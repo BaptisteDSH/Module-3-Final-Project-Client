@@ -18,11 +18,11 @@ const App = () => {
       try {
         //fetch events
         const eventsData = await axios.get("");
-        setEvents(eventsData);
+        setEvents(eventsData.data);
 
         //fetch adoptions
         const adoptionsData = await axios.get("");
-        setAdoptions(adoptionsData);
+        setAdoptions(adoptionsData.data);
       } catch (error) {
         console.log("Something is wrong with fetching all the data");
       }
@@ -35,11 +35,18 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<HomePage events={events} setEvents={setEvents} />}
+          element={
+            <HomePage
+              events={events}
+              setEvents={setEvents}
+              adoptions={adoptions}
+              setAdoptions={setAdoptions}
+            />
+          }
         />
         <Route path="/Adopt" element={<AdoptPage />} />
         <Route path="/AboutUs" element={<AboutUsPage />} />
-        <Route path="/Profil" element={<MyProfilPage />} />
+        <Route path="/MyProfil" element={<MyProfilPage />} />
         <Route path="/Events" element={<EventsPage />} />
       </Routes>
       <Footer />

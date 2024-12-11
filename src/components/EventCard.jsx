@@ -1,7 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const EventCard = () => {
-  return <div>EventCard</div>;
+const EventCard = ({ oneEvent, setEvent }) => {
+  return (
+    <div>
+      <section>
+        <img> </img>
+        <h4> </h4>
+        <p> </p>
+      </section>
+    </div>
+  );
 };
 
 export default EventCard;
