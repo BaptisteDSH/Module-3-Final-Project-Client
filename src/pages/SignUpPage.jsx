@@ -288,8 +288,8 @@ const SignUpPage = () => {
               value={pet.petType}
               onChange={handlePetChange}
               className="form-input"
-              placeholder="Select a pet type"
             >
+              <option value="">Select a pet type</option>
               {petTypes.map((type, index) => (
                 <option key={index} value={type}>
                   {type}
