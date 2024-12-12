@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const EventCard = ({ _id, picture, title, location, date }) => {
+const EventCard = ({ _id, picture, title, location, dates }) => {
   return (
     <div>
       <section>

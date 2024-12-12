@@ -1,8 +1,10 @@
 import React from "react";
+import EventCard from "../components/EventCard";
+import AdoptionCard from "../components/AdoptionCard";
 
 const HomePage = ({ events, setEvents, adoptions, setAdoptions }) => {
   const sortedEvents = [...events].sort((a, b) => b.date - a.date);
-  // const sortedAdoptions = [...adoptions].sort((a, b) => b.date - a.date);
+  const sortedAdoptions = [...adoptions].sort((a, b) => b.date - a.date);
   return (
     <>
       <div className="home-page-container">
@@ -20,19 +22,19 @@ const HomePage = ({ events, setEvents, adoptions, setAdoptions }) => {
           <div className="event-list">
             {sortedEvents.map((oneEvent) => {
               return (
-                <div key={oneEvent.id}>
-                  <EventCard oneEvent={oneEvent} setEvent={setEvent} />
+                <div key={oneEvent._id}>
+                  <EventCard oneEvent={oneEvent} setEvents={setEvents} />
                 </div>
               );
             })}
           </div>
           <div className="event-element">
-            <img src="" alt="" />
+            {/* <img src="" alt="" /> */}
             <h4>title of the event</h4>
             <p>little description</p>
           </div>
           <div className="event-element">
-            <img src="" alt="" />
+            {/* <img src="" alt="" /> */}
             <h4>title of the event</h4>
             <p>little description</p>
           </div>
@@ -40,26 +42,18 @@ const HomePage = ({ events, setEvents, adoptions, setAdoptions }) => {
         <h3>Adoptions</h3>
         <div className="adoption-block-home-page-container">
           <div className="adoption-list">
-            {sortedEvents.map((oneAdoption) => {
+            {sortedAdoptions.slice(0, 3).map((oneAdoption) => {
               return (
-                <div key={oneAdoption.id}>
-                  <AdoptionCard
-                    oneAdoption={oneAdoption}
-                    setAdoption={setAdoption}
-                  />
+                <div className="adoption-element">
+                  <div key={oneAdoption._id}>
+                    <AdoptionCard
+                      oneAdoption={oneAdoption}
+                      setAdoptions={setAdoptions}
+                    />
+                  </div>
                 </div>
               );
             })}
-          </div>
-          <div className="adoption-element">
-            <h4>title of the adoption post</h4>
-            <p>little description</p>
-            <img src="" alt="" />
-          </div>
-          <div className="adoption-element">
-            <h4>title of the adoption post</h4>
-            <p>little description</p>
-            <img src="" alt="" />
           </div>
         </div>
       </div>
