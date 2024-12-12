@@ -5,9 +5,11 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AdoptPage from "./pages/AdoptPage";
 import EventsPage from "./pages/EventsPage";
+import EventDetailPage from "./pages/EventDetailPage";
 import { useState, useEffect } from "react";
 import AboutUsPage from "./pages/AboutUsPage";
 import MyProfilPage from "./pages/MyProfilPage";
+import CreateEventPage from "./pages/CreateEventPage";
 // import axios from "axios";
 
 const App = () => {
@@ -48,6 +50,8 @@ const App = () => {
         <Route path="/AboutUs" element={<AboutUsPage />} />
         <Route path="/MyProfil" element={<MyProfilPage />} />
         <Route path="/Events" element={<EventsPage />} />
+        <Route path="/Events/Create" element={<CreateEventPage />} />
+        <Route path="/Event/:eventId" element={<EventDetailPage />} />
       </Routes>
       <Footer />
     </>

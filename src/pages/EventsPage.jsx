@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import EventCard from "../components/EventCard";
+
+// Import the string from the .env with URL of the server - http://localhost:5005
+const API_URL = `http://localhost:5005`;
 
 const EventsPage = () => {
+  const [events, setEvents] = useState([]);
+
+  const getAllEvents = () => {
+    axios
+      .get(`${API_URL}/api/events`)
+      .then((response) => {
+        console.log(response.data);
+        setEvents(Array.isArray(response.data) ? response.data : []);
+      })
+      .catch((error) => {
+        console.log("Error fetching events:", error);
+        setEvents([]);
+      });
+  };
+
+  useEffect(() => {
+    getAllEvents();
+  }, []);
+
   return (
     <>
       <div className="events-page-container">
@@ -17,41 +41,18 @@ const EventsPage = () => {
         </div>
         <div className="search-bar">SEARCH BAR TO CREATE</div>
         <div className="event-container">
-          <div className="event-box-container">
-            <img src="" alt="" />
-            <h3>event Name</h3>
-            <p>location</p>
-            <p>Brief description</p>
-          </div>
-          <div className="event-box-container">
-            <img src="" alt="" />
-            <h3>event Name</h3>
-            <p>location</p>
-            <p>Brief description</p>
-          </div>
-          <div className="event-box-container">
-            <img src="" alt="" />
-            <h3>event Name</h3>
-            <p>location</p>
-            <p>Brief description</p>
-          </div>
-          <div className="event-box-container">
-            <img src="" alt="" />
-            <h3>event Name</h3>
-            <p>location</p>
-            <p>Brief description</p>
-          </div>
-          <div className="event-box-container">
-            <img src="" alt="" />
-            <h3>event Name</h3>
-            <p>location</p>
-            <p>Brief description</p>
-          </div>
-          <div className="event-box-container">
-            <img src="" alt="" />
-            <h3>event Name</h3>
-            <p>location</p>
-            <p>Brief description</p>
+          <div>
+            <div className="event-box-container">
+              {events && events.length > 0 ? (
+                events.map((event) => (
+                  <div key={event._id}>
+                    <EventCard {...event} />
+                  </div>
+                ))
+              ) : (
+                <p>No events available.</p>
+              )}
+            </div>
           </div>
         </div>
       </div>
