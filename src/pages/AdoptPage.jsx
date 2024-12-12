@@ -10,7 +10,9 @@ const AdoptPage = ({ adoptions, setAdoptions }) => {
         <div className="button-add-adoption-container">
           <h2>Find the perfect home for your pet</h2>
           <h4>Click here to start !</h4>
-          <button>Add an adoption</button>
+          <Link to={"/CreateAdoption"}>
+            <button>Add an adoption</button>
+          </Link>
         </div>
         <div className="search-bar">SEARCH BAR TO CREATE</div>
         <div className="adoption-container">

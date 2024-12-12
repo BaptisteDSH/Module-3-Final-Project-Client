@@ -15,6 +15,7 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import axios from "axios";
 import AdoptionDetails from "./pages/AdoptionDetails";
+import CreateAdoption from "./components/CreateAdoption";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -23,7 +24,7 @@ const App = () => {
     const fetchData = async () => {
       try {
         //fetch events
-        const eventsData = await axios.get("");
+        const eventsData = await axios.get("http://localhost:5005/api/events");
         setEvents(eventsData.data);
 
         //fetch adoptions
@@ -66,7 +67,7 @@ const App = () => {
         <Route path="/SignUp" element={<SignUpPage />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route
-          path="/adoptions/:adoptionId"
+          path="/AdoptionDetails/:adoptionId"
           element={
             <AdoptionDetails
               adoptions={adoptions}
@@ -74,6 +75,7 @@ const App = () => {
             />
           }
         />
+        <Route path="/CreateAdoption" element={<CreateAdoption />} />
       </Routes>
       <Footer />
     </>
