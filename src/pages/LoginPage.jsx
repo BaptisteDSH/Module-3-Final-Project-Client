@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
+  const { storeToken, authenticateUser } = useContext(AuthContext);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -18,11 +21,16 @@ const LoginPage = () => {
 
     axios
       .post("http://localhost:5005/api/user/Login", requestBody)
-      .then(() => {
+      .then((response) => {
+        console.log("JWT token", response.data.authToken);
+
+        storeToken(response.data.authToken);
+        authenticateUser();
         navigate("/");
       })
       .catch((error) => {
-        const errorDescription = error.response.data.message;
+        const errorDescription =
+          error.response?.data?.message || "Login failed"; // Ajout de la sécurité
         setErrorMessage(errorDescription);
       });
   };
@@ -70,6 +78,12 @@ const LoginPage = () => {
             </button>
           </div>
         </form>
+        <div className="redirection-container">
+          <p>Already have an account?</p>
+          <Link to="/Signup">
+            <div>SignUp</div>
+          </Link>
+        </div>
         {errorMessage && <p className="error">{errorMessage}</p>}
       </div>
     </>

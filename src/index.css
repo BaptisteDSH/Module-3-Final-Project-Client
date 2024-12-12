@@ -57,12 +57,28 @@ nav .active {
 }
 
 .log-button {
-  padding: 8px 10px;
-  border-radius: 5px;
-  background-color: black;
-  color: aliceblue;
-  font-size: 15px;
-  margin: 20px 30px;
+  display: inline-block; /* Assure un bon alignement du bouton */
+  padding: 10px 15px; /* Un peu plus d'espace pour un confort visuel */
+  border-radius: 5px; /* Bords arrondis */
+  background-color: black; /* Couleur de fond */
+  color: aliceblue; /* Couleur du texte */
+  font-size: 16px; /* Taille du texte légèrement augmentée */
+  font-weight: bold; /* Rendre le texte un peu plus impactant */
+  margin: 20px 30px; /* Espacement autour du bouton */
+  text-decoration: none; /* Supprime le soulignement */
+  text-align: center; /* Centre le texte à l'intérieur */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Animation fluide */
+  cursor: pointer; /* Change le curseur au survol */
+}
+
+.log-button:hover {
+  background-color: #333; /* Couleur légèrement plus claire au survol */
+  transform: scale(1.05); /* Effet de zoom au survol */
+}
+
+.log-button:active {
+  background-color: #111; /* Couleur plus sombre lorsqu'il est cliqué */
+  transform: scale(0.95); /* Réduit légèrement pour un effet de clic */
 }
 
 footer {
@@ -424,6 +440,22 @@ footer {
 
 .form-button:hover {
   background-color: #45a049;
+}
+
+.redirection-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.redirection-container p {
+  margin-right: 10px;
+}
+
+.redirection-container div {
+  text-decoration: none;
+  color: #111;
 }
 
 /* Error message styling */

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
@@ -21,6 +21,7 @@ const SignUpPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  // Handle changes in pet details
   const handlePetChange = (e) => {
     const { name, value } = e.target;
     setPet((prevPet) => ({
@@ -29,6 +30,7 @@ const SignUpPage = () => {
     }));
   };
 
+  // Handle form submission
   const handleSignUpSubmit = (e) => {
     e.preventDefault();
 
@@ -45,6 +47,7 @@ const SignUpPage = () => {
       pet,
     };
 
+    // Send POST request to the server
     axios
       .post("http://localhost:5005/api/user/signup", requestBody)
       .then(() => {
@@ -55,6 +58,69 @@ const SignUpPage = () => {
         setErrorMessage(errorDescription);
       });
   };
+
+  // List of locations to populate the dropdown
+  const locations = [
+    "Álava",
+    "Albacete",
+    "Alicante",
+    "Almería",
+    "Asturias",
+    "Ávila",
+    "Badajoz",
+    "Barcelona",
+    "Burgos",
+    "Cáceres",
+    "Cádiz",
+    "Cantabria",
+    "Castellón",
+    "Ciudad Real",
+    "Córdoba",
+    "Cuenca",
+    "Girona",
+    "Granada",
+    "Guadalajara",
+    "Gipuzkoa",
+    "Huelva",
+    "Huesca",
+    "Jaén",
+    "La Coruña",
+    "León",
+    "Lleida",
+    "Lugo",
+    "Madrid",
+    "Málaga",
+    "Murcia",
+    "Navarra",
+    "Ourense",
+    "Palencia",
+    "Pontevedra",
+    "Salamanca",
+    "Segovia",
+    "Sevilla",
+    "Soria",
+    "Tarragona",
+    "Teruel",
+    "Toledo",
+    "Valencia",
+    "Valladolid",
+    "Vizcaya",
+    "Zamora",
+    "Zaragoza",
+  ];
+
+  // List of pet types to populate the dropdown
+  const petTypes = [
+    "dog",
+    "cat",
+    "bird",
+    "snake",
+    "spider",
+    "hamster",
+    "ferret",
+    "fish",
+    "guinea pigs",
+  ];
 
   return (
     <>
@@ -171,19 +237,25 @@ const SignUpPage = () => {
           />
         </div>
 
+        {/* Location dropdown */}
         <div className="form-group">
           <label htmlFor="location" className="form-label">
             Location
           </label>
-          <input
-            type="text"
+          <select
             name="location"
             id="location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             className="form-input"
-            placeholder="Enter your location"
-          />
+          >
+            <option value="">Select a location</option>
+            {locations.map((loc, index) => (
+              <option key={index} value={loc}>
+                {loc}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form-group">
@@ -201,23 +273,29 @@ const SignUpPage = () => {
           />
         </div>
 
-        {/* Pet Infos */}
+        {/* Pet Info Section */}
         <h2 className="sign-up-title-h2">Pet Informations</h2>
 
         <div className="pet-infos">
+          {/* Pet type dropdown */}
           <div className="form-group">
             <label htmlFor="petType" className="form-label">
               Pet Type
             </label>
-            <input
-              type="text"
+            <select
               name="petType"
               id="petType"
               value={pet.petType}
               onChange={handlePetChange}
               className="form-input"
-              placeholder="Enter your pet's type"
-            />
+              placeholder="Select a pet type"
+            >
+              {petTypes.map((type, index) => (
+                <option key={index} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">
@@ -273,6 +351,13 @@ const SignUpPage = () => {
           </button>
         </div>
       </form>
+
+      <div className="redirection-container">
+        <p>Already have an account?</p>
+        <Link to="/Login">
+          <div>Login</div>
+        </Link>
+      </div>
       {errorMessage && <p className="error">{errorMessage}</p>}
     </>
   );
