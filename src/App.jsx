@@ -8,7 +8,8 @@ import EventsPage from "./pages/EventsPage";
 import { useState, useEffect } from "react";
 import AboutUsPage from "./pages/AboutUsPage";
 import MyProfilPage from "./pages/MyProfilPage";
-// import axios from "axios";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -48,6 +49,8 @@ const App = () => {
         <Route path="/AboutUs" element={<AboutUsPage />} />
         <Route path="/MyProfil" element={<MyProfilPage />} />
         <Route path="/Events" element={<EventsPage />} />
+        <Route path="/SignUp" element={<SignUpPage />} />
+        <Route path="/Login" element={<LoginPage />} />
       </Routes>
       <Footer />
     </>

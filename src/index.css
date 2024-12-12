@@ -1,3 +1,6 @@
+/* Import fonts from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Open+Sans:wght@400;600&display=swap");
+
 #root,
 body,
 h1,
@@ -8,6 +11,20 @@ h5,
 h6 {
   margin: 0;
   padding: 0;
+}
+/* Apply Open Sans by default to the entire body */
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+/* Apply Lora to headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lora", serif;
 }
 
 nav {
@@ -308,4 +325,173 @@ footer {
 .adoption-detail-box {
   background-color: palevioletred;
   padding: 5px;
+}
+/* Form title */
+.sign-up-title-h1 {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px; /* Space below the title */
+  font-size: 40px;
+}
+
+.sign-up-title-h2 {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 20px; /* Space below the title */
+}
+
+/* General form SignUP*/
+.form-signup {
+  margin: 50px auto; /* Centered horizontally */
+  padding: 30px;
+  border: 1px solid #ddd; /* Soft border */
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px; /* Maximum width for the form */
+  background-color: #f9f9f9; /* Soft background color */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Group of form fields */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px; /* Margin below each field */
+}
+
+/* Input fields styling */
+.form-input {
+  padding: 10px;
+  margin-top: 5px; /* Space above the input */
+  margin-bottom: 10px; /* Space below the input */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  height: 35px;
+  font-size: 1rem;
+  width: 100%; /* Ensures input takes full available width */
+  box-sizing: border-box; /* Includes padding in the width calculation */
+}
+
+/* Sections where multiple fields are aligned horizontally */
+
+/* Name fields (first name and last name) */
+.signup-names {
+  display: flex;
+  justify-content: space-between; /* Distribute space evenly between fields */
+  gap: 20px; /* Space between the fields */
+}
+
+.signup-names .form-group {
+  flex: 1; /* Each field takes 50% of the width */
+}
+
+/* Phone, age, and picture fields */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Space between the fields */
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* Pet information fields */
+.pet-infos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.pet-infos .form-group {
+  flex: 1 1 45%; /* Fields take 45% of the width with flexibility */
+  min-width: 250px; /* Minimum width for each field */
+}
+
+/* Submit button */
+.form-button {
+  padding: 12px;
+  background-color: grey;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+  background-color: #45a049;
+}
+
+/* Error message styling */
+.error {
+  color: red;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* General styles for the form Login*/
+.form-login {
+  margin: 40px 430px;
+  padding: 20px;
+  border: 0.3px solid gray;
+  border-radius: 15px;
+  justify-content: center;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.form-label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  height: 30px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.form-button {
+  padding: 10px;
+  border: none;
+  background-color: grey;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.form-button:hover {
+  background-color: #45a049;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.login-page-container {
+  min-height: 480px;
 }
