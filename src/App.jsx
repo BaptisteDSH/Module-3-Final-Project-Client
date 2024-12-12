@@ -11,6 +11,8 @@ import AboutUsPage from "./pages/AboutUsPage";
 import MyProfilPage from "./pages/MyProfilPage";
 import CreateEventPage from "./pages/CreateEventPage";
 // import axios from "axios";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
 import axios from "axios";
 import AdoptionDetails from "./pages/AdoptionDetails";
 
@@ -61,6 +63,8 @@ const App = () => {
         <Route path="/Events" element={<EventsPage />} />
         <Route path="/Events/Create" element={<CreateEventPage />} />
         <Route path="/Event/:eventId" element={<EventDetailPage />} />
+        <Route path="/SignUp" element={<SignUpPage />} />
+        <Route path="/Login" element={<LoginPage />} />
         <Route
           path="/adoptions/:adoptionId"
           element={

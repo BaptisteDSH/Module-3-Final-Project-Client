@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 const Navbar = () => {
+  const { isLoggedIn, logOutUser } = useContext(AuthContext);
   return (
     <nav>
       <Link to="/">
@@ -14,7 +16,17 @@ const Navbar = () => {
         <NavLink to="/Events">Events</NavLink>
         <NavLink to="/AboutUs">About us</NavLink>
       </div>
-      <button className="log-button">Logout</button>
+      <div>
+        {isLoggedIn ? (
+          <div className="log-button" onClick={logOutUser}>
+            Logout
+          </div>
+        ) : (
+          <Link to="/Signup">
+            <div className="log-button">SignUp</div>
+          </Link>
+        )}
+      </div>
     </nav>
   );
 };
