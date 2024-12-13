@@ -20,15 +20,13 @@ const HomePage = ({ events, setEvents, adoptions, setAdoptions }) => {
         <h3>Events</h3>
         <div className="event-block-home-page-container">
           <div className="event-list">
-            {sortedEvents && sortedEvents.length > 0 ? (
-              sortedEvents.map((event) => (
+            {sortedEvents.slice(0, 3).map((event) => {
+              return (
                 <div key={event._id}>
                   <EventCard {...event} />
                 </div>
-              ))
-            ) : (
-              <p>No events available.</p>
-            )}
+              );
+            })}
           </div>
           <div className="event-element">
             {/* <img src="" alt="" /> */}
