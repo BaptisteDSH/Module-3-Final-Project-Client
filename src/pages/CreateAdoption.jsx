@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/auth.context";
 
 const CreateAdoption = ({ adoptions, setAdoptions }) => {
+  const { user } = useContext(AuthContext);
   const [newAdoption, setNewAdoption] = useState({
     //set to default to current date, in international format, separated at the "T", and displaying only the date ([0])
     datePosted: new Date().toISOString().split("T")[0],
     description: "",
     pet: { name: "" },
     picture: "",
-    userName: "",
-    userPhone: "",
+    user: user._id,
   });
+  console.log(user);
 
   //handleChange function dynamically updates the state of the newAdoption object based on changes in the input fields
   const handleChange = (e) => {
@@ -36,9 +38,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
     if (
       !newAdoption.description ||
       !newAdoption.pet.name ||
-      !newAdoption.picture ||
-      !newAdoption.userName ||
-      !newAdoption.userPhone
+      !newAdoption.picture
     ) {
       alert("Please fill in all required fields");
       return;
@@ -57,8 +57,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
         description: "",
         pet: { name: "" },
         picture: "",
-        userName: "",
-        userPhone: "",
+        user: user._id,
       });
     } catch (error) {
       console.log(
@@ -86,21 +85,13 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
           <label>Description:</label>
 
           <textarea
-            name="datePosted"
-            value={newAdoption.datePosted}
+            name="description"
+            value={newAdoption.description}
             onChange={handleChange}
             placeholder="Enter description"
           />
         </div>
-        <div>
-          <label>Description:</label>
-          <input
-            name="datePosted"
-            value={newAdoption.datePosted}
-            onChange={handleChange}
-            placeholder="Enter description"
-          ></input>
-        </div>
+
         <div>
           <label>Pet Name:</label>
           <input
@@ -121,26 +112,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             placeholder="Enter picture URL"
           ></input>
         </div>
-        <div>
-          <label>Your Name:</label>
-          <input
-            type="text"
-            name="userName"
-            value={newAdoption.userName}
-            onChange={handleChange}
-            placeholder="Enter user name"
-          />
-        </div>
-        <div>
-          <label>Your Number:</label>
-          <input
-            type="text"
-            name="userPhone"
-            value={newAdoption.userPhone}
-            onChange={handleChange}
-            placeholder="Enter phone number"
-          />
-        </div>
+
         <button type="submit">Create Adoption</button>
       </form>
     </div>
