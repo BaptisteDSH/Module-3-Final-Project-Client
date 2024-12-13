@@ -16,6 +16,9 @@ import LoginPage from "./pages/LoginPage";
 import axios from "axios";
 import AdoptionDetails from "./pages/AdoptionDetails";
 import CreateAdoption from "./components/CreateAdoption";
+import IsPrivate from "./components/IsPrivate";
+import EditProfilPage from "./pages/EditProfilPage";
+import AddPet from "./pages/AddPet";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -60,7 +63,16 @@ const App = () => {
           }
         />
         <Route path="/AboutUs" element={<AboutUsPage />} />
-        <Route path="/MyProfil" element={<MyProfilPage />} />
+        <Route
+          path="/MyProfil"
+          element={
+            <IsPrivate>
+              <MyProfilPage />
+            </IsPrivate>
+          }
+        />
+        <Route path="/EditProfile" element={<EditProfilPage />} />
+        <Route path="/AddPet" element={<AddPet />} />
         <Route path="/Events" element={<EventsPage />} />
         <Route path="/Events/Create" element={<CreateEventPage />} />
         <Route path="/Event/:eventId" element={<EventDetailPage />} />

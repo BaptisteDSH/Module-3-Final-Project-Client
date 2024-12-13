@@ -4,7 +4,8 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
 const Navbar = () => {
-  const { isLoggedIn, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, logOutUser, user } = useContext(AuthContext);
+
   return (
     <nav>
       <Link to="/">
