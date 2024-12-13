@@ -8,7 +8,7 @@ import EventsPage from "./pages/EventsPage";
 import EventDetailPage from "./pages/EventDetailPage";
 import { useState, useEffect } from "react";
 import AboutUsPage from "./pages/AboutUsPage";
-import MyProfilPage from "./pages/MyProfilPage";
+import MyProfilePage from "./pages/MyProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
 // import axios from "axios";
 import SignUpPage from "./pages/SignUpPage";
@@ -16,6 +16,7 @@ import LoginPage from "./pages/LoginPage";
 import axios from "axios";
 import AdoptionDetails from "./pages/AdoptionDetails";
 import CreateAdoption from "./pages/CreateAdoption";
+import UpdateAdoption from "./pages/UpdateAdoption";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -60,7 +61,17 @@ const App = () => {
           }
         />
         <Route path="/AboutUs" element={<AboutUsPage />} />
-        <Route path="/MyProfil" element={<MyProfilPage />} />
+        <Route
+          path="/MyProfile"
+          element={
+            <MyProfilePage
+              events={events}
+              setEvents={setEvents}
+              adoptions={adoptions}
+              setAdoptions={setAdoptions}
+            />
+          }
+        />
         <Route path="/Events" element={<EventsPage />} />
         <Route path="/Events/Create" element={<CreateEventPage />} />
         <Route path="/Event/:eventId" element={<EventDetailPage />} />
@@ -79,6 +90,12 @@ const App = () => {
           path="/CreateAdoption"
           element={
             <CreateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
+          }
+        />
+        <Route
+          path="/UpdateAdoptions/:adoptionId"
+          element={
+            <UpdateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
           }
         />
       </Routes>

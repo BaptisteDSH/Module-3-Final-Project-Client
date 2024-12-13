@@ -3,19 +3,7 @@ import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 
 const AdoptionCard = ({ oneAdoption, setAdoptions }) => {
-  const handleDelete = async () => {
-    try {
-      await axios.delete(
-        "http://localhost:5005/api/adoptions/${oneAdoption._id}"
-      );
-      setAdoptions((prevAdoption) =>
-        prevAdoption.filter((adoption) => adoption._id !== oneAdoption._id)
-      );
-      alert("Adoption deleted successfully!");
-    } catch (error) {
-      console.error("Error deleting adoption:", error);
-    }
-  };
+  
 
   const { pet, description } = oneAdoption;
   return (
