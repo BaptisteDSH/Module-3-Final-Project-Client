@@ -10,7 +10,6 @@ import { useState, useEffect } from "react";
 import AboutUsPage from "./pages/AboutUsPage";
 import MyProfilPage from "./pages/MyProfilPage";
 import CreateEventPage from "./pages/CreateEventPage";
-// import axios from "axios";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import axios from "axios";
@@ -19,28 +18,35 @@ import CreateAdoption from "./components/CreateAdoption";
 import IsPrivate from "./components/IsPrivate";
 import EditProfilPage from "./pages/EditProfilPage";
 import AddPet from "./pages/AddPet";
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS for react-toastify
 
 const App = () => {
   const [events, setEvents] = useState([]);
   const [adoptions, setAdoptions] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //fetch events
+        // Fetch events
         const eventsData = await axios.get("http://localhost:5005/api/events");
         setEvents(eventsData.data);
 
-        //fetch adoptions
+        // Fetch adoptions
         const adoptionsData = await axios.get(
           "http://localhost:5005/api/adoptions"
         );
         setAdoptions(adoptionsData.data);
       } catch (error) {
         console.log("Something is wrong with fetching all the data");
+
+        // Error toast notification
+        toast.error("Failed to fetch data!");
       }
     };
     fetchData();
   }, []);
+
   return (
     <>
       <Navbar />
@@ -90,6 +96,15 @@ const App = () => {
         <Route path="/CreateAdoption" element={<CreateAdoption />} />
       </Routes>
       <Footer />
+
+      {/* ToastContainer to display toasts */}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+      />
     </>
   );
 };

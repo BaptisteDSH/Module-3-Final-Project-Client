@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify"; // Import toast
+import "react-toastify/dist/ReactToastify.css"; // Import CSS
 
 const MyProfilPage = () => {
   const [userProfile, setUserProfile] = useState(null);
@@ -21,10 +23,13 @@ const MyProfilPage = () => {
         setIsLoggedIn(false); // Log out the user
         logOutUser(); // Ensure the user is logged out
         setLoading(false); // Stop loading after the action
+        toast.success("Your profile has been deleted successfully!"); // Show success toast
+        navigate("/"); // Redirect to the homepage or another page after deletion
       })
       .catch((error) => {
         setErrorMessage(error.response?.data?.message || "An error occurred");
         setLoading(false);
+        toast.error("An error occurred while deleting your profile."); // Show error toast
       });
   };
 

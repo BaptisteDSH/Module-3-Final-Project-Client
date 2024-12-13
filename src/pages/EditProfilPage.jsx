@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS for react-toastify
 
 const EditProfilPage = () => {
   const { user } = useContext(AuthContext);
@@ -27,6 +29,7 @@ const EditProfilPage = () => {
     axios
       .put(`http://localhost:5005/api/user/${user._id}`, requestBody)
       .then(() => {
+        toast.success("Profil updated !");
         navigate("/MyProfil");
       })
       .catch((error) => {

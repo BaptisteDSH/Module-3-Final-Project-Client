@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"; // Context to manage user data
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS for react-toastify
 
 const AddPet = () => {
   const { user, setUser } = useContext(AuthContext); // Use context to get and update user data
@@ -59,6 +61,7 @@ const AddPet = () => {
       .then((response) => {
         setUser(response.data); // Update the user context with the latest data
         setExistingPets(response.data.pet); // Update existing pets to include the new pet
+        toast.success("Pet added !");
         navigate("/MyProfil"); // Redirect to profile page after adding the pet
         window.location.reload();
       })
