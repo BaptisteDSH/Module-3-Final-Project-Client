@@ -29,6 +29,7 @@ const LoginPage = () => {
         navigate("/");
       })
       .catch((error) => {
+        console.log(error);
         const errorDescription =
           error.response?.data?.message || "Login failed"; // Ajout de la sécurité
         setErrorMessage(errorDescription);

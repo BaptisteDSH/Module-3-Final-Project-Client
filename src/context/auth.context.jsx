@@ -88,7 +88,7 @@ function AuthProviderWrapper(props) {
       setIsLoading(false);
     }
   }, []); // This useEffect runs only once on the first render
-
+console.log("hello")
   return (
     <AuthContext.Provider
       value={{
