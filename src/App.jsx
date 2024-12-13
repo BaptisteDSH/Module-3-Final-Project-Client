@@ -15,7 +15,7 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import axios from "axios";
 import AdoptionDetails from "./pages/AdoptionDetails";
-import CreateAdoption from "./components/CreateAdoption";
+import CreateAdoption from "./pages/CreateAdoption";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -75,7 +75,12 @@ const App = () => {
             />
           }
         />
-        <Route path="/CreateAdoption" element={<CreateAdoption />} />
+        <Route
+          path="/CreateAdoption"
+          element={
+            <CreateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
+          }
+        />
       </Routes>
       <Footer />
     </>
