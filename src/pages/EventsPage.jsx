@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import EventCard from "../components/EventCard";
 
@@ -37,7 +38,11 @@ const EventsPage = () => {
         <div className="button-add-event-container">
           <h2>Are you the organiser ?</h2>
           <h4>Click here to start !</h4>
-          <button>Add an event</button>
+          <div>
+            <Link to="/events/create">
+              <div className="log-button">Add an event</div>
+            </Link>
+          </div>
         </div>
         <div className="search-bar">SEARCH BAR TO CREATE</div>
         <div className="event-container">
