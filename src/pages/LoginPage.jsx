@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { toast } from "react-toastify"; // Import toast
+import "react-toastify/dist/ReactToastify.css"; // Import CSS
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -26,6 +28,7 @@ const LoginPage = () => {
 
         storeToken(response.data.authToken);
         authenticateUser();
+        toast.success("You are logged In!");
         navigate("/");
       })
       .catch((error) => {

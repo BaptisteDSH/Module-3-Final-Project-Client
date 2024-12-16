@@ -35,14 +35,6 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !newAdoption.description ||
-      !newAdoption.pet.name ||
-      !newAdoption.picture
-    ) {
-      alert("Please fill in all required fields");
-      return;
-    }
     try {
       const response = await axios.post(
         "http://localhost:5005/api/adoptions",
@@ -70,7 +62,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
 
   return (
     <div>
-      <h2>CreateAdoption</h2>
+      <h2>Create a new Adoption</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Date Posted:</label>
@@ -79,7 +71,8 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             name="datePosted"
             value={newAdoption.datePosted}
             onChange={handleChange}
-          ></input>
+            required
+          />
         </div>
         <div>
           <label>Description:</label>
@@ -89,6 +82,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             value={newAdoption.description}
             onChange={handleChange}
             placeholder="Enter description"
+            required
           />
         </div>
 
@@ -100,7 +94,8 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             value={newAdoption.pet.name}
             onChange={handleChange}
             placeholder="Enter pet name"
-          ></input>
+            required
+          />
         </div>
         <div>
           <label>Picture URL:</label>
@@ -110,7 +105,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             value={newAdoption.picture}
             onChange={handleChange}
             placeholder="Enter picture URL"
-          ></input>
+          />
         </div>
 
         <button type="submit">Create Adoption</button>

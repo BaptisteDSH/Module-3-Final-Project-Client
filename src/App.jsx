@@ -16,29 +16,36 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import axios from "axios";
 import AdoptionDetails from "./pages/AdoptionDetails";
+import IsPrivate from "./components/IsPrivate";
+import EditProfilPage from "./pages/EditProfilPage";
+import AddPet from "./pages/AddPet";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import CreateAdoption from "./pages/CreateAdoption";
+import UpdateAdoption from "./pages/UpdateAdoption";
 
 const App = () => {
   const [events, setEvents] = useState([]);
   const [adoptions, setAdoptions] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //fetch events
         const eventsData = await axios.get("http://localhost:5005/api/events");
         setEvents(eventsData.data);
 
-        //fetch adoptions
         const adoptionsData = await axios.get(
           "http://localhost:5005/api/adoptions"
         );
         setAdoptions(adoptionsData.data);
       } catch (error) {
-        console.log("Something is wrong with fetching all the data");
+        console.error("Something is wrong with fetching all the data");
+        toast.error("Failed to fetch data!");
       }
     };
     fetchData();
   }, []);
+
   return (
     <>
       <Navbar />
@@ -62,6 +69,21 @@ const App = () => {
         />
         <Route path="/AboutUs" element={<AboutUsPage />} />
         <Route path="/MyProfil" element={<MyProfilePage />} />
+        <Route
+          path="/MyProfile"
+          element={
+            <IsPrivate>
+              <MyProfilePage
+                events={events}
+                setEvents={setEvents}
+                adoptions={adoptions}
+                setAdoptions={setAdoptions}
+              />
+            </IsPrivate>
+          }
+        />
+        <Route path="/EditProfile" element={<EditProfilPage />} />
+        <Route path="/AddPet" element={<AddPet />} />
         <Route path="/Events" element={<EventsPage />} />
         <Route
           path="/Events/Create"
@@ -86,8 +108,21 @@ const App = () => {
             <CreateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
           }
         />
+        <Route
+          path="/UpdateAdoptions/:adoptionId"
+          element={
+            <UpdateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
+          }
+        />
       </Routes>
       <Footer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+      />
     </>
   );
 };

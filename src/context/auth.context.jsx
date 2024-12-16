@@ -93,8 +93,10 @@ function AuthProviderWrapper(props) {
     <AuthContext.Provider
       value={{
         isLoggedIn,
+        setIsLoggedIn,
         isLoading,
         user,
+        setUser,
         storeToken,
         authenticateUser,
         logOutUser,
