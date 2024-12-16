@@ -11,6 +11,7 @@ const CreateEventPage = ({ events, setEvents }) => {
     picture: "",
     location: "",
     date: "",
+    description: "",
     organizerId: user?._id,
   });
 
@@ -55,6 +56,7 @@ const CreateEventPage = ({ events, setEvents }) => {
           location: "",
           date: "",
           price: "",
+          description: "",
           organizerId: user?._id,
         });
 
@@ -185,7 +187,18 @@ const CreateEventPage = ({ events, setEvents }) => {
             value={newEvent.price}
             onChange={handleChange}
             className="form-input"
-            placeholder="Enter the price of the even or leave it blank if it is free"
+            placeholder="Enter the price of the event or leave it blank if it is free"
+          />
+        </div>
+        <div>
+          <label>Description</label>
+          <input
+            type="string"
+            name="description"
+            value={newEvent.description}
+            onChange={handleChange}
+            className="form-input"
+            placeholder="Enter the description of the event"
           />
         </div>
         <div>

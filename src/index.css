@@ -27,12 +27,27 @@ h6 {
   font-family: "Lora", serif;
 }
 
+/*Added by Emi to keep the navbar in place*/
+/* main {
+  padding-top: 15vh !important;
+  margin: 0;
+} */
+
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
-  height: 20vh;
+  height: 15vh;
+  /*Added by Emi to keep the navbar in place*/
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+  padding: 0px 20px;
+   */
 }
 
 nav img {
@@ -211,34 +226,50 @@ footer {
 
 .image-container img {
   width: 100%;
-  height: auto; /* Assure un bon ratio */
+  height: auto;
   display: block;
 }
 
+/* EVENTS*/
+/* Add Event*/
+
 .button-add-event-container {
-  margin: 30px 20px;
+  margin: 30px 50px;
 }
 
 .button-add-event-container h4 {
-  margin: 10px;
+  margin-top: 10px;
 }
 
 .button-add-event-container button {
   background-color: black;
   padding: 8px;
   color: whitesmoke;
-  border-radius: 5px;
+  border-radius: 10px;
   border: none;
 }
 
 /* Event Detail Page */
 .event-container {
   padding: 80px;
-  background-color: blueviolet;
+  background-color: white;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 20px;
+}
+
+.event-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.event-box-container-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  justify-content: center;
 }
 
 .event-box-container {
@@ -246,20 +277,85 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: aqua;
-  margin: 10px;
-  padding: 10px 0px;
-  flex: 1 1 calc(33.333% - 40px); /* max 3 element per line */
+  background-color: white;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  flex: 1 1 calc(33.333% - 40px);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 500px;
+  max-height: 500px;
+  width: 100%;
+  height: 100%;
+}
+
+.event-box-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .event-image-container {
   position: relative;
   width: 100%;
-  height: 55vh;
+  height: 50vh;
   overflow: hidden;
 }
 
+.events-separation {
+  position: relative;
+  width: 100%;
+  height: 2vh;
+}
+
 .event-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-title {
+  padding: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.event-title h1 {
+  margin: 0;
+  font-size: 40px;
+}
+
+.event-location {
+  font-size: 10px;
+  color: #555;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.event-date {
+  font-size: 10px;
+  color: #555;
+}
+
+.event-box-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-image-card-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  max-height: 200px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-image-card-container img {
+  display: flex;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -276,6 +372,66 @@ footer {
   font-size: 2rem;
   line-height: 1.2;
 }
+
+.event-detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.event-detail-title {
+  padding-top: 3%;
+  padding-bottom: 3%;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+}
+.event-detail-picture {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+}
+
+.event-detail-location {
+  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0px;
+}
+
+.event-detail-date {
+  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0px;
+}
+.event-detail-price {
+  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0px;
+}
+
+.event-detail-description {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
+  font-size: 20px;
+  text-align: justify;
+}
+
+/* */
 
 .founders img {
   height: 200px;

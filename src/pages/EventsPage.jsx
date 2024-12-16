@@ -44,13 +44,20 @@ const EventsPage = () => {
             </Link>
           </div>
         </div>
+        <div>
+          <img
+            src="https://www.educateurcaninfrance.com/wp-content/uploads/2024/05/GettyImages-1317531965-1.jpg"
+            alt=""
+            className="events-separation"
+          />
+        </div>
         {/* <div className="search-bar">SEARCH BAR TO CREATE</div> */}
         <div className="event-container">
           <div>
-            <div className="event-box-container">
+            <div className="event-box-container-wrapper">
               {events && events.length > 0 ? (
                 events.map((event) => (
-                  <div key={event._id}>
+                  <div className="event-box-container" key={event._id}>
                     <EventCard {...event} />
                   </div>
                 ))
