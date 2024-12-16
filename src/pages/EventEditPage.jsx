@@ -1,74 +1,51 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../context/auth.context";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CreateEventPage = ({ events, setEvents }) => {
-  const { user } = useContext(AuthContext);
-  const [newEvent, setNewEvent] = useState({
-    title: "",
-    picture: "",
-    location: "",
-    date: "",
-    user: user?._id,
-  });
+// const API_URL = `http://localhost:5005`;
 
-  //   console.log(user);
-
-  //   const [errorMessage, setErrorMessage] = useState("");
+const EventEditPage = () => {
+  const [eventToEdit, setEventToEdit] = useState({});
+  const { eventId } = useParams();
   const navigate = useNavigate();
 
-  //andle dynamic change for each input field
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewEvent((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  //Handle event submission
-  const handleEventSubmit = async (e) => {
-    e.preventDefault();
-    console.log(newEvent);
-    if (!newEvent.title || !newEvent.location || !newEvent.date) {
-      alert("Please fill in all required fields.");
-      return;
-    }
-
-    //Send POST to server
-    try {
-      const response = await axios.post(
-        "http://localhost:5005/api/events/create",
-        newEvent
-      );
-      console.log("Event created:", response.data);
-
-      //If the res is ok, add the event to the list
-      if (response.status === 201) {
-        setEvents([...events, response.data]);
-
-        setNewEvent({
-          title: "",
-          picture: "",
-          location: "",
-          date: "",
-          price: "",
-          user: user._id,
+  useEffect(() => {
+    if (eventId) {
+      axios
+        .get(`http://localhost:5005/api/events/${eventId}`)
+        .then((response) => {
+          const oneEvent = response.data;
+          setEventToEdit(oneEvent);
+        })
+        .catch((error) => {
+          console.error("Error fetching the event:", error);
         });
-
-        //redirect to the events page, afte we can change it to details page of created event
-        navigate("/Events");
-      } else {
-        alert("Error when creating the event.");
-      }
-    } catch (error) {
-      console.error("An error occurred while creating the event:", error);
     }
-  };
+  }, [eventId]);
 
-  // List of locations to populate the dropdown
+  function handleChange(e) {
+    const whatWasTyped = e.target.value;
+    const inputThatIsUsed = e.target.name;
+
+    setEventToEdit((prevState) => ({
+      ...prevState,
+      [inputThatIsUsed]: whatWasTyped,
+    }));
+  }
+
+  function handleUpdateEvent(e) {
+    e.preventDefault();
+    axios
+      .put(`http://localhost:5005/api/events/${eventId}`, eventToEdit)
+      .then((response) => {
+        console.log(response.data);
+        navigate(`/event/${eventId}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   const locations = [
     "Álava",
     "Albacete",
@@ -120,14 +97,14 @@ const CreateEventPage = ({ events, setEvents }) => {
 
   return (
     <>
-      <h1>Create a new event!</h1>
-      <form onSubmit={handleEventSubmit}>
+      <h1>Edit the event!</h1>
+      <form onSubmit={handleUpdateEvent}>
         <div>
           <label>Title</label>
           <input
             type="text"
             name="title"
-            value={newEvent.title}
+            value={eventToEdit.title || ""}
             onChange={handleChange}
             className="form-input"
             placeholder="Enter the title of the event"
@@ -140,7 +117,7 @@ const CreateEventPage = ({ events, setEvents }) => {
           <select
             name="location"
             id="location"
-            value={newEvent.location}
+            value={eventToEdit.location || ""}
             onChange={handleChange}
             className="form-input"
           >
@@ -157,7 +134,7 @@ const CreateEventPage = ({ events, setEvents }) => {
           <input
             type="text"
             name="date"
-            value={newEvent.date}
+            value={eventToEdit.date || ""}
             onChange={handleChange}
             className="form-input"
             placeholder="Enter the date of the event"
@@ -171,10 +148,10 @@ const CreateEventPage = ({ events, setEvents }) => {
             type="url"
             name="picture"
             id="eventPicture"
-            value={newEvent.picture}
+            value={eventToEdit.picture || ""}
             onChange={handleChange}
             className="form-input"
-            placeholder="Enter URL for your events's picture"
+            placeholder="Enter URL for your event's picture"
           />
         </div>
         <div>
@@ -182,18 +159,20 @@ const CreateEventPage = ({ events, setEvents }) => {
           <input
             type="number"
             name="price"
-            value={newEvent.price}
+            value={eventToEdit.price || ""}
             onChange={handleChange}
             className="form-input"
-            placeholder="Enter the price of the even or leave it blank if it is free"
+            placeholder="Enter the price of the event or leave it blank if it is free"
           />
         </div>
         <div>
-          <button className="log-button"> Add Event</button>
+          <button type="submit" className="log-button">
+            Upload your changes!
+          </button>
         </div>
       </form>
     </>
   );
 };
 
-export default CreateEventPage;
+export default EventEditPage;

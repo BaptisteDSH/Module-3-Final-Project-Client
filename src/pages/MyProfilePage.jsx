@@ -1,6 +1,6 @@
 import React from "react";
 
-const MyProfilPage = () => {
+const MyProfilePage = () => {
   return (
     <>
       <div className="my-profil-page-container">
@@ -48,4 +48,4 @@ const MyProfilPage = () => {
   );
 };
 
-export default MyProfilPage;
+export default MyProfilePage;

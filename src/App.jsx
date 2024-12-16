@@ -8,8 +8,9 @@ import EventsPage from "./pages/EventsPage";
 import EventDetailPage from "./pages/EventDetailPage";
 import { useState, useEffect } from "react";
 import AboutUsPage from "./pages/AboutUsPage";
-import MyProfilPage from "./pages/MyProfilPage";
+import MyProfilePage from "./pages/MyProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
+import EventEditPage from "./pages/EventEditPage";
 // import axios from "axios";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
@@ -60,10 +61,14 @@ const App = () => {
           }
         />
         <Route path="/AboutUs" element={<AboutUsPage />} />
-        <Route path="/MyProfil" element={<MyProfilPage />} />
+        <Route path="/MyProfil" element={<MyProfilePage />} />
         <Route path="/Events" element={<EventsPage />} />
-        <Route path="/Events/Create" element={<CreateEventPage />} />
+        <Route
+          path="/Events/Create"
+          element={<CreateEventPage events={events} setEvents={setEvents} />}
+        />
         <Route path="/Event/:eventId" element={<EventDetailPage />} />
+        <Route path="/Event/Update/:eventId" element={<EventEditPage />} />
         <Route path="/SignUp" element={<SignUpPage />} />
         <Route path="/Login" element={<LoginPage />} />
         <Route
