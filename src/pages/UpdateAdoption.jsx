@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const UpdateAdoption = ({ adoptions, setAdoptions }) => {
   const { user } = useContext(AuthContext);
   const { adoptionId } = useParams();
+
   console.log("adoptionId from params:", adoptionId);
 
   // Holds the fetched adoption data
@@ -14,15 +14,15 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
   const navigate = useNavigate();
 
   const [updatedAdoption, setUpdatedAdoption] = useState({
-    datePosted: "" || "",
+    datePosted: "",
     description: "",
     pet: { name: "" },
     picture: "",
     user: user._id,
   });
+  console.log(user._id);
 
-  //fetch the specific adoption data when the component loads
-
+  // Fetch the specific adoption data when the component loads
   useEffect(() => {
     const fetchAdoption = async () => {
       try {
@@ -37,19 +37,20 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
     fetchAdoption();
   }, [adoptionId]);
 
-  //   useEffect(() => {
-  //     if (adoption) {
-  //       setUpdatedAdoption({
-  //         datePosted: adoption.datePosted,
-  //         description: adoption.description,
-  //         pet: { name: adoption.pet.name },
-  //         picture: adoption.picture,
-  //         user: adoption.user,
-  //       });
-  //     }
-  //   }, [adoption]);
+  // Update the `updatedAdoption` state when adoption data is fetched
+  useEffect(() => {
+    if (adoption) {
+      setUpdatedAdoption({
+        datePosted: adoption.datePosted,
+        description: adoption.description,
+        pet: { name: adoption.pet.name },
+        picture: adoption.picture,
+        user: adoption.user,
+      });
+    }
+  }, [adoption]);
 
-  //handleChange function dynamically updates the state of the updatedAdoption object based on changes in the input fields
+  // handleChange function to update state based on input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "petName") {
@@ -68,8 +69,7 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
     }
   };
 
-  //Put request for the individual adoption
-
+  // PUT request for the individual adoption
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting updated adoption:", updatedAdoption);
@@ -82,9 +82,9 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
         item._id === adoptionId ? response.data : item
       );
       setAdoptions(updatedAdoptions);
-
+      navigate("/MyProfile"); // Correct usage of navigate
+      window.location.reload();
       alert("Adoption updated successfully!");
-      navigate(`/adoptions/${adoptionId}`);
     } catch (error) {
       console.error("Failed to update adoption:", error);
       alert("An error occurred while updating the adoption.");
@@ -107,7 +107,6 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
         </div>
         <div>
           <label>Description:</label>
-
           <textarea
             name="description"
             value={updatedAdoption.description}
@@ -116,7 +115,6 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
             required
           />
         </div>
-
         <div>
           <label>Pet Name:</label>
           <input
@@ -138,7 +136,6 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
             placeholder="Enter picture URL"
           />
         </div>
-
         <button type="submit">Update Adoption</button>
       </form>
     </div>
