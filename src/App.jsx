@@ -8,7 +8,7 @@ import EventsPage from "./pages/EventsPage";
 import EventDetailPage from "./pages/EventDetailPage";
 import { useState, useEffect } from "react";
 import AboutUsPage from "./pages/AboutUsPage";
-import MyProfilPage from "./pages/MyProfilPage";
+import MyProfilePage from "./pages/MyProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
@@ -70,10 +70,10 @@ const App = () => {
         />
         <Route path="/AboutUs" element={<AboutUsPage />} />
         <Route
-          path="/MyProfil"
+          path="/MyProfile"
           element={
             <IsPrivate>
-              <MyProfilPage />
+              <MyProfilePage />
             </IsPrivate>
           }
         />

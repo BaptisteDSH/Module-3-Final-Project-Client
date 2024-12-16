@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css"; // Import CSS
 
-const MyProfilPage = () => {
+const MyProfilePage = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext); // Get user data from context
@@ -130,4 +130,4 @@ const MyProfilPage = () => {
   );
 };
 
-export default MyProfilPage;
+export default MyProfilePage;
