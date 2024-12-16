@@ -14,12 +14,13 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import axios from "axios";
 import AdoptionDetails from "./pages/AdoptionDetails";
-import CreateAdoption from "./components/CreateAdoption";
 import IsPrivate from "./components/IsPrivate";
 import EditProfilPage from "./pages/EditProfilPage";
 import AddPet from "./pages/AddPet";
-import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
-import "react-toastify/dist/ReactToastify.css"; // Import the CSS for react-toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CreateAdoption from "./pages/CreateAdoption";
+import UpdateAdoption from "./pages/UpdateAdoption";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -28,19 +29,15 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch events
         const eventsData = await axios.get("http://localhost:5005/api/events");
         setEvents(eventsData.data);
 
-        // Fetch adoptions
         const adoptionsData = await axios.get(
           "http://localhost:5005/api/adoptions"
         );
         setAdoptions(adoptionsData.data);
       } catch (error) {
-        console.log("Something is wrong with fetching all the data");
-
-        // Error toast notification
+        console.error("Something is wrong with fetching all the data");
         toast.error("Failed to fetch data!");
       }
     };
@@ -73,7 +70,12 @@ const App = () => {
           path="/MyProfile"
           element={
             <IsPrivate>
-              <MyProfilePage />
+              <MyProfilePage
+                events={events}
+                setEvents={setEvents}
+                adoptions={adoptions}
+                setAdoptions={setAdoptions}
+              />
             </IsPrivate>
           }
         />
@@ -93,11 +95,20 @@ const App = () => {
             />
           }
         />
-        <Route path="/CreateAdoption" element={<CreateAdoption />} />
+        <Route
+          path="/CreateAdoption"
+          element={
+            <CreateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
+          }
+        />
+        <Route
+          path="/UpdateAdoptions/:adoptionId"
+          element={
+            <UpdateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
+          }
+        />
       </Routes>
       <Footer />
-
-      {/* ToastContainer to display toasts */}
       <ToastContainer
         position="bottom-right"
         autoClose={2000}
