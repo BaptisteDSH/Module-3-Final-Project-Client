@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const UpdateAdoption = ({ adoptions, setAdoptions }) => {
@@ -11,6 +11,7 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
 
   // Holds the fetched adoption data
   const [adoption, setAdoption] = useState(null);
+  const navigate = useNavigate();
 
   const [updatedAdoption, setUpdatedAdoption] = useState({
     datePosted: "" || "",
@@ -35,8 +36,6 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
     };
     fetchAdoption();
   }, [adoptionId]);
-
-  
 
   //   useEffect(() => {
   //     if (adoption) {
