@@ -59,6 +59,25 @@ const MyProfilePage = ({ adoptions, setAdoptions, events, setEvents }) => {
     }
   }, [user]);
 
+  //Handle event deletion
+
+  async function handleDelete(eventId) {
+    console.log("delete", eventId);
+    try {
+      await axios.delete(`http://localhost:5005/api/events/${eventId}`);
+
+      // Update the state by removing the deleted event
+      setEvents((prevEvents) =>
+        prevEvents.filter((event) => event._id !== eventId)
+      );
+
+      toast.success("Event deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      toast.error("Failed to delete the event.");
+    }
+  }
+
   // Handle adoption deletion
   const handleDeleteAdoption = async (adoptionId) => {
     try {
@@ -66,19 +85,40 @@ const MyProfilePage = ({ adoptions, setAdoptions, events, setEvents }) => {
       setAdoptions((prev) =>
         prev.filter((adoption) => adoption._id !== adoptionId)
       );
-      toast.success("Adoption deleted successfully!");
+      toast.success("Event deleted successfully!");
     } catch (error) {
       console.error("Error deleting adoption:", error);
+      toast.error("Failed to delete the event.");
     }
   };
 
   if (errorMessage) return <div>{errorMessage}</div>;
   if (loading) return <div>Loading...</div>;
 
+  //Handle event deletion
+  //DELETE FUNCTION FOR EVENTS
+  // async function handleDelete(eventId) {
+  //   console.log("delete", eventId);
+  //   try {
+  //     await axios.delete(`http://localhost:5005/api/events/${eventId}`);
+  //     setEvents((prevEvents) =>
+  //       prevEvents.filter((event) => event._id !== eventId)
+  //     ) toast.success("Event deleted successfully!");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  //Filtering for only user created adoptions and events
+
   const userAdoptions = adoptions.filter(
     (adoption) => adoption.user === user._id
   );
-  const userEvents = events.filter((event) => event.user === user._id);
+  console.log(userAdoptions);
+  const userEvents = events.filter((event) => event.organizerId === user._id);
+  console.log(userEvents);
+
+  //Displaying the elements of the page
 
   return (
     <div className="my-profile-page-container">
@@ -123,23 +163,47 @@ const MyProfilePage = ({ adoptions, setAdoptions, events, setEvents }) => {
         )}
       </div>
 
-      <div className="user-event-container">
+      <div className="event-list">
+        {userEvents.map((event) => (
+          <div key={event._id}>
+            <EventCard {...event} setEvents={setEvents} />
+            <div>
+              <Link to={`/Event/Update/${event._id}`}>
+                <button className="log-button">Edit Event</button>
+              </Link>
+              <button
+                onClick={() => {
+                  handleDelete(event._id);
+                }}
+                className="log-button"
+              >
+                Delete Event
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* <div className="user-event-container">
         {userEvents.length > 0 ? (
           userEvents.map((event) => <EventCard key={event._id} {...event} />)
         ) : (
           <p>No events available.</p>
         )}
-      </div>
+      </div> */}
 
       <div className="user-adoption-container">
         {userAdoptions.map((adoption) => (
           <div key={adoption._id} className="adoption-box-container">
             <AdoptionCard oneAdoption={adoption} setAdoptions={setAdoptions} />
             <Link to={`/UpdateAdoptions/${adoption._id}`}>
-              <button>Edit</button>
+              <button className="log-button">Edit Adoption</button>
             </Link>
-            <button onClick={() => handleDeleteAdoption(adoption._id)}>
-              Delete
+            <button
+              onClick={() => handleDeleteAdoption(adoption._id)}
+              className="log-button"
+            >
+              Delete Adoption
             </button>
           </div>
         ))}

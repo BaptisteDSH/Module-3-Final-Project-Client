@@ -24,16 +24,7 @@ const EventDetailPage = () => {
     getEvent();
   }, [eventId, getEvent]);
 
-  //DELETE FUNCTION FOR EVENTS
-  async function handleDelete(eventId) {
-    // console.log("delete", eventId);
-    try {
-      const { data } = await axios.delete(`${API_URL}/api/events/${eventId}`);
-      navigate(`/events`);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  
 
   return (
     <>
@@ -58,19 +49,7 @@ const EventDetailPage = () => {
           </>
         )}
       </div>
-      <div>
-        <Link to={`/Event/Update/${eventId}`}>
-          <button className="log-button">Edit Event</button>
-        </Link>
-        <button
-          onClick={() => {
-            handleDelete(eventId);
-          }}
-          className="log-button"
-        >
-          Delete Event
-        </button>
-      </div>
+      
     </>
   );
 };

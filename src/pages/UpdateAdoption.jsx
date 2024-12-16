@@ -6,8 +6,8 @@ import { useEffect } from "react";
 
 const UpdateAdoption = ({ adoptions, setAdoptions }) => {
   const { user } = useContext(AuthContext);
-    const { adoptionId } = useParams();
-    console.log("adoptionId from params:", adoptionId);
+  const { adoptionId } = useParams();
+  console.log("adoptionId from params:", adoptionId);
 
   // Holds the fetched adoption data
   const [adoption, setAdoption] = useState(null);
@@ -20,7 +20,7 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
     user: user._id,
   });
 
-  //fetch the specific data when the component loads
+  //fetch the specific adoption data when the component loads
 
   useEffect(() => {
     const fetchAdoption = async () => {
@@ -35,6 +35,8 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
     };
     fetchAdoption();
   }, [adoptionId]);
+
+  
 
   //   useEffect(() => {
   //     if (adoption) {
@@ -70,8 +72,8 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
   //Put request for the individual adoption
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log("Submitting updated adoption:", updatedAdoption);
+    e.preventDefault();
+    console.log("Submitting updated adoption:", updatedAdoption);
     try {
       const response = await axios.put(
         `http://localhost:5005/api/adoptions/${adoptionId}`,
@@ -83,6 +85,7 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
       setAdoptions(updatedAdoptions);
 
       alert("Adoption updated successfully!");
+      navigate(`/adoptions/${adoptionId}`);
     } catch (error) {
       console.error("Failed to update adoption:", error);
       alert("An error occurred while updating the adoption.");

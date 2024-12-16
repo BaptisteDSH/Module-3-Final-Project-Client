@@ -11,7 +11,7 @@ const CreateEventPage = ({ events, setEvents }) => {
     picture: "",
     location: "",
     date: "",
-    user: user?._id,
+    organizerId: user?._id,
   });
 
   //   console.log(user);
@@ -55,7 +55,7 @@ const CreateEventPage = ({ events, setEvents }) => {
           location: "",
           date: "",
           price: "",
-          user: user._id,
+          organizerId: user?._id,
         });
 
         //redirect to the events page, afte we can change it to details page of created event
