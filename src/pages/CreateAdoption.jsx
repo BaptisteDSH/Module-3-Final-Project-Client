@@ -4,15 +4,16 @@ import { AuthContext } from "../context/auth.context";
 
 const CreateAdoption = ({ adoptions, setAdoptions }) => {
   const { user } = useContext(AuthContext);
+ 
+
   const [newAdoption, setNewAdoption] = useState({
     //set to default to current date, in international format, separated at the "T", and displaying only the date ([0])
     datePosted: new Date().toISOString().split("T")[0],
     description: "",
     pet: { name: "" },
-    picture: "",
+    pictures: [],
     user: user._id,
   });
-  console.log(user);
 
   //handleChange function dynamically updates the state of the newAdoption object based on changes in the input fields
   const handleChange = (e) => {
@@ -33,6 +34,43 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
     }
   };
 
+
+
+
+  
+  //handleImageUpload allows to upload multiple pictures directly in the form
+  async function handleImageUpload(e) {
+    //prevent the form from reloading
+    e.preventDefault();
+    //Retrieve the files from the event
+    const images = e.target.files;
+    console.log(images);
+    //create formData (multer on the server expects form data)
+    const myFormData = new FormData();
+
+    // Change the images state to an array so we can call the .forEach( ) on it
+    //for each image, add it to the form data
+    Array.from(images).forEach((image) => {
+      myFormData.append("imageUrl", image);
+    });
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5005/uploads/multiple-uploads",
+        myFormData
+      );
+      console.log("image uploaded successfully", data);
+      //   nav("/home");
+      // Add the returned image URLs to the state
+      setNewAdoption((prevState) => ({
+        ...prevState,
+        pictures: [...prevState.pictures, ...data.imageUrls],
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(...data.imageUrls);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -48,7 +86,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
         datePosted: new Date().toISOString().split("T")[0],
         description: "",
         pet: { name: "" },
-        picture: "",
+        pictures: [],
         user: user._id,
       });
     } catch (error) {
@@ -97,18 +135,31 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             required
           />
         </div>
+
         <div>
-          <label>Picture URL:</label>
-          <input
-            type="text"
-            name="picture"
-            value={newAdoption.picture}
-            onChange={handleChange}
-            placeholder="Enter picture URL"
-          />
+          {/*the uploaded pictures below*/}
+          <ul>
+            {newAdoption.pictures.map((url, index) => (
+              <li key={index}>
+                <img src={url} alt={`Uploaded ${index}`} width="100" />
+              </li>
+            ))}
+          </ul>
         </div>
 
         <button type="submit">Create Adoption</button>
+      </form>
+      <form onSubmit={handleImageUpload}>
+        <div>
+          <label>Upload Pictures</label>
+          <input
+            type="file"
+            name="pictures"
+            multiple
+            placeholder="Upload your adoptions' pictures"
+          />
+        </div>
+        <button>Submit</button>
       </form>
     </div>
   );
