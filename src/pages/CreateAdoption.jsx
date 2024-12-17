@@ -3,8 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 
 const CreateAdoption = ({ adoptions, setAdoptions }) => {
-  const { user } = useContext(AuthContext);
- 
+  const { user, isLoading } = useContext(AuthContext);
 
   const [newAdoption, setNewAdoption] = useState({
     //set to default to current date, in international format, separated at the "T", and displaying only the date ([0])
@@ -12,8 +11,16 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
     description: "",
     pet: { name: "" },
     pictures: [],
-    user: user._id,
+    user: user ? user._id : "", // Use fallback if user is null
   });
+
+  if (isLoading) {
+    return <p>Loading...</p>; // Display a loading state until user is fetched
+  }
+
+  if (!user) {
+    return <p>User not authenticated. Please log in.</p>;
+  }
 
   //handleChange function dynamically updates the state of the newAdoption object based on changes in the input fields
   const handleChange = (e) => {
@@ -34,10 +41,6 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
     }
   };
 
-
-
-
-  
   //handleImageUpload allows to upload multiple pictures directly in the form
   async function handleImageUpload(e) {
     //prevent the form from reloading
@@ -58,9 +61,10 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
         "http://localhost:5005/uploads/multiple-uploads",
         myFormData
       );
-      console.log("image uploaded successfully", data);
+
       //   nav("/home");
       // Add the returned image URLs to the state
+      console.log("image uploaded successfully", data);
       setNewAdoption((prevState) => ({
         ...prevState,
         pictures: [...prevState.pictures, ...data.imageUrls],
@@ -68,7 +72,6 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
     } catch (error) {
       console.log(error);
     }
-    console.log(...data.imageUrls);
   }
 
   const handleSubmit = async (e) => {
@@ -149,7 +152,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
 
         <button type="submit">Create Adoption</button>
       </form>
-      <form onSubmit={handleImageUpload}>
+      <form onChange={handleImageUpload}>
         <div>
           <label>Upload Pictures</label>
           <input
