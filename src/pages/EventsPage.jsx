@@ -8,6 +8,8 @@ const API_URL = `http://localhost:5005`;
 
 const EventsPage = () => {
   const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]); //added by Emi
+  const [query, setQuery] = useState(""); //added by Emi
 
   const getAllEvents = () => {
     axios
@@ -15,16 +17,35 @@ const EventsPage = () => {
       .then((response) => {
         console.log(response.data);
         setEvents(Array.isArray(response.data) ? response.data : []);
+        setFilteredEvents(response.data); //added by Emi
       })
       .catch((error) => {
         console.log("Error fetching events:", error);
         setEvents([]);
+        setFilteredEvents([]); //added by Emi
       });
   };
 
   useEffect(() => {
     getAllEvents();
   }, []);
+
+  // Function to filter events added by Emi
+  const handleSearch = (e) => {
+    const searchQuery = e.target.value;
+    setQuery(searchQuery);
+
+    if (searchQuery === "") {
+      // If the query is empty, show all events
+      setFilteredEvents(events);
+    } else {
+      // Otherwise, filter events by location
+      const filtered = events.filter((event) =>
+        event.location.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredEvents(filtered);
+    }
+  };
 
   return (
     <>
@@ -44,25 +65,31 @@ const EventsPage = () => {
             </Link>
           </div>
         </div>
-        <div>
-          <img
-            src="https://www.educateurcaninfrance.com/wp-content/uploads/2024/05/GettyImages-1317531965-1.jpg"
-            alt=""
-            className="events-separation"
+        <div className="search-bar-title">
+          Curious if there's something happening near you?
+        </div>
+        {/* Search Bar added by Emi*/}
+        <div className="search-bar-container">
+          <input
+            type="text"
+            value={query}
+            onChange={handleSearch}
+            placeholder="Search events by location"
+            className="search-bar"
           />
         </div>
         {/* <div className="search-bar">SEARCH BAR TO CREATE</div> */}
         <div className="event-container">
           <div>
             <div className="event-box-container-wrapper">
-              {events && events.length > 0 ? (
-                events.map((event) => (
+              {filteredEvents && filteredEvents.length > 0 ? (
+                filteredEvents.map((event) => (
                   <div className="event-box-container" key={event._id}>
                     <EventCard {...event} />
                   </div>
                 ))
               ) : (
-                <p>No events available.</p>
+                <p>No events found matching your search.</p>
               )}
             </div>
           </div>

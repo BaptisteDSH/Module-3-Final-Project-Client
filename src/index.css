@@ -46,8 +46,7 @@ nav {
   width: 100%;
   z-index: 1000;
   background-color: white;
-  padding: 0px 20px;
-   */
+  padding: 0px 20px; */
 }
 
 nav img {
@@ -303,12 +302,6 @@ footer {
   overflow: hidden;
 }
 
-.events-separation {
-  position: relative;
-  width: 100%;
-  height: 2vh;
-}
-
 .event-image-container img {
   width: 100%;
   height: 100%;
@@ -429,6 +422,36 @@ footer {
   padding-bottom: 5%;
   font-size: 20px;
   text-align: justify;
+}
+
+/* Search Box*/
+
+.search-bar-title {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.search-bar-container {
+  width: 100%;
+  max-width: 700px;
+  margin: 5px auto;
+  text-align: center;
+}
+
+.search-bar {
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 8px rgba(0, 128, 0, 0.5);
 }
 
 /* */
