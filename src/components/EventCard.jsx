@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const EventCard = ({ _id, picture, title, location, date, description }) => {
+const EventCard = ({ _id, pictures, title, location, date, description }) => {
   return (
     <div className="event-card-container">
       <Link to={`/Event/${_id}`} className="event-link">
         <section>
           <div className="event-image-card-container">
-            <img src={picture} alt="event-img" className="event-image" />
+            <img
+              src={pictures?.[0] || "https://shorturl.at/I39cR"}
+              alt="event-img"
+              className="event-image"
+            />
           </div>
           <div className="event-title">
             <h1>{title}</h1>

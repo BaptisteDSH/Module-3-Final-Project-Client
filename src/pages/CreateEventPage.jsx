@@ -5,20 +5,24 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
 const CreateEventPage = ({ events, setEvents }) => {
-  const { user } = useContext(AuthContext);
+  const { user, isLoading } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [newEvent, setNewEvent] = useState({
     title: "",
-    picture: "",
+    pictures: [],
     location: "",
-    date: "",
+    date: new Date().toISOString().split("T")[0],
     description: "",
-    organizerId: user?._id,
+    organizerId: user ? user._id : "",
   });
 
-  //   console.log(user);
+  if (isLoading) {
+    return <p>Loading...</p>; // Display a loading state until user is fetched
+  }
 
-  //   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
+  if (!user) {
+    return <p>User not authenticated. Please log in.</p>;
+  }
 
   //Handle dynamic change for each input field
   const handleChange = (e) => {
@@ -32,19 +36,36 @@ const CreateEventPage = ({ events, setEvents }) => {
   //Handle event submission
   const handleEventSubmit = async (e) => {
     e.preventDefault();
-    console.log(newEvent);
-    if (!newEvent.title || !newEvent.location || !newEvent.date) {
-      alert("Please fill in all required fields.");
-      return;
-    }
 
-    //Send POST to server
     try {
+      //Step 1, upload the images
+      const myFormData = new FormData();
+      //for each image, add it to the form data
+      newEvent.pictures.forEach((image) => {
+        myFormData.append("imageUrl", image);
+      });
+
+      //API call to upload the multiple images
+      const { data } = await axios.post(
+        "http://localhost:5005/uploads/multiple-uploads",
+        myFormData
+      );
+      console.log("image uploaded successfully", data.imageUrls);
+
+      //Step 2, Add the returned image URLs to the state
+      const eventPayload = {
+        ...newEvent,
+        pictures: data.imageUrls, // Use the uploaded image URLs
+        user: user._id, // Ensure user ID is included
+      };
+
+      //Step 3: sending the POST request to create event
+
       const response = await axios.post(
         "http://localhost:5005/api/events/create",
-        newEvent
+        eventPayload
       );
-      console.log("Event created:", response.data);
+      console.log("Event created successfully:", response.data);
 
       //If the res is ok, add the event to the list
       if (response.status === 201) {
@@ -52,12 +73,11 @@ const CreateEventPage = ({ events, setEvents }) => {
 
         setNewEvent({
           title: "",
-          picture: "",
+          pictures: [],
           location: "",
-          date: "",
-          price: "",
+          date: new Date().toISOString().split("T")[0],
           description: "",
-          organizerId: user?._id,
+          organizerId: user._id,
         });
 
         //redirect to the events page, afte we can change it to details page of created event
@@ -133,6 +153,7 @@ const CreateEventPage = ({ events, setEvents }) => {
             onChange={handleChange}
             className="form-input"
             placeholder="Enter the title of the event"
+            required
           />
         </div>
         <div className="form-group">
@@ -145,6 +166,7 @@ const CreateEventPage = ({ events, setEvents }) => {
             value={newEvent.location}
             onChange={handleChange}
             className="form-input"
+            required
           >
             <option value="">Select a location</option>
             {locations.map((loc, index) => (
@@ -163,21 +185,37 @@ const CreateEventPage = ({ events, setEvents }) => {
             onChange={handleChange}
             className="form-input"
             placeholder="Enter the date of the event"
+            required
           />
         </div>
         <div className="form-group">
           <label htmlFor="eventPicture" className="form-label">
-            Event Picture
+            Upload Pictures
           </label>
           <input
-            type="url"
-            name="picture"
+            type="file"
+            name="pictures"
             id="eventPicture"
-            value={newEvent.picture}
-            onChange={handleChange}
+            placeholder="Upload your adoptions' pictures"
+            onChange={(e) => {
+              const files = Array.from(e.target.files);
+              setNewEvent((prevState) => ({
+                ...prevState,
+                pictures: files, // Store files directly in the state
+              }));
+            }}
             className="form-input"
-            placeholder="Enter URL for your events's picture"
           />
+        </div>
+        <div>
+          {/*the uploaded pictures below*/}
+          <ul>
+            {newEvent.pictures.map((url, index) => (
+              <li key={index}>
+                <img src={url} alt={`Uploaded ${index}`} width="100" />
+              </li>
+            ))}
+          </ul>
         </div>
         <div>
           <label>Price</label>

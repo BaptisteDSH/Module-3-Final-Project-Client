@@ -18,8 +18,8 @@ const AdoptPage = ({ adoptions, setAdoptions }) => {
         <div className="adoption-container">
           {sortedAdoptions.map((oneAdoption) => {
             return (
-              <div className="adoption-box-container">
-                <div key={oneAdoption._id}>
+              <div key={oneAdoption._id} className="adoption-box-container">
+                <div>
                   <AdoptionCard
                     oneAdoption={oneAdoption}
                     setAdoptions={setAdoptions}
