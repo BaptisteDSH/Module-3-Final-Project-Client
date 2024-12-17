@@ -42,47 +42,72 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
   };
 
   //handleImageUpload allows to upload multiple pictures directly in the form
-  async function handleImageUpload(e) {
-    //prevent the form from reloading
-    e.preventDefault();
-    //Retrieve the files from the event
-    const images = e.target.files;
-    console.log(images);
-    //create formData (multer on the server expects form data)
-    const myFormData = new FormData();
+  // async function handleImageUpload(e) {
+  //prevent the form from reloading
+  // e.preventDefault();
+  //Retrieve the files from the event
+  // const images = e.target.files;
+  // console.log(images);
+  //create formData (multer on the server expects form data)
+  // const myFormData = new FormData();
 
-    // Change the images state to an array so we can call the .forEach( ) on it
-    //for each image, add it to the form data
-    Array.from(images).forEach((image) => {
-      myFormData.append("imageUrl", image);
-    });
+  // Change the images state to an array so we can call the .forEach( ) on it
+  //for each image, add it to the form data
+  // Array.from(images).forEach((image) => {
+  //   myFormData.append("imageUrl", image);
+  // });
+  // try {
+  //   const { data } = await axios.post(
+  //     "http://localhost:5005/uploads/multiple-uploads",
+  //     myFormData
+  //   );
+
+  //   nav("/home");
+  // Add the returned image URLs to the state
+  // console.log("image uploaded successfully", data);
+  //     setNewAdoption((prevState) => ({
+  //       ...prevState,
+  //       pictures: [...prevState.pictures, ...data.imageUrls],
+  //     }));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
+      //step 1, upload the images
+      const myFormData = new FormData();
+      // Change the images state to an array so we can call the .forEach( ) on it
+      //for each image, add it to the form data
+      newAdoption.pictures.forEach((image) => {
+        myFormData.append("imageUrl", image);
+      });
+
+      //API call to upload the multiple images
       const { data } = await axios.post(
         "http://localhost:5005/uploads/multiple-uploads",
         myFormData
       );
 
-      //   nav("/home");
-      // Add the returned image URLs to the state
       console.log("image uploaded successfully", data);
-      setNewAdoption((prevState) => ({
-        ...prevState,
-        pictures: [...prevState.pictures, ...data.imageUrls],
-      }));
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
+      //Step 2, Add the returned image URLs to the state
+      const adoptionPayload = {
+        ...newAdoption,
+        pictures: data.imageUrls, // Use the uploaded image URLs
+        user: user._id, // Ensure user ID is included
+      };
+
       const response = await axios.post(
         "http://localhost:5005/api/adoptions",
-        newAdoption
+        adoptionPayload
       );
+
+      console.log("Adoption created successfully:", response.data);
       //This adds the newly created adoption to the adoptions array
-      setAdoptions([...adoptions, newAdoption]);
+      setAdoptions([...adoptions, response.data]);
 
       //Resetting the form after submission
       setNewAdoption({
@@ -138,6 +163,22 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             required
           />
         </div>
+        <div>
+          <label>Upload Pictures</label>
+          <input
+            type="file"
+            name="pictures"
+            multiple
+            placeholder="Upload your adoptions' pictures"
+            onChange={(e) => {
+              const files = Array.from(e.target.files);
+              setNewAdoption((prevState) => ({
+                ...prevState,
+                pictures: files, // Store files directly in the state
+              }));
+            }}
+          />
+        </div>
 
         <div>
           {/*the uploaded pictures below*/}
@@ -152,18 +193,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
 
         <button type="submit">Create Adoption</button>
       </form>
-      <form onChange={handleImageUpload}>
-        <div>
-          <label>Upload Pictures</label>
-          <input
-            type="file"
-            name="pictures"
-            multiple
-            placeholder="Upload your adoptions' pictures"
-          />
-        </div>
-        <button>Submit</button>
-      </form>
+      {/* <form onChange={handleImageUpload}></form> */}
     </div>
   );
 };
