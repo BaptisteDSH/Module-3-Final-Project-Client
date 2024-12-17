@@ -41,39 +41,6 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
     }
   };
 
-  //handleImageUpload allows to upload multiple pictures directly in the form
-  // async function handleImageUpload(e) {
-  //prevent the form from reloading
-  // e.preventDefault();
-  //Retrieve the files from the event
-  // const images = e.target.files;
-  // console.log(images);
-  //create formData (multer on the server expects form data)
-  // const myFormData = new FormData();
-
-  // Change the images state to an array so we can call the .forEach( ) on it
-  //for each image, add it to the form data
-  // Array.from(images).forEach((image) => {
-  //   myFormData.append("imageUrl", image);
-  // });
-  // try {
-  //   const { data } = await axios.post(
-  //     "http://localhost:5005/uploads/multiple-uploads",
-  //     myFormData
-  //   );
-
-  //   nav("/home");
-  // Add the returned image URLs to the state
-  // console.log("image uploaded successfully", data);
-  //     setNewAdoption((prevState) => ({
-  //       ...prevState,
-  //       pictures: [...prevState.pictures, ...data.imageUrls],
-  //     }));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

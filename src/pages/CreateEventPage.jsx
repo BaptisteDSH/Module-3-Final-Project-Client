@@ -19,7 +19,7 @@ const CreateEventPage = ({ events, setEvents }) => {
   //   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  //andle dynamic change for each input field
+  //Handle dynamic change for each input field
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewEvent((prevState) => ({
