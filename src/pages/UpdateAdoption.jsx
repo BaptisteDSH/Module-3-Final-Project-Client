@@ -7,7 +7,6 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
   const { user } = useContext(AuthContext);
   const { adoptionId } = useParams();
 
-  console.log("adoptionId from params:", adoptionId);
 
   // Holds the fetched adoption data
   const [adoption, setAdoption] = useState(null);
@@ -15,12 +14,12 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
 
   const [updatedAdoption, setUpdatedAdoption] = useState({
     datePosted: "",
+    location: "",
     description: "",
     pet: { name: "" },
-    picture: "",
-    user: user._id,
+    pictures: [],
+    user: user ? user._id : "", // Use fallback if user is null
   });
-  console.log(user._id);
 
   // Fetch the specific adoption data when the component loads
   useEffect(() => {
@@ -42,9 +41,10 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
     if (adoption) {
       setUpdatedAdoption({
         datePosted: adoption.datePosted,
+        location: adoption.location,
         description: adoption.description,
         pet: { name: adoption.pet.name },
-        picture: adoption.picture,
+        pictures: adoption.pictures,
         user: adoption.user,
       });
     }
@@ -74,12 +74,34 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
     e.preventDefault();
     console.log("Submitting updated adoption:", updatedAdoption);
     try {
+      //Step 1, upload the images
+      const myFormData = new FormData();
+      //for each image, add it to the form data
+      updatedAdoption.pictures.forEach((image) => {
+        myFormData.append("imageUrl", image);
+      });
+
+      //API call to upload the multiple images
+      const { data } = await axios.post(
+        "http://localhost:5005/uploads/multiple-uploads",
+        myFormData
+      );
+      console.log("image uploaded successfully", data.imageUrls);
+
+      //Step 2, Add the returned image URLs to the state
+      const adoptionPayload = {
+        ...updatedAdoption,
+        pictures: data.imageUrls, // Use the uploaded image URLs
+        user: user._id, // Ensure user ID is included
+      };
+
+      //Step 3, updating the adoptions
       const response = await axios.put(
         `http://localhost:5005/api/adoptions/${adoptionId}`,
-        updatedAdoption
+        adoptionPayload
       );
       const updatedAdoptions = adoptions.map((item) =>
-        item._id === adoptionId ? response.data : item
+        item._id === adoptionId ? response.data.updatedAdoption : item
       );
       setAdoptions(updatedAdoptions);
       navigate("/MyProfile"); // Correct usage of navigate
@@ -127,14 +149,31 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
           />
         </div>
         <div>
-          <label>Picture URL:</label>
+          <label>Upload Pictures</label>
           <input
-            type="text"
-            name="picture"
-            value={updatedAdoption.picture}
-            onChange={handleChange}
-            placeholder="Enter picture URL"
+            type="file"
+            name="pictures"
+            multiple
+            placeholder="Upload your adoptions' pictures"
+            onChange={(e) => {
+              const files = Array.from(e.target.files);
+              setUpdatedAdoption((prevState) => ({
+                ...prevState,
+                pictures: files, // Store files directly in the state
+              }));
+            }}
           />
+        </div>
+
+        <div>
+          {/*the uploaded pictures below*/}
+          <ul>
+            {updatedAdoption.pictures.map((url, index) => (
+              <li key={index}>
+                <img src={url} alt={`Uploaded ${index}`} width="100" />
+              </li>
+            ))}
+          </ul>
         </div>
         <button type="submit">Update Adoption</button>
       </form>

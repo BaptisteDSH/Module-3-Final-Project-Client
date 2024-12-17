@@ -35,7 +35,7 @@ const EventDetailPage = () => {
             </div>
             <div>
               <img
-                src={event.picture}
+                src={event.pictures}
                 alt="event-picture"
                 className="event-detail-picture"
               />
