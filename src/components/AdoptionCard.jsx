@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-
-import React, { useEffect } from "react";
+import React from "react";
 
 const AdoptionCard = ({ oneAdoption, setAdoptions }) => {
   const { pet, description, location, pictures } = oneAdoption;
   return (
-    <Link to={`/adoptions/${oneAdoption._id}`}>
-      <div>
+    <div>
+      <Link to={`/adoptions/${oneAdoption._id}`} className="event-link">
         <section>
           <div className="event-image-card-container">
             <img
@@ -21,8 +20,8 @@ const AdoptionCard = ({ oneAdoption, setAdoptions }) => {
             <h2>{location}</h2>
           </div>
         </section>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

@@ -390,7 +390,12 @@ footer {
 /* Add Event*/
 
 .button-add-event-container {
-  margin: 30px 50px;
+  margin-top: 40px;
+  margin-left: 380px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 200px;
 }
 
 .button-add-event-container h4 {
@@ -408,7 +413,7 @@ footer {
 /* Event Detail Page */
 .event-container {
   padding: 80px;
-  background-color: white;
+
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -433,7 +438,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+
   padding-bottom: 20px;
   padding-top: 20px;
   flex: 1 1 calc(33.333% - 40px);
@@ -493,7 +498,7 @@ footer {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.event-image-card-container {
+.card-container {
   position: relative;
   width: 100%;
   max-width: 400px;
@@ -504,7 +509,7 @@ footer {
   align-items: center;
 }
 
-.event-image-card-container img {
+.card-container img {
   display: flex;
   width: 100%;
   height: 100%;
