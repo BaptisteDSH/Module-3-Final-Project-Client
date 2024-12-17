@@ -22,7 +22,7 @@ const HomePage = ({ events, setEvents, adoptions, setAdoptions }) => {
           <div className="event-list">
             {sortedEvents.slice(0, 3).map((event) => {
               return (
-                <div key={event._id}>
+                <div key={event._id} className="event-element">
                   <EventCard {...event} />
                 </div>
               );
@@ -44,13 +44,11 @@ const HomePage = ({ events, setEvents, adoptions, setAdoptions }) => {
           <div className="adoption-list">
             {sortedAdoptions.slice(0, 3).map((oneAdoption) => {
               return (
-                <div className="adoption-element">
-                  <div key={oneAdoption._id}>
-                    <AdoptionCard
-                      oneAdoption={oneAdoption}
-                      setAdoptions={setAdoptions}
-                    />
-                  </div>
+                <div key={oneAdoption._id} className="adoption-element">
+                  <AdoptionCard
+                    oneAdoption={oneAdoption}
+                    setAdoptions={setAdoptions}
+                  />
                 </div>
               );
             })}
