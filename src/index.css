@@ -166,7 +166,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
-  height: 15vh;
+  height: 20vh;
   /*Added by Emi to keep the navbar in place*/
   /* position: fixed;
   top: 0;
@@ -194,6 +194,7 @@ nav img {
 /* Navbar button container */
 .nav-button-container {
   margin: 10px;
+  display: flex;
 }
 
 /* Navbar links */

@@ -24,8 +24,9 @@ const Navbar = () => {
         <NavLink to="/MyProfile">My Profile</NavLink>
         <NavLink to="/Events">Events</NavLink>
         <NavLink to="/AboutUs">About us</NavLink>
+        <Switch />
       </div>
-      <Switch />
+
       <div>
         {isLoggedIn ? (
           <div className="log-button" onClick={logOutUser}>
