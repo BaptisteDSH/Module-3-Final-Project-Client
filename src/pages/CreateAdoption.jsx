@@ -1,13 +1,16 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
+import { useNavigate } from "react-router-dom";
 
 const CreateAdoption = ({ adoptions, setAdoptions }) => {
   const { user, isLoading } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [newAdoption, setNewAdoption] = useState({
     //set to default to current date, in international format, separated at the "T", and displaying only the date ([0])
     datePosted: new Date().toISOString().split("T")[0],
+    location: "",
     description: "",
     pet: { name: "" },
     pictures: [],
@@ -46,7 +49,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
     try {
       //step 1, upload the images
       const myFormData = new FormData();
-      // Change the images state to an array so we can call the .forEach( ) on it
+
       //for each image, add it to the form data
       newAdoption.pictures.forEach((image) => {
         myFormData.append("imageUrl", image);
@@ -67,6 +70,8 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
         user: user._id, // Ensure user ID is included
       };
 
+      //Step 3: sending the POST request to create adoption
+
       const response = await axios.post(
         "http://localhost:5005/api/adoptions",
         adoptionPayload
@@ -79,11 +84,15 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
       //Resetting the form after submission
       setNewAdoption({
         datePosted: new Date().toISOString().split("T")[0],
+        location: "",
         description: "",
         pet: { name: "" },
         pictures: [],
-        user: user._id,
+        user: user ? user._id : "", // Use fallback if user is null
       });
+
+      //Navigating to the adoption page
+      navigate("/Adopt");
     } catch (error) {
       console.log(
         "This is why you cannot create the adoption",
@@ -92,6 +101,56 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
       alert("An error occurred while creating the adoption.");
     }
   };
+
+  // List of locations to populate the dropdown
+  const locations = [
+    "Álava",
+    "Albacete",
+    "Alicante",
+    "Almería",
+    "Asturias",
+    "Ávila",
+    "Badajoz",
+    "Barcelona",
+    "Burgos",
+    "Cáceres",
+    "Cádiz",
+    "Cantabria",
+    "Castellón",
+    "Ciudad Real",
+    "Córdoba",
+    "Cuenca",
+    "Girona",
+    "Granada",
+    "Guadalajara",
+    "Gipuzkoa",
+    "Huelva",
+    "Huesca",
+    "Jaén",
+    "La Coruña",
+    "León",
+    "Lleida",
+    "Lugo",
+    "Madrid",
+    "Málaga",
+    "Murcia",
+    "Navarra",
+    "Ourense",
+    "Palencia",
+    "Pontevedra",
+    "Salamanca",
+    "Segovia",
+    "Sevilla",
+    "Soria",
+    "Tarragona",
+    "Teruel",
+    "Toledo",
+    "Valencia",
+    "Valladolid",
+    "Vizcaya",
+    "Zamora",
+    "Zaragoza",
+  ];
 
   return (
     <div>
@@ -106,6 +165,26 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             onChange={handleChange}
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="location" className="form-label">
+            Location
+          </label>
+          <select
+            name="location"
+            id="location"
+            value={newAdoption.location}
+            onChange={handleChange}
+            className="form-input"
+            required
+          >
+            <option value="">Select a location</option>
+            {locations.map((loc, index) => (
+              <option key={index} value={loc}>
+                {loc}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
           <label>Description:</label>

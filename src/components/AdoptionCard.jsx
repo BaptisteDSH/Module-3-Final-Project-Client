@@ -1,23 +1,27 @@
 import { Link } from "react-router-dom";
-
-import React, { useEffect } from "react";
+import React from "react";
 
 const AdoptionCard = ({ oneAdoption, setAdoptions }) => {
-  
-
-  const { pet, description } = oneAdoption;
+  const { pet, description, location, pictures } = oneAdoption;
   return (
-    <Link to={`/adoptions/${oneAdoption._id}`}>
-      <div>
+    <div>
+      <Link to={`/adoptions/${oneAdoption._id}`} className="event-link">
         <section>
-          {/* <img src={picture} alt={pet.name}>
-          {" "}
-        </img> */}
-          <h4>{pet.name} </h4>
+          <div className="event-image-card-container">
+            <img
+              src={pictures?.[0] || "https://shorturl.at/I39cR"}
+              alt="event-img"
+              className="event-image"
+            />
+          </div>
+          <h4>{pet?.name || "No pet name available"} </h4>
           <p> {description}</p>
+          <div className="event-location">
+            <h2>{location}</h2>
+          </div>
         </section>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
