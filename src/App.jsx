@@ -23,6 +23,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CreateAdoption from "./pages/CreateAdoption";
 import UpdateAdoption from "./pages/UpdateAdoption";
+import MultipleImages from "./pages/MultipleImages";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -114,6 +115,7 @@ const App = () => {
             <UpdateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
           }
         />
+        <Route path="/multiple-uploads" element={<MultipleImages />} />
       </Routes>
       <Footer />
       <ToastContainer

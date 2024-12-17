@@ -3,16 +3,24 @@ import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 
 const CreateAdoption = ({ adoptions, setAdoptions }) => {
-  const { user } = useContext(AuthContext);
+  const { user, isLoading } = useContext(AuthContext);
+
   const [newAdoption, setNewAdoption] = useState({
     //set to default to current date, in international format, separated at the "T", and displaying only the date ([0])
     datePosted: new Date().toISOString().split("T")[0],
     description: "",
     pet: { name: "" },
-    picture: "",
-    user: user._id,
+    pictures: [],
+    user: user ? user._id : "", // Use fallback if user is null
   });
-  console.log(user);
+
+  if (isLoading) {
+    return <p>Loading...</p>; // Display a loading state until user is fetched
+  }
+
+  if (!user) {
+    return <p>User not authenticated. Please log in.</p>;
+  }
 
   //handleChange function dynamically updates the state of the newAdoption object based on changes in the input fields
   const handleChange = (e) => {
@@ -36,19 +44,44 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      //step 1, upload the images
+      const myFormData = new FormData();
+      // Change the images state to an array so we can call the .forEach( ) on it
+      //for each image, add it to the form data
+      newAdoption.pictures.forEach((image) => {
+        myFormData.append("imageUrl", image);
+      });
+
+      //API call to upload the multiple images
+      const { data } = await axios.post(
+        "http://localhost:5005/uploads/multiple-uploads",
+        myFormData
+      );
+
+      console.log("image uploaded successfully", data);
+
+      //Step 2, Add the returned image URLs to the state
+      const adoptionPayload = {
+        ...newAdoption,
+        pictures: data.imageUrls, // Use the uploaded image URLs
+        user: user._id, // Ensure user ID is included
+      };
+
       const response = await axios.post(
         "http://localhost:5005/api/adoptions",
-        newAdoption
+        adoptionPayload
       );
+
+      console.log("Adoption created successfully:", response.data);
       //This adds the newly created adoption to the adoptions array
-      setAdoptions([...adoptions, newAdoption]);
+      setAdoptions([...adoptions, response.data]);
 
       //Resetting the form after submission
       setNewAdoption({
         datePosted: new Date().toISOString().split("T")[0],
         description: "",
         pet: { name: "" },
-        picture: "",
+        pictures: [],
         user: user._id,
       });
     } catch (error) {
@@ -98,18 +131,36 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
           />
         </div>
         <div>
-          <label>Picture URL:</label>
+          <label>Upload Pictures</label>
           <input
-            type="text"
-            name="picture"
-            value={newAdoption.picture}
-            onChange={handleChange}
-            placeholder="Enter picture URL"
+            type="file"
+            name="pictures"
+            multiple
+            placeholder="Upload your adoptions' pictures"
+            onChange={(e) => {
+              const files = Array.from(e.target.files);
+              setNewAdoption((prevState) => ({
+                ...prevState,
+                pictures: files, // Store files directly in the state
+              }));
+            }}
           />
+        </div>
+
+        <div>
+          {/*the uploaded pictures below*/}
+          <ul>
+            {newAdoption.pictures.map((url, index) => (
+              <li key={index}>
+                <img src={url} alt={`Uploaded ${index}`} width="100" />
+              </li>
+            ))}
+          </ul>
         </div>
 
         <button type="submit">Create Adoption</button>
       </form>
+      {/* <form onChange={handleImageUpload}></form> */}
     </div>
   );
 };
