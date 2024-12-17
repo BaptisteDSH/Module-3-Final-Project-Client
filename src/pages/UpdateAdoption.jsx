@@ -7,7 +7,6 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
   const { user } = useContext(AuthContext);
   const { adoptionId } = useParams();
 
-  console.log("adoptionId from params:", adoptionId);
 
   // Holds the fetched adoption data
   const [adoption, setAdoption] = useState(null);
