@@ -12,13 +12,13 @@ const SignUpPage = () => {
   const [location, setLocation] = useState("");
   const [age, setAge] = useState("");
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState("");
+  const [picture, setPicture] = useState(null);
   const [phone, setPhone] = useState("");
   const [pet, setPet] = useState({
     petType: "",
     petName: "",
     petDescription: "",
-    petPicture: "",
+    petPicture: null,
   });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -32,34 +32,59 @@ const SignUpPage = () => {
     }));
   };
 
+  // Handle file selection
+  const handleFileChange = (e, setFile) => {
+    const file = e.target.files[0];
+    setFile(file);
+  };
+
   // Handle form submission
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     e.preventDefault();
 
-    const requestBody = {
-      name,
-      lastName,
-      email,
-      password,
-      location,
-      age,
-      description,
-      picture,
-      phone,
-      pet,
-    };
+    try {
+      //Step 1: upload images to Cloudinary
 
-    // Send POST request to the server
-    axios
-      .post("http://localhost:5005/api/user/signup", requestBody)
-      .then(() => {
-        toast.success("Your profile has been created!");
-        navigate("/login");
-      })
-      .catch((error) => {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-      });
+      const uploadImage = async (file) => {
+        const formData = new FormData();
+        formData.append("imageUrl", file);
+
+        //API call to upload the images
+
+        const response = await axios.post(
+          "http://localhost:5005/uploads/multiple-uploads",
+          formData
+        );
+        return response.data.imageUrls[0];
+      };
+
+      const uploadedProfilePicture = await uploadImage(picture);
+      const uploadedPetPicture = await uploadImage(pet.petPicture);
+
+      //Step 2, prepare the payload
+
+      const requestBody = {
+        name,
+        lastName,
+        email,
+        password,
+        location,
+        age,
+        description,
+        picture: uploadedProfilePicture || "",
+        phone,
+        pet: { ...pet, petPicture: uploadedPetPicture || "" },
+      };
+
+      // Send POST request to the server
+      await axios.post("http://localhost:5005/api/user/signup", requestBody);
+
+      toast.success("Your profile has been created!");
+      navigate("/login");
+    } catch (error) {
+      const errorDescription = error.response.data.message;
+      setErrorMessage(errorDescription);
+    }
   };
 
   // List of locations to populate the dropdown
@@ -199,11 +224,11 @@ const SignUpPage = () => {
               Picture
             </label>
             <input
-              type="url"
+              type="file"
               name="picture"
               id="picture"
-              value={picture}
-              onChange={(e) => setPicture(e.target.value)}
+              // value={picture}
+              onChange={(e) => handleFileChange(e, setPicture)}
               className="form-input"
               placeholder="Enter URL "
             />
@@ -336,11 +361,14 @@ const SignUpPage = () => {
               Pet Picture
             </label>
             <input
-              type="url"
+              type="file"
               name="petPicture"
               id="petPicture"
-              value={pet.petPicture}
-              onChange={handlePetChange}
+              // value={pet.petPicture}
+              onChange={(e) => {
+                const file = e.target.files[0];
+                setPet((prev) => ({ ...prev, petPicture: file }));
+              }}
               className="form-input"
               placeholder="Enter URL for your pet's picture"
             />
