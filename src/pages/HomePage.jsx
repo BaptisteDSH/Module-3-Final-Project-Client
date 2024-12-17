@@ -28,16 +28,6 @@ const HomePage = ({ events, setEvents, adoptions, setAdoptions }) => {
               );
             })}
           </div>
-          <div className="event-element">
-            {/* <img src="" alt="" /> */}
-            <h4>title of the event</h4>
-            <p>little description</p>
-          </div>
-          <div className="event-element">
-            {/* <img src="" alt="" /> */}
-            <h4>title of the event</h4>
-            <p>little description</p>
-          </div>
         </div>
         <h3>Adoptions</h3>
         <div className="adoption-block-home-page-container">

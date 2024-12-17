@@ -109,6 +109,7 @@ const MyProfilePage = ({
             "https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW4lMjBiZWluZ3xlbnwwfHwwfHx8MA%3D%3D"
           }
           alt="Profile"
+          style={{ height: "200px" }}
         />
         <div className="infos-and-button">
           <div className="user-detail-box">
@@ -148,10 +149,10 @@ const MyProfilePage = ({
         )}
       </div>
       <h2 style={{ margin: "50px" }}>Your Events</h2>
-      <div className="event-list">
+      <div className="user-event-container">
         {userEvents.length > 0 ? (
           userEvents.map((event) => (
-            <div key={event._id}>
+            <div key={event._id} className="adoption-box-container">
               <EventCard {...event} setEvents={setEvents} />
               <div>
                 <Link to={`/Event/Update/${event._id}`}>
