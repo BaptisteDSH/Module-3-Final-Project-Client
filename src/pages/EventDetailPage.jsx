@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import icon from "../assets/location-icon.png";
+import clock from "../assets/clock-icon.png";
 
 const API_URL = `http://localhost:5005`;
 
@@ -24,32 +25,40 @@ const EventDetailPage = () => {
     getEvent();
   }, [eventId, getEvent]);
 
-  
-
   return (
     <>
       <div>
         {event && (
           <>
-            <div>
+            <div className="event-detail-title">
               <h1>{event.title}</h1>
             </div>
             <div>
-              <img src={event.picture} alt="event-picture" />
+              <img
+                src={event.picture}
+                alt="event-picture"
+                className="event-detail-picture"
+              />
             </div>
-            <div>
-              <p>{event.location}</p>
+            <div className="event-detail">
+              <div className="event-detail-location">
+                <img src={icon} alt="location" style={{ height: "50px" }} />
+                <p>{event.location}</p>
+              </div>
+              <div className="event-detail-date">
+                <img src={clock} alt="time" style={{ height: "50px" }} />
+                <p>{event.date}</p>
+              </div>
+              <div className="event-detail-price">
+                <p>Price of the event: €{event.price}</p>
+              </div>
             </div>
-            <div>
-              <p>{event.date}</p>
-            </div>
-            <div>
-              <p>{event.price}</p>
+            <div className="event-detail-description">
+              <p>{event.description}</p>
             </div>
           </>
         )}
       </div>
-      
     </>
   );
 };
