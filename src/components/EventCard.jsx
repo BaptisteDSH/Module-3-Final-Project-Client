@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const EventCard = ({ _id, picture, title, location, date, description }) => {
   return (
-    <div className="event-card-container">
+    <div>
       <Link to={`/Event/${_id}`} className="event-link">
         <section>
-          <div className="event-image-card-container">
+          <div className="card-container">
             <img src={picture} alt="event-img" className="event-image" />
           </div>
           <div className="event-title">
