@@ -687,11 +687,14 @@ h3 {
 /* General container */
 .my-profile-page-container {
   margin: 0 auto;
-  max-width: 1200px;
   padding: 20px;
   font-family: Arial, sans-serif;
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
+}
+
+.light-theme .my-profile-page-container {
+  background-color: #f4f7fb;
 }
 
 /* Links - remove text decoration */

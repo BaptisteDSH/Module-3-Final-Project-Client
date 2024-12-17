@@ -171,7 +171,7 @@ const MyProfilePage = ({
           <p>No events available.</p>
         )}
       </div>
-
+      <h2 style={{ margin: "50px" }}>Your Adoptions</h2>
       <div className="user-adoption-container">
         {userAdoptions.length > 0 ? (
           userAdoptions.map((adoption) => (
