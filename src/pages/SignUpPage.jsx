@@ -133,7 +133,7 @@ const SignUpPage = () => {
         <div className="signup-names">
           <div className="form-group">
             <label htmlFor="name" className="form-label">
-              Name
+              First Name
             </label>
             <input
               type="text"

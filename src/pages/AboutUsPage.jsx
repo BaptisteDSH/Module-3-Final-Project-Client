@@ -7,13 +7,15 @@ const AboutUsPage = () => {
     <>
       <div className="aboutUs-page-container">
         <header>
-          <h1>About</h1>
-          <h5>little description of the website</h5>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
-            sapiente ipsam, deserunt velit mollitia natus autem odit nam harum
-            soluta praesentium! Quasi, dignissimos dicta corporis dolore minima
-            alias excepturi commodi!Lorem
+          <h1 style={{ margin: "20px" }}>About</h1>
+          <p style={{ margin: "20px" }}>
+            Welcome to our pet adoption and events hub! Our site is dedicated to
+            helping animals find their forever homes while keeping you
+            up-to-date on exciting events and activities for pets. Whether
+            you're looking to adopt a furry friend or get involved in
+            pet-related events, we provide a platform for connecting pet lovers
+            with animals in need. Join us in making a difference for animals,
+            and find your next companion today!
           </p>
         </header>
         <div className="founders">
