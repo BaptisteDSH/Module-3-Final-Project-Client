@@ -659,12 +659,24 @@ footer {
   margin: 15px;
 }
 
-.my-profil-page-container {
-  background-color: red;
+.my-profile-page-container {
+  background-color: darkblue;
 }
 
 .user-detail-container {
-  background-color: aqua;
+  background-color: rebeccapurple;
+  display: flex;
+  justify-content: space-around;
+}
+
+.infos-and-button {
+  background-color: yellowgreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.user-detail-container {
   padding: 10px;
 }
 

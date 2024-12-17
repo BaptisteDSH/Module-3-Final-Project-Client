@@ -7,7 +7,12 @@ import "react-toastify/dist/ReactToastify.css"; // Import CSS
 import AdoptionCard from "../components/AdoptionCard";
 import EventCard from "../components/EventCard";
 
-const MyProfilePage = ({ adoptions, setAdoptions, events, setEvents }) => {
+const MyProfilePage = ({
+  adoptions = [],
+  setAdoptions,
+  events = [],
+  setEvents,
+}) => {
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -59,35 +64,29 @@ const MyProfilePage = ({ adoptions, setAdoptions, events, setEvents }) => {
     }
   }, [user]);
 
-  //Handle event deletion
-
-  async function handleDelete(eventId) {
-    console.log("delete", eventId);
-    try {
-      await axios.delete(`http://localhost:5005/api/events/${eventId}`);
-
-      // Update the state by removing the deleted event
-      setEvents((prevEvents) =>
-        prevEvents.filter((event) => event._id !== eventId)
-      );
-
-      toast.success("Event deleted successfully!");
-    } catch (error) {
-      console.error("Error deleting event:", error);
-      toast.error("Failed to delete the event.");
-    }
-  }
-
-  // Handle adoption deletion
+  // Handle adoption and event deletion
   const handleDeleteAdoption = async (adoptionId) => {
     try {
       await axios.delete(`http://localhost:5005/api/adoptions/${adoptionId}`);
       setAdoptions((prev) =>
         prev.filter((adoption) => adoption._id !== adoptionId)
       );
-      toast.success("Event deleted successfully!");
+      toast.success("Adoption deleted successfully!");
     } catch (error) {
       console.error("Error deleting adoption:", error);
+      toast.error("Failed to delete the adoption.");
+    }
+  };
+
+  const handleDeleteEvent = async (eventId) => {
+    try {
+      await axios.delete(`http://localhost:5005/api/events/${eventId}`);
+      setEvents((prevEvents) =>
+        prevEvents.filter((event) => event._id !== eventId)
+      );
+      toast.success("Event deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting event:", error);
       toast.error("Failed to delete the event.");
     }
   };
@@ -95,53 +94,40 @@ const MyProfilePage = ({ adoptions, setAdoptions, events, setEvents }) => {
   if (errorMessage) return <div>{errorMessage}</div>;
   if (loading) return <div>Loading...</div>;
 
-  //Handle event deletion
-  //DELETE FUNCTION FOR EVENTS
-  // async function handleDelete(eventId) {
-  //   console.log("delete", eventId);
-  //   try {
-  //     await axios.delete(`http://localhost:5005/api/events/${eventId}`);
-  //     setEvents((prevEvents) =>
-  //       prevEvents.filter((event) => event._id !== eventId)
-  //     ) toast.success("Event deleted successfully!");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
-  //Filtering for only user created adoptions and events
-
+  // Filtering for only user created adoptions and events
   const userAdoptions = adoptions.filter(
     (adoption) => adoption.user === user._id
   );
-  console.log(userAdoptions);
   const userEvents = events.filter((event) => event.organizerId === user._id);
-  console.log(userEvents);
-
-  //Displaying the elements of the page
 
   return (
     <div className="my-profile-page-container">
       <div className="user-detail-container">
         <img
-          src={userProfile?.picture || "defaultProfilePicture.jpg"}
+          src={
+            userProfile?.picture ||
+            "https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW4lMjBiZWluZ3xlbnwwfHwwfHx8MA%3D%3D"
+          }
           alt="Profile"
+          style={{ width: "140px", height: "190px" }}
         />
-        <div className="user-detail-box">
-          <h1>{userProfile?.name}</h1>
-          <h5>{userProfile?.lastName}</h5>
-          <h5>{userProfile?.age}</h5>
-          <h5>{userProfile?.phone}</h5>
-          <p>{userProfile?.description}</p>
-        </div>
+        <div className="infos-and-button">
+          <div className="user-detail-box">
+            <h1>{userProfile?.name}</h1>
+            <h5>{userProfile?.lastName}</h5>
+            <h5>{userProfile?.age}</h5>
+            <h5>{userProfile?.phone}</h5>
+            <p>{userProfile?.description}</p>
+          </div>
 
-        <div className="button-edit-add-container">
-          <Link to="/EditProfile">
-            <button>Edit Profile</button>
-          </Link>
-          <Link to="/AddPet">
-            <button>Add a pet</button>
-          </Link>
+          <div className="button-edit-add-container">
+            <Link to="/EditProfile">
+              <button>Edit Profile</button>
+            </Link>
+            <Link to="/AddPet">
+              <button>Add a pet</button>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -164,49 +150,50 @@ const MyProfilePage = ({ adoptions, setAdoptions, events, setEvents }) => {
       </div>
 
       <div className="event-list">
-        {userEvents.map((event) => (
-          <div key={event._id}>
-            <EventCard {...event} setEvents={setEvents} />
-            <div>
-              <Link to={`/Event/Update/${event._id}`}>
-                <button className="log-button">Edit Event</button>
-              </Link>
-              <button
-                onClick={() => {
-                  handleDelete(event._id);
-                }}
-                className="log-button"
-              >
-                Delete Event
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* <div className="user-event-container">
         {userEvents.length > 0 ? (
-          userEvents.map((event) => <EventCard key={event._id} {...event} />)
+          userEvents.map((event) => (
+            <div key={event._id}>
+              <EventCard {...event} setEvents={setEvents} />
+              <div>
+                <Link to={`/Event/Update/${event._id}`}>
+                  <button className="log-button">Edit Event</button>
+                </Link>
+                <button
+                  onClick={() => handleDeleteEvent(event._id)}
+                  className="log-button"
+                >
+                  Delete Event
+                </button>
+              </div>
+            </div>
+          ))
         ) : (
           <p>No events available.</p>
         )}
-      </div> */}
+      </div>
 
       <div className="user-adoption-container">
-        {userAdoptions.map((adoption) => (
-          <div key={adoption._id} className="adoption-box-container">
-            <AdoptionCard oneAdoption={adoption} setAdoptions={setAdoptions} />
-            <Link to={`/UpdateAdoptions/${adoption._id}`}>
-              <button className="log-button">Edit Adoption</button>
-            </Link>
-            <button
-              onClick={() => handleDeleteAdoption(adoption._id)}
-              className="log-button"
-            >
-              Delete Adoption
-            </button>
-          </div>
-        ))}
+        {userAdoptions.length > 0 ? (
+          userAdoptions.map((adoption) => (
+            <div key={adoption._id} className="adoption-box-container">
+              <AdoptionCard
+                oneAdoption={adoption}
+                setAdoptions={setAdoptions}
+              />
+              <Link to={`/UpdateAdoptions/${adoption._id}`}>
+                <button className="log-button">Edit Adoption</button>
+              </Link>
+              <button
+                onClick={() => handleDeleteAdoption(adoption._id)}
+                className="log-button"
+              >
+                Delete Adoption
+              </button>
+            </div>
+          ))
+        ) : (
+          <p>No adoptions available.</p>
+        )}
       </div>
 
       <button onClick={handleDeleteProfile}>Delete Profile</button>
