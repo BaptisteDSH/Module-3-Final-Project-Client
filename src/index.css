@@ -33,6 +33,134 @@ h6 {
   margin: 0;
 } */
 
+/* Global style for dark theme */
+.dark-theme {
+  background-color: black; /* Dark background */
+  color: whitesmoke; /* Light text */
+}
+
+/* Global style for light theme */
+.light-theme {
+  background-color: white; /* Light background */
+  color: black; /* Dark text */
+}
+
+/* Form container */
+.form-login {
+  margin: 40px 430px;
+  padding: 20px;
+  border: 0.3px solid gray;
+  border-radius: 15px;
+  justify-content: center;
+  background-color: #f9f9f9; /* Default light background */
+}
+
+/* Apply dark theme styles for form in dark mode */
+.dark-theme .form-login {
+  background-color: #333; /* Dark background for form */
+  color: whitesmoke; /* Light text for dark mode */
+}
+
+/* Input fields styling */
+.form-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  height: 30px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  background-color: white; /* Light background for input fields */
+  color: black; /* Dark text for input fields */
+}
+
+/* Apply dark theme styles for input fields */
+.dark-theme .form-input {
+  background-color: #555; /* Dark input background */
+  color: whitesmoke; /* Light text for input fields in dark mode */
+  border: 1px solid #777; /* Darker border */
+}
+
+/* Button styling */
+.form-button {
+  padding: 10px;
+  border: none;
+  background-color: grey;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Button hover */
+.form-button:hover {
+  background-color: #45a049;
+}
+
+/* Apply dark theme styles for the submit button */
+.dark-theme .form-button {
+  background-color: #444; /* Darker background for button */
+}
+
+/* Button hover in dark theme */
+.dark-theme .form-button:hover {
+  background-color: #666; /* Lighter background on hover */
+}
+
+/* Error message styling */
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Login title */
+.login-title {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+/* Adjust for dark theme */
+.dark-theme .login-title {
+  color: whitesmoke; /* Light color for title */
+}
+
+/* Redirection container */
+.redirection-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.redirection-container p {
+  margin-right: 10px;
+}
+
+.redirection-container div {
+  text-decoration: none;
+  color: #111;
+}
+
+/* Apply dark theme styles for redirection container */
+.dark-theme .redirection-container div {
+  color: #ddd; /* Lighter color for links in dark mode */
+}
+
+/* Login page container */
+.login-page-container {
+  min-height: 480px;
+}
+
+/* Add transitions for dark theme switches */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navbar styles */
 nav {
   display: flex;
   justify-content: space-between;
@@ -47,52 +175,81 @@ nav {
   z-index: 1000;
   background-color: white;
   padding: 0px 20px; */
+  background-color: white; /* Light background for navbar */
+  padding: 10px 30px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Apply dark theme styles for navbar */
+.dark-theme nav {
+  background-color: #333; /* Dark background for navbar */
+  border-color: #444; /* Darker border for navbar */
+}
+
+/* Navbar logo */
 nav img {
   margin: 20px 30px;
 }
 
+/* Navbar button container */
 .nav-button-container {
   margin: 10px;
 }
 
+/* Navbar links */
 .nav-button-container a {
   text-decoration: none;
-  color: black;
   margin: 10px 30px;
   border: none;
   background: none;
   font-size: 18px;
+  color: black; /* Dark text for links */
+  transition: color 0.3s ease;
 }
 
+/* Apply dark theme styles for navbar links */
+.dark-theme .nav-button-container a {
+  color: whitesmoke; /* Light text for links in dark mode */
+}
+
+/* Navbar active link */
 nav .active {
   text-decoration: underline;
 }
 
+/* Hover effect for navbar links */
+.nav-button-container a:hover {
+  color: #45a049; /* Hover color */
+}
+
+/* Apply dark theme hover effect for navbar links */
+.dark-theme .nav-button-container a:hover {
+  color: #66b366; /* Lighter hover color in dark mode */
+}
+
 .log-button {
-  display: inline-block; /* Assure un bon alignement du bouton */
-  padding: 10px 15px; /* Un peu plus d'espace pour un confort visuel */
-  border-radius: 5px; /* Bords arrondis */
-  background-color: black; /* Couleur de fond */
-  color: aliceblue; /* Couleur du texte */
-  font-size: 16px; /* Taille du texte légèrement augmentée */
-  font-weight: bold; /* Rendre le texte un peu plus impactant */
-  margin: 20px 30px; /* Espacement autour du bouton */
-  text-decoration: none; /* Supprime le soulignement */
-  text-align: center; /* Centre le texte à l'intérieur */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Animation fluide */
-  cursor: pointer; /* Change le curseur au survol */
+  display: inline-block; /* Ensures proper alignment of the button */
+  padding: 10px 15px; /* Adds a bit more space for visual comfort */
+  border-radius: 5px; /* Rounded corners */
+  background-color: black; /* Background color */
+  color: aliceblue; /* Text color */
+  font-size: 16px; /* Slightly increased text size */
+  font-weight: bold; /* Makes the text a bit more impactful */
+  margin: 20px 30px; /* Spacing around the button */
+  text-decoration: none; /* Removes underlining */
+  text-align: center; /* Centers the text inside */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth animation */
+  cursor: pointer; /* Changes the cursor on hover */
 }
 
 .log-button:hover {
-  background-color: #333; /* Couleur légèrement plus claire au survol */
-  transform: scale(1.05); /* Effet de zoom au survol */
+  background-color: #333; /* Slightly lighter color on hover */
+  transform: scale(1.05); /* Zoom effect on hover */
 }
 
 .log-button:active {
-  background-color: #111; /* Couleur plus sombre lorsqu'il est cliqué */
-  transform: scale(0.95); /* Réduit légèrement pour un effet de clic */
+  background-color: #111; /* Darker color when clicked */
+  transform: scale(0.95); /* Slight reduction for a click effect */
 }
 
 footer {
@@ -547,7 +704,8 @@ footer {
   background-color: palevioletred;
   padding: 5px;
 }
-/* Form title */
+
+/* Title for SignUp */
 .sign-up-title-h1 {
   text-align: center;
   margin-top: 30px;
@@ -555,13 +713,14 @@ footer {
   font-size: 40px;
 }
 
+/* H2 title for SignUp */
 .sign-up-title-h2 {
   text-align: center;
   margin-top: 30px;
   margin-bottom: 20px; /* Space below the title */
 }
 
-/* General form SignUP*/
+/* General form SignUp */
 .form-signup {
   margin: 50px auto; /* Centered horizontally */
   padding: 30px;
@@ -571,6 +730,13 @@ footer {
   max-width: 600px; /* Maximum width for the form */
   background-color: #f9f9f9; /* Soft background color */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Apply dark mode styles for SignUp form */
+.dark-theme .form-signup {
+  background-color: #333; /* Dark background for form */
+  border-color: #444; /* Darker border */
+  color: whitesmoke; /* Light text in dark mode */
 }
 
 /* Group of form fields */
@@ -591,6 +757,13 @@ footer {
   font-size: 1rem;
   width: 100%; /* Ensures input takes full available width */
   box-sizing: border-box; /* Includes padding in the width calculation */
+}
+
+/* Apply dark mode styles for input fields */
+.dark-theme .form-input {
+  background-color: #555; /* Dark background for inputs */
+  color: whitesmoke; /* Light text for input fields */
+  border: 1px solid #777; /* Darker border */
 }
 
 /* Sections where multiple fields are aligned horizontally */
@@ -643,10 +816,23 @@ footer {
   transition: background-color 0.3s ease;
 }
 
+/* Apply dark mode styles for submit button */
+.dark-theme .form-button {
+  background-color: #444; /* Darker background for the button */
+  color: whitesmoke; /* Light text color */
+}
+
+/* Button hover */
 .form-button:hover {
   background-color: #45a049;
 }
 
+/* Apply dark mode hover effect */
+.dark-theme .form-button:hover {
+  background-color: #666; /* Slightly lighter background */
+}
+
+/* Redirection container */
 .redirection-container {
   display: flex;
   flex-direction: row;
@@ -663,11 +849,17 @@ footer {
   color: #111;
 }
 
+/* Apply dark mode for redirection text */
+.dark-theme .redirection-container div {
+  color: #ddd; /* Light color for links in dark mode */
+}
+
 /* Error message styling */
 .error {
   color: red;
   font-size: 1rem;
   margin-top: 10px;
+  text-align: center;
 }
 
 /* General styles for the form Login*/
@@ -700,6 +892,13 @@ footer {
   font-size: 16px;
 }
 
+/* Apply dark mode styles for Login form */
+.dark-theme .form-login {
+  background-color: #333;
+  border-color: #444;
+  color: whitesmoke;
+}
+
 .form-button {
   padding: 10px;
   border: none;
@@ -711,22 +910,34 @@ footer {
   width: 100%;
 }
 
+/* Apply dark mode styles for Login form button */
+.dark-theme .form-button {
+  background-color: #444; /* Dark background for button */
+}
+
 .form-button:hover {
   background-color: #45a049;
 }
 
+/* Error messages */
 .error {
   color: red;
   font-size: 14px;
   text-align: center;
 }
 
+/* Login title */
 .login-title {
   text-align: center;
   font-size: 40px;
   margin-bottom: 20px;
   margin-top: 20px;
   font-weight: bold;
+}
+
+/* Apply dark mode styles for login title */
+.dark-theme .login-title {
+  color: whitesmoke; /* Light color for title */
 }
 
 .login-page-container {

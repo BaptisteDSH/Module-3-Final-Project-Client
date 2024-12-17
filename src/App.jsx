@@ -6,7 +6,8 @@ import HomePage from "./pages/HomePage";
 import AdoptPage from "./pages/AdoptPage";
 import EventsPage from "./pages/EventsPage";
 import EventDetailPage from "./pages/EventDetailPage";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { ThemeContext } from "./context/ThemeContext";
 import AboutUsPage from "./pages/AboutUsPage";
 import MyProfilePage from "./pages/MyProfilePage";
 import CreateEventPage from "./pages/CreateEventPage";
@@ -27,6 +28,7 @@ import UpdateAdoption from "./pages/UpdateAdoption";
 const App = () => {
   const [events, setEvents] = useState([]);
   const [adoptions, setAdoptions] = useState([]);
+  const { darkTheme, setDarkTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,81 +50,89 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage
-              events={events}
-              setEvents={setEvents}
-              adoptions={adoptions}
-              setAdoptions={setAdoptions}
-            />
-          }
-        />
-        <Route
-          path="/Adopt"
-          element={
-            <AdoptPage adoptions={adoptions} setAdoptions={setAdoptions} />
-          }
-        />
-        <Route path="/AboutUs" element={<AboutUsPage />} />
-        <Route path="/MyProfil" element={<MyProfilePage />} />
-        <Route
-          path="/MyProfile"
-          element={
-            <IsPrivate>
-              <MyProfilePage
+      <div className={darkTheme ? "dark-theme" : "light-theme"}>
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage
                 events={events}
                 setEvents={setEvents}
                 adoptions={adoptions}
                 setAdoptions={setAdoptions}
               />
-            </IsPrivate>
-          }
+            }
+          />
+          <Route
+            path="/Adopt"
+            element={
+              <AdoptPage adoptions={adoptions} setAdoptions={setAdoptions} />
+            }
+          />
+          <Route path="/AboutUs" element={<AboutUsPage />} />
+          <Route path="/MyProfil" element={<MyProfilePage />} />
+          <Route
+            path="/MyProfile"
+            element={
+              <IsPrivate>
+                <MyProfilePage
+                  events={events}
+                  setEvents={setEvents}
+                  adoptions={adoptions}
+                  setAdoptions={setAdoptions}
+                />
+              </IsPrivate>
+            }
+          />
+          <Route path="/EditProfile" element={<EditProfilPage />} />
+          <Route path="/AddPet" element={<AddPet />} />
+          <Route path="/Events" element={<EventsPage />} />
+          <Route
+            path="/Events/Create"
+            element={<CreateEventPage events={events} setEvents={setEvents} />}
+          />
+          <Route path="/Event/:eventId" element={<EventDetailPage />} />
+          <Route path="/Event/Update/:eventId" element={<EventEditPage />} />
+          <Route path="/SignUp" element={<SignUpPage />} />
+          <Route path="/Login" element={<LoginPage />} />
+          <Route
+            path="/Adoptions/:adoptionId"
+            element={
+              <AdoptionDetails
+                adoptions={adoptions}
+                setAdoptions={setAdoptions}
+              />
+            }
+          />
+          <Route
+            path="/CreateAdoption"
+            element={
+              <CreateAdoption
+                adoptions={adoptions}
+                setAdoptions={setAdoptions}
+              />
+            }
+          />
+          <Route
+            path="/UpdateAdoptions/:adoptionId"
+            element={
+              <UpdateAdoption
+                adoptions={adoptions}
+                setAdoptions={setAdoptions}
+              />
+            }
+          />
+        </Routes>
+        <Footer />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          closeOnClick
+          pauseOnHover
         />
-        <Route path="/EditProfile" element={<EditProfilPage />} />
-        <Route path="/AddPet" element={<AddPet />} />
-        <Route path="/Events" element={<EventsPage />} />
-        <Route
-          path="/Events/Create"
-          element={<CreateEventPage events={events} setEvents={setEvents} />}
-        />
-        <Route path="/Event/:eventId" element={<EventDetailPage />} />
-        <Route path="/Event/Update/:eventId" element={<EventEditPage />} />
-        <Route path="/SignUp" element={<SignUpPage />} />
-        <Route path="/Login" element={<LoginPage />} />
-        <Route
-          path="/Adoptions/:adoptionId"
-          element={
-            <AdoptionDetails
-              adoptions={adoptions}
-              setAdoptions={setAdoptions}
-            />
-          }
-        />
-        <Route
-          path="/CreateAdoption"
-          element={
-            <CreateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
-          }
-        />
-        <Route
-          path="/UpdateAdoptions/:adoptionId"
-          element={
-            <UpdateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
-          }
-        />
-      </Routes>
-      <Footer />
-      <ToastContainer
-        position="bottom-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        closeOnClick
-        pauseOnHover
-      />
+      </div>
     </>
   );
 };
