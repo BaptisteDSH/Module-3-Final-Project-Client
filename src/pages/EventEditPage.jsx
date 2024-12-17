@@ -3,49 +3,114 @@ import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate, useParams } from "react-router-dom";
 
-// const API_URL = `http://localhost:5005`;
-
 const EventEditPage = () => {
-  const [eventToEdit, setEventToEdit] = useState({});
+  const { user } = useContext(AuthContext);
   const { eventId } = useParams();
   const navigate = useNavigate();
 
+  // Holds the fetched event data
+  const [eventToEdit, setEventToEdit] = useState(null);
+
+  // Holds the updated event data
+  const [updatedEvent, setUpdatedEvent] = useState({
+    title: "",
+    location: "",
+    date: "",
+    price: 0,
+    description: "",
+    pictures: [],
+    organizerId: user ? user._id : "", // Use fallback if user is null
+  });
+
   useEffect(() => {
-    if (eventId) {
-      axios
-        .get(`http://localhost:5005/api/events/${eventId}`)
-        .then((response) => {
-          const oneEvent = response.data;
-          setEventToEdit(oneEvent);
-        })
-        .catch((error) => {
-          console.error("Error fetching the event:", error);
-        });
-    }
+    const fetchEvent = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5005/api/events/${eventId}`
+        );
+        setEventToEdit(response.data);
+      } catch (error) {
+        console.error("Error fetching the event:", error);
+      }
+    };
+    fetchEvent();
   }, [eventId]);
 
-  function handleChange(e) {
-    const whatWasTyped = e.target.value;
-    const inputThatIsUsed = e.target.name;
-
-    setEventToEdit((prevState) => ({
-      ...prevState,
-      [inputThatIsUsed]: whatWasTyped,
-    }));
-  }
-
-  function handleUpdateEvent(e) {
-    e.preventDefault();
-    axios
-      .put(`http://localhost:5005/api/events/${eventId}`, eventToEdit)
-      .then((response) => {
-        console.log(response.data);
-        navigate(`/event/${eventId}`);
-      })
-      .catch((error) => {
-        console.error(error);
+  useEffect(() => {
+    if (eventToEdit) {
+      setUpdatedEvent({
+        title: eventToEdit.title || "",
+        location: eventToEdit.location || "",
+        date: eventToEdit.date || "",
+        price: eventToEdit.price || 0,
+        description: eventToEdit.description || "",
+        pictures: eventToEdit.pictures || [],
+        organizerId: eventToEdit.organizerId,
       });
-  }
+    }
+  }, [eventToEdit]);
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedEvent((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  // Handle file uploads
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setUpdatedEvent((prevState) => ({
+      ...prevState,
+      pictures: files,
+    }));
+  };
+
+  // Handle form submission
+  const handleUpdateEvent = async (e) => {
+    e.preventDefault();
+
+    try {
+      let uploadedImageUrls = updatedEvent.pictures;
+
+      // Step 1: Upload the images to your backend
+      if (updatedEvent.pictures[0] instanceof File) {
+        const myFormData = new FormData();
+        updatedEvent.pictures.forEach((image) => {
+          myFormData.append("imageUrl", image); // Key: "imageUrl"
+        });
+
+        // POST the files to your backend
+        const uploadResponse = await axios.post(
+          "http://localhost:5005/uploads/multiple-uploads",
+          myFormData
+        );
+
+        uploadedImageUrls = uploadResponse.data.imageUrls; // Array of uploaded image URLs
+      }
+
+      // Step 2: Prepare the event payload
+      const eventPayload = {
+        ...updatedEvent,
+        pictures: uploadedImageUrls,
+        organizerId: user._id,
+      };
+
+      // Step 3: Send the PUT request to update the event
+      const response = await axios.put(
+        `http://localhost:5005/api/events/${eventId}`,
+        eventPayload
+      );
+
+      console.log("Event updated successfully:", response.data);
+      navigate(`/Event/${eventId}`);
+    } catch (error) {
+      console.error("Failed to update the event:", error.message);
+      alert("An error occurred while updating the event.");
+    }
+  };
 
   const locations = [
     "Álava",
@@ -97,30 +162,25 @@ const EventEditPage = () => {
   ];
 
   return (
-    <>
-      <h1>Edit the event!</h1>
+    <div>
+      <h1>Edit the Event</h1>
       <form onSubmit={handleUpdateEvent}>
         <div>
-          <label>Title</label>
+          <label>Title:</label>
           <input
             type="text"
             name="title"
-            value={eventToEdit.title || ""}
+            value={updatedEvent.title}
             onChange={handleChange}
-            className="form-input"
-            placeholder="Enter the title of the event"
+            placeholder="Enter the event title"
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="location" className="form-label">
-            Location
-          </label>
+        <div>
+          <label>Location:</label>
           <select
             name="location"
-            id="location"
-            value={eventToEdit.location || ""}
+            value={updatedEvent.location}
             onChange={handleChange}
-            className="form-input"
           >
             <option value="">Select a location</option>
             {locations.map((loc, index) => (
@@ -131,48 +191,58 @@ const EventEditPage = () => {
           </select>
         </div>
         <div>
-          <label>Date</label>
+          <label>Date:</label>
           <input
-            type="text"
+            type="date"
             name="date"
-            value={eventToEdit.date || ""}
+            value={updatedEvent.date}
             onChange={handleChange}
-            className="form-input"
-            placeholder="Enter the date of the event"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="eventPicture" className="form-label">
-            Event Picture
-          </label>
-          <input
-            type="url"
-            name="picture"
-            id="eventPicture"
-            value={eventToEdit.picture || ""}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Enter URL for your event's picture"
           />
         </div>
         <div>
-          <label>Price</label>
+          <label>Price:</label>
           <input
             type="number"
             name="price"
-            value={eventToEdit.price || ""}
+            value={updatedEvent.price}
             onChange={handleChange}
-            className="form-input"
-            placeholder="Enter the price of the event or leave it blank if it is free"
+            placeholder="Enter the event price"
           />
         </div>
         <div>
-          <button type="submit" className="log-button">
-            Upload your changes!
-          </button>
+          <label>Description:</label>
+          <textarea
+            name="description"
+            value={updatedEvent.description}
+            onChange={handleChange}
+            placeholder="Enter a description"
+          />
         </div>
+        <div>
+          <label>Upload Pictures:</label>
+          <input
+            type="file"
+            name="pictures"
+            multiple
+            onChange={handleImageChange}
+          />
+        </div>
+        <div>
+          <ul>
+            {updatedEvent.pictures.map((pic, index) => (
+              <li key={index}>
+                <img
+                  src={pic instanceof File ? URL.createObjectURL(pic) : pic}
+                  alt={`Uploaded ${index}`}
+                  width="100"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+        <button type="submit">Update Event</button>
       </form>
-    </>
+    </div>
   );
 };
 
