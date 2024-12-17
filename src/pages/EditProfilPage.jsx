@@ -30,7 +30,7 @@ const EditProfilPage = () => {
       .put(`http://localhost:5005/api/user/${user._id}`, requestBody)
       .then(() => {
         toast.success("Profil updated !");
-        navigate("/MyProfil");
+        navigate("/MyProfile");
       })
       .catch((error) => {
         const errorDescription =

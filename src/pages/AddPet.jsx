@@ -62,7 +62,7 @@ const AddPet = () => {
         setUser(response.data); // Update the user context with the latest data
         setExistingPets(response.data.pet); // Update existing pets to include the new pet
         toast.success("Pet added !");
-        navigate("/MyProfil"); // Redirect to profile page after adding the pet
+        navigate("/MyProfile"); // Redirect to profile page after adding the pet
         window.location.reload();
       })
       .catch((error) => {

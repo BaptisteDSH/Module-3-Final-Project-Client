@@ -109,14 +109,13 @@ const MyProfilePage = ({
             "https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW4lMjBiZWluZ3xlbnwwfHwwfHx8MA%3D%3D"
           }
           alt="Profile"
-          style={{ width: "140px", height: "190px" }}
         />
         <div className="infos-and-button">
           <div className="user-detail-box">
             <h1>{userProfile?.name}</h1>
             <h5>{userProfile?.lastName}</h5>
-            <h5>{userProfile?.age}</h5>
-            <h5>{userProfile?.phone}</h5>
+            <h5>{userProfile?.age} ans</h5>
+            <h5>0{userProfile?.phone}</h5>
             <p>{userProfile?.description}</p>
           </div>
 
@@ -130,7 +129,7 @@ const MyProfilePage = ({
           </div>
         </div>
       </div>
-
+      <h2 style={{ margin: "50px" }}>Your Pets</h2>
       <div className="user-pet-container">
         {userProfile?.pet?.length > 0 ? (
           userProfile.pet.map((pet, index) => (
@@ -148,7 +147,7 @@ const MyProfilePage = ({
           <p>No pets added yet.</p>
         )}
       </div>
-
+      <h2 style={{ margin: "50px" }}>Your Events</h2>
       <div className="event-list">
         {userEvents.length > 0 ? (
           userEvents.map((event) => (
@@ -195,8 +194,9 @@ const MyProfilePage = ({
           <p>No adoptions available.</p>
         )}
       </div>
-
-      <button onClick={handleDeleteProfile}>Delete Profile</button>
+      <div className="button-delete-container">
+        <button onClick={handleDeleteProfile}>Delete Profile</button>
+      </div>
     </div>
   );
 };

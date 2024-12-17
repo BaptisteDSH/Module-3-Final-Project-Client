@@ -660,44 +660,88 @@ footer {
 }
 
 .my-profile-page-container {
-  background-color: darkblue;
 }
 
 .user-detail-container {
-  background-color: rebeccapurple;
   display: flex;
   justify-content: space-around;
+  padding: 15px;
+  max-height: 400px;
+}
+
+.user-detail-container img {
+  max-height: 300px;
+  border-radius: 2px;
+  padding: 20px;
 }
 
 .infos-and-button {
-  background-color: yellowgreen;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.user-detail-container {
-  padding: 10px;
-}
-
 .user-detail-box {
-  background-color: aquamarine;
   padding: 5px;
+  font-size: 30px;
 }
 
-.button-edit-add-container {
-  background-color: green;
+.button-edit-add-container button {
   padding: 10px;
+  padding: 10px 15px; /* Adds a bit more space for visual comfort */
+  border-radius: 5px; /* Rounded corners */
+  border: none;
+  background-color: black; /* Background color */
+  color: aliceblue; /* Text color */
+  font-size: 12px; /* Slightly increased text size */
+  font-weight: bold; /* Makes the text a bit more impactful */
+  margin: 20px 30px; /* Spacing around the button */
+  text-decoration: none; /* Removes underlining */
+  text-align: center; /* Centers the text inside */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth animation */
+  cursor: pointer; /* Changes the cursor on hover */
+}
+
+.button-delete-container {
+  display: flex;
+  justify-content: center;
+}
+
+.button-delete-container button {
+  padding: 10px;
+  padding: 10px 15px; /* Adds a bit more space for visual comfort */
+  border-radius: 5px; /* Rounded corners */
+  border: none;
+  background-color: black; /* Background color */
+  color: aliceblue; /* Text color */
+  font-size: 12px; /* Slightly increased text size */
+  font-weight: bold; /* Makes the text a bit more impactful */
+  margin: 20px 30px; /* Spacing around the button */
+  text-decoration: none; /* Removes underlining */
+  text-align: center; /* Centers the text inside */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth animation */
+  cursor: pointer; /* Changes the cursor on hover */
 }
 
 .user-pet-container {
-  background-color: blueviolet;
   padding: 10px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .pet-detail-box {
-  background-color: brown;
-  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pet-detail-box img {
+  height: 200px;
+  width: auto;
 }
 
 .user-event-container {
@@ -750,6 +794,11 @@ footer {
   background-color: #333; /* Dark background for form */
   border-color: #444; /* Darker border */
   color: whitesmoke; /* Light text in dark mode */
+}
+
+.dark-theme button {
+  background-color: whitesmoke;
+  color: black;
 }
 
 /* Group of form fields */
