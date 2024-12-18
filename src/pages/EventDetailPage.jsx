@@ -45,7 +45,7 @@ const EventDetailPage = () => {
               </div>
               <div className="event-detail-date">
                 <img src={clock} alt="time" style={{ height: "50px" }} />
-                <p>{event.date}</p>
+                <p> {new Date(event.date).toLocaleDateString()}</p>
               </div>
               <div className="event-detail-price">
                 <p>Price of the event: €{event.price}</p>
