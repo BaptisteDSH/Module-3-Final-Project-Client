@@ -6,11 +6,12 @@ import { API_URL } from "../config/apiUrl.config";
 const HomePage = ({ events, setEvents, adoptions, setAdoptions }) => {
   const sortedEvents = [...events].sort((a, b) => b.date - a.date);
   const sortedAdoptions = [...adoptions].sort((a, b) => b.date - a.date);
+
   return (
     <>
       <div className="home-page-container">
         <div className="header-home-page">
-          <h1>HEY BUDDY !</h1>
+          <h1> HEY BUDDY !</h1>
           <p>
             At PAWTY TIME, we’re dedicated to connecting loving families with
             their perfect furry companions. <span />
