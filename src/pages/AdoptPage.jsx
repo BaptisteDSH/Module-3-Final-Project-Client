@@ -26,13 +26,13 @@ const AdoptPage = ({ adoptions, setAdoptions }) => {
   return (
     <>
       {/* Image Header */}
-      <div className="events-page-container">
-        <div className="event-image-container">
+      <div className="adoption-page-container">
+        <div className="adoption-image-container">
           <img
             src="https://media.newyorker.com/photos/606b51c2313f23423168acbe/master/w_2240,c_limit/Brewer-CompanionDogApplication.jpg"
             alt="adoption-img"
           />
-          <div className="event-text-overlay">
+          <div className="adoption-text-overlay">
             <h1>Find Your Furever Friend!</h1>
           </div>
         </div>
