@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_URL } from "../config/apiUrl.config";
 
 const EventEditPage = () => {
   const { user } = useContext(AuthContext);
@@ -25,9 +26,7 @@ const EventEditPage = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5005/api/events/${eventId}`
-        );
+        const response = await axios.get(`${API_URL}/api/events/${eventId}`);
         setEventToEdit(response.data);
       } catch (error) {
         console.error("Error fetching the event:", error);
@@ -84,7 +83,7 @@ const EventEditPage = () => {
 
         // POST the files to your backend
         const uploadResponse = await axios.post(
-          "http://localhost:5005/uploads/multiple-uploads",
+          `${API_URL}/uploads/multiple-uploads`,
           myFormData
         );
 
@@ -100,7 +99,7 @@ const EventEditPage = () => {
 
       // Step 3: Send the PUT request to update the event
       const response = await axios.put(
-        `http://localhost:5005/api/events/${eventId}`,
+        `${API_URL}/api/events/${eventId}`,
         eventPayload
       );
 

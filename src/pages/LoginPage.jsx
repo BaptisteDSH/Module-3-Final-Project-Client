@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { toast } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css"; // Import CSS
+import { API_URL } from "../config/apiUrl.config";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -22,7 +23,7 @@ const LoginPage = () => {
     };
 
     axios
-      .post("http://localhost:5005/api/user/Login", requestBody)
+      .post(`${API_URL}/api/user/Login`, requestBody)
       .then((response) => {
         console.log("JWT token", response.data.authToken);
 

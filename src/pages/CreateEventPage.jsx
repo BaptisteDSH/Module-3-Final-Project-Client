@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { API_URL } from "../config/apiUrl.config";
 
 const CreateEventPage = ({ events, setEvents }) => {
   const { user, isLoading } = useContext(AuthContext);
@@ -47,7 +48,7 @@ const CreateEventPage = ({ events, setEvents }) => {
 
       //API call to upload the multiple images
       const { data } = await axios.post(
-        "http://localhost:5005/uploads/multiple-uploads",
+        `${API_URL}/uploads/multiple-uploads`,
         myFormData
       );
       console.log("image uploaded successfully", data.imageUrls);
@@ -62,7 +63,7 @@ const CreateEventPage = ({ events, setEvents }) => {
       //Step 3: sending the POST request to create event
 
       const response = await axios.post(
-        "http://localhost:5005/api/events/create",
+        `${API_URL}/api/events/create`,
         eventPayload
       );
       console.log("Event created successfully:", response.data);

@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import EventCard from "../components/EventCard";
-
-// Import the string from the .env with URL of the server - http://localhost:5005
-const API_URL = `http://localhost:5005`;
+import { API_URL } from "../config/apiUrl.config";
 
 const EventsPage = () => {
   const [events, setEvents] = useState([]);
@@ -77,9 +75,9 @@ const EventsPage = () => {
           </div>
         </div>
         {/* <div className="search-bar">SEARCH BAR TO CREATE</div> */}
-        <div className="event-container">
+        <div className="event-details-container">
           <div>
-            <div className="event-box-container-wrapper">
+            <div>
               {filteredEvents && filteredEvents.length > 0 ? (
                 filteredEvents.map((event) => (
                   <div className="event-box-container" key={event._id}>

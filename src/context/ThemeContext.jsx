@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { API_URL } from "../config/apiUrl.config";
 
 const ThemeContext = createContext();
 

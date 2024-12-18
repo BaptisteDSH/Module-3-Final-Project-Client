@@ -3,27 +3,25 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import icon from "../assets/location-icon.png";
 import clock from "../assets/clock-icon.png";
-
-const API_URL = `http://localhost:5005`;
+import { API_URL } from "../config/apiUrl.config";
 
 const EventDetailPage = () => {
   const [event, setEvent] = useState(null);
   const { eventId } = useParams();
   const navigate = useNavigate();
 
-  const getEvent = useCallback(() => {
-    axios
-      .get(`${API_URL}/api/events/${eventId}`)
-      .then((response) => {
-        const oneEvent = response.data;
-        setEvent(oneEvent);
-      })
-      .catch((error) => console.log(error));
-  }, [eventId]);
-
   useEffect(() => {
+    const getEvent = () => {
+      axios
+        .get(`${API_URL}/api/events/${eventId}`)
+        .then((response) => {
+          console.log("Fetched Event Data:", response.data); // Debug log
+          setEvent(response.data);
+        })
+        .catch((error) => console.error("Error fetching event:", error));
+    };
     getEvent();
-  }, [eventId, getEvent]);
+  }, [eventId]);
 
   return (
     <>
@@ -55,6 +53,22 @@ const EventDetailPage = () => {
             </div>
             <div className="event-detail-description">
               <p>{event.description}</p>
+            </div>
+            <div className="event-detail-description">
+              {event.organizerId && (
+                <p>
+                  <strong>Posted by:</strong>{" "}
+                  {event.organizerId ? event.organizerId.name : "Unknown user"}
+                </p>
+              )}
+              {event.organizerId && (
+                <p>
+                  <strong>Contact:</strong>{" "}
+                  {event.organizerId
+                    ? event.organizerId.email
+                    : "No contact information"}
+                </p>
+              )}
             </div>
           </>
         )}
