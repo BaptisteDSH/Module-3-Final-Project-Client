@@ -5,20 +5,20 @@ const AdoptionCard = ({ oneAdoption, setAdoptions }) => {
   const { pet, description, location, datePosted, pictures } = oneAdoption;
   return (
     <div>
-      <Link to={`/adoptions/${oneAdoption._id}`} className="event-link">
-        <section>
-          <div className="event-image-card-container">
+      <Link to={`/adoptions/${oneAdoption._id}`}>
+        <section className="card-container">
+          <div>
             <img
               src={pictures?.[0] || "https://shorturl.at/I39cR"}
-              alt="event-img"
-              className="event-image"
+              alt="card-img"
             />
           </div>
-          <h3>{pet?.name || "No pet name available"} </h3>
-          <div className="event-location">
-            <h2>{location}</h2>
-          </div>
-          <div className="event-date">
+          <div className="card-p-container">
+            <div className="card-name">
+              <h3>{pet?.name || "No pet name available"} </h3>
+            </div>
+            <p>{location}</p>
+
             <p> {new Date(datePosted).toLocaleDateString()}</p>
           </div>
         </section>

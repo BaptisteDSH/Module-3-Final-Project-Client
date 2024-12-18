@@ -47,40 +47,45 @@ const EventsPage = () => {
 
   return (
     <>
-      <div className="events-page-container">
-        <div className="event-image-container">
+      <div className="event-page-container">
+        <div className="event-cover-image">
           <img src="https://www.educateurcaninfrance.com/wp-content/uploads/2024/05/GettyImages-1317531965-1.jpg" />
           <div className="event-text-overlay">
             <h1>It's Pawty time!</h1>
           </div>
         </div>
-        <div className="button-add-event-container">
-          <div className="search-bar-wrapper">
-            <div className="search-bar-title">
-              Curious if there's something happening near you?
-            </div>
-            {/* Search Bar */}
-            <div className="search-bar-container">
-              <input
-                type="text"
-                value={query}
-                onChange={handleSearch}
-                placeholder="Search events by location"
-                className="search-bar"
-              />
-            </div>
-            <Link to="/events/create">
-              <div className="log-button">Add an event</div>
-            </Link>
+        <div>
+          <div className="add-event-title">
+            <h3>Are you the organiser?</h3>
+          </div>
+          <Link to="/events/create">
+            <button className="add-event-button">Add an event</button>
+          </Link>
+        </div>
+
+        <div className="event-search-bar-wrapper">
+          <div className="event-search-bar-title">
+            <h3>Curious if there's something happening near you?</h3>
+          </div>
+          {/* Search Bar */}
+          <div className="event-search-bar-container">
+            <input
+              type="text"
+              value={query}
+              onChange={handleSearch}
+              placeholder="Search events by location"
+              className="search-bar"
+            />
           </div>
         </div>
+
         {/* <div className="search-bar">SEARCH BAR TO CREATE</div> */}
         <div className="event-details-container">
           <div>
             <div>
               {filteredEvents && filteredEvents.length > 0 ? (
                 filteredEvents.map((event) => (
-                  <div className="event-box-container" key={event._id}>
+                  <div key={event._id}>
                     <EventCard {...event} />
                   </div>
                 ))

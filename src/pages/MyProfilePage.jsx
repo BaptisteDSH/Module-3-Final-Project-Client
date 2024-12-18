@@ -110,29 +110,28 @@ const MyProfilePage = ({
             "https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW4lMjBiZWluZ3xlbnwwfHwwfHx8MA%3D%3D"
           }
           alt="Profile"
-          style={{ height: "200px" }}
         />
-        <div className="infos-and-button">
-          <div className="user-detail-box">
-            <h1>{userProfile?.name}</h1>
-            <h5>{userProfile?.lastName}</h5>
-            <h5>{userProfile?.age} ans</h5>
-            <h5>0{userProfile?.phone}</h5>
-            <p>{userProfile?.description}</p>
-          </div>
+        <div className="myprofile-infos">
+          <h1>{userProfile?.name}</h1>
+          <h5>{userProfile?.lastName}</h5>
+          <h5>{userProfile?.age} years</h5>
+          <h5>{userProfile?.phone}</h5>
+          <br></br>
+          <p>{userProfile?.description}</p>
 
-          <div className="button-edit-add-container">
+          <div className="myprofile-buttons-edit-add">
             <Link to="/EditProfile">
               <button>Edit Profile</button>
             </Link>
             <Link to="/AddPet">
-              <button>Add a pet</button>
+              <button>Add pet</button>
             </Link>
           </div>
         </div>
       </div>
-      <h2 style={{ margin: "50px" }}>Your Pets</h2>
-      <div className="user-pet-container">
+      <h2>Your Pets</h2>
+      <br></br>
+      <div className="myprofile-pet-container">
         {userProfile?.pet?.length > 0 ? (
           userProfile.pet.map((pet, index) => (
             <div key={index} className="pet-detail-box">
@@ -150,20 +149,20 @@ const MyProfilePage = ({
         )}
       </div>
       <h2 style={{ margin: "50px" }}>Your Events</h2>
-      <div className="user-event-container">
+      <div className="user-cards-container">
         {userEvents.length > 0 ? (
           userEvents.map((event) => (
-            <div key={event._id} className="adoption-box-container">
+            <div key={event._id}>
               <EventCard {...event} setEvents={setEvents} />
               <div>
                 <Link to={`/Event/Update/${event._id}`}>
-                  <button className="log-button">Edit Event</button>
+                  <button className="log-button">Edit </button>
                 </Link>
                 <button
                   onClick={() => handleDeleteEvent(event._id)}
                   className="log-button"
                 >
-                  Delete Event
+                  Delete
                 </button>
               </div>
             </div>
@@ -173,22 +172,22 @@ const MyProfilePage = ({
         )}
       </div>
       <h2 style={{ margin: "50px" }}>Your Adoptions</h2>
-      <div className="user-adoption-container">
+      <div className="user-cards-container">
         {userAdoptions.length > 0 ? (
           userAdoptions.map((adoption) => (
-            <div key={adoption._id} className="adoption-box-container">
+            <div key={adoption._id}>
               <AdoptionCard
                 oneAdoption={adoption}
                 setAdoptions={setAdoptions}
               />
               <Link to={`/UpdateAdoptions/${adoption._id}`}>
-                <button className="log-button">Edit Adoption</button>
+                <button className="myprofile-button">Edit </button>
               </Link>
               <button
                 onClick={() => handleDeleteAdoption(adoption._id)}
                 className="log-button"
               >
-                Delete Adoption
+                Delete
               </button>
             </div>
           ))
@@ -196,8 +195,13 @@ const MyProfilePage = ({
           <p>No adoptions available.</p>
         )}
       </div>
-      <div className="button-delete-container">
-        <button onClick={handleDeleteProfile}>Delete Profile</button>
+      <div>
+        <button
+          className="myprofile-button-delete"
+          onClick={handleDeleteProfile}
+        >
+          Delete Profile
+        </button>
       </div>
     </div>
   );

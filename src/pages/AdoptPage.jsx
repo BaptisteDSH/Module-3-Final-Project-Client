@@ -28,7 +28,7 @@ const AdoptPage = ({ adoptions, setAdoptions }) => {
     <>
       {/* Image Header */}
       <div className="adoption-page-container">
-        <div className="adoption-image-container">
+        <div className="adoption-cover-image">
           <img
             src="https://media.newyorker.com/photos/606b51c2313f23423168acbe/master/w_2240,c_limit/Brewer-CompanionDogApplication.jpg"
             alt="adoption-img"
@@ -38,37 +38,42 @@ const AdoptPage = ({ adoptions, setAdoptions }) => {
           </div>
         </div>
 
-        {/* Search Bar and Add Adoption Button */}
-        <div className="button-add-event-container">
-          <div className="search-bar-wrapper">
-            <div className="search-bar-title">Looking for a pet near you?</div>
-            <div className="search-bar-container">
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search adoptions by location"
-                className="search-bar"
-              />
-            </div>
+        <div>
+          <div className="add-adoption-title">
+            <h3>Find the perfect home for your pet!</h3>
           </div>
-          <div>
-            <Link to="/CreateAdoption">
-              <button className="log-button">Add an adoption</button>
-            </Link>
+
+          <Link to="/CreateAdoption">
+            <button className="add-adoption-button">Add an adoption</button>
+          </Link>
+        </div>
+
+        {/* Search Bar and Add Adoption Button */}
+
+        <div className="adoption-search-bar-wrapper">
+          <div className="adoption-search-bar-title">
+            <h3>Looking for your next pet?</h3>
+          </div>
+          <div className="adoption-search-bar-container">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search adoptions by location"
+              className="search-bar"
+            />
           </div>
         </div>
 
         {/* Adoption Cards */}
         <div className="adoption-details-container">
           {sortedAdoptions.length > 0 ? (
-            sortedAdoptions.map((oneAdoption) => (
-              <div key={oneAdoption._id} className="adoption-box-container">
-                <AdoptionCard
-                  oneAdoption={oneAdoption}
-                  setAdoptions={setAdoptions}
-                />
-              </div>
+            sortedAdoptions.map((oneAdoption, index) => (
+              <AdoptionCard
+                key={oneAdoption._id || index}
+                oneAdoption={oneAdoption}
+                setAdoptions={setAdoptions}
+              />
             ))
           ) : (
             <p>No adoptions found matching your search.</p>
