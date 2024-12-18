@@ -136,44 +136,6 @@ const SignUpPage = () => {
       setErrorMessage(errorDescription);
     }
   };
-
-  // Handle form submission
-  // const handleSignUpSubmit = (e) => {
-  //   e.preventDefault();
-  //   setErrorMessage("");
-
-  //   if (!validateForm()) return;
-
-  //   const requestBody = {
-  //     name,
-  //     lastName,
-  //     email,
-  //     password,
-  //     location,
-  //     age,
-  //     description,
-  //     picture,
-  //     phone,
-  //     pet,
-  //   };
-
-  //   console.log("Request body:", requestBody); // Debugging
-
-  //   axios
-  //     .post(`${API_URL}/api/user/signup`, requestBody)
-  //     .then(() => {
-  //       toast.success("Your profile has been created!");
-  //       navigate("/login");
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error during signup:", error); // Debugging
-  //       const errorDescription =
-  //         error.response?.data?.message ||
-  //         "An unexpected error occurred. Please try again.";
-  //       setErrorMessage(errorDescription);
-  //     });
-  // };
-
   return (
     <>
       <h1 className="sign-up-title-h1">Sign Up</h1>
