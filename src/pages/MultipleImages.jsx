@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { API_URL } from "../config/apiUrl.config";
 
 const MultipleImages = () => {
   const [images, setImages] = useState();
@@ -16,11 +17,11 @@ const MultipleImages = () => {
     });
     try {
       const { data } = await axios.post(
-        "http://localhost:5005/auth/multiple-uploads",
+        `${API_URL}/auth/multiple-uploads`,
         myFormData
       );
       console.log("image uploaded successfully", data);
-    //   nav("/home");
+      //   nav("/home");
     } catch (error) {
       console.log(error);
     }

@@ -2,11 +2,11 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { useParams, useNavigate } from "react-router-dom";
+import { API_URL } from "../config/apiUrl.config";
 
 const UpdateAdoption = ({ adoptions, setAdoptions }) => {
   const { user } = useContext(AuthContext);
   const { adoptionId } = useParams();
-
 
   // Holds the fetched adoption data
   const [adoption, setAdoption] = useState(null);
@@ -26,7 +26,7 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
     const fetchAdoption = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5005/api/adoptions/${adoptionId}`
+          `${API_URL}/api/adoptions/${adoptionId}`
         );
         setAdoption(response.data);
       } catch (error) {
@@ -83,7 +83,7 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
 
       //API call to upload the multiple images
       const { data } = await axios.post(
-        "http://localhost:5005/uploads/multiple-uploads",
+        `${API_URL}/uploads/multiple-uploads`,
         myFormData
       );
       console.log("image uploaded successfully", data.imageUrls);
@@ -97,7 +97,7 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
 
       //Step 3, updating the adoptions
       const response = await axios.put(
-        `http://localhost:5005/api/adoptions/${adoptionId}`,
+        `${API_URL}/api/adoptions/${adoptionId}`,
         adoptionPayload
       );
       const updatedAdoptions = adoptions.map((item) =>
