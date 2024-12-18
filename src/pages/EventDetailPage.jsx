@@ -10,19 +10,18 @@ const EventDetailPage = () => {
   const { eventId } = useParams();
   const navigate = useNavigate();
 
-  const getEvent = useCallback(() => {
-    axios
-      .get(`${API_URL}/api/events/${eventId}`)
-      .then((response) => {
-        const oneEvent = response.data;
-        setEvent(oneEvent);
-      })
-      .catch((error) => console.log(error));
-  }, [eventId]);
-
   useEffect(() => {
+    const getEvent = () => {
+      axios
+        .get(`${API_URL}/api/events/${eventId}`)
+        .then((response) => {
+          console.log("Fetched Event Data:", response.data); // Debug log
+          setEvent(response.data);
+        })
+        .catch((error) => console.error("Error fetching event:", error));
+    };
     getEvent();
-  }, [eventId, getEvent]);
+  }, [eventId]);
 
   return (
     <>
@@ -46,7 +45,7 @@ const EventDetailPage = () => {
               </div>
               <div className="event-detail-date">
                 <img src={clock} alt="time" style={{ height: "50px" }} />
-                <p>{event.date}</p>
+                <p> {new Date(event.date).toLocaleDateString()}</p>
               </div>
               <div className="event-detail-price">
                 <p>Price of the event: €{event.price}</p>
@@ -54,6 +53,22 @@ const EventDetailPage = () => {
             </div>
             <div className="event-detail-description">
               <p>{event.description}</p>
+            </div>
+            <div className="event-detail-description">
+              {event.organizerId && (
+                <p>
+                  <strong>Posted by:</strong>{" "}
+                  {event.organizerId ? event.organizerId.name : "Unknown user"}
+                </p>
+              )}
+              {event.organizerId && (
+                <p>
+                  <strong>Contact:</strong>{" "}
+                  {event.organizerId
+                    ? event.organizerId.email
+                    : "No contact information"}
+                </p>
+              )}
             </div>
           </>
         )}

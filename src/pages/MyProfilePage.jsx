@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css"; // Import CSS
 import AdoptionCard from "../components/AdoptionCard";
 import EventCard from "../components/EventCard";
 import { API_URL } from "../config/apiUrl.config";
-
 const MyProfilePage = ({
   adoptions = [],
   setAdoptions,
@@ -17,11 +16,9 @@ const MyProfilePage = ({
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(undefined);
-
   const { user, isLoggedIn, setIsLoggedIn, logOutUser } =
     useContext(AuthContext);
   const navigate = useNavigate();
-
   // Handle profile deletion
   const handleDeleteProfile = async (e) => {
     e.preventDefault();
@@ -37,7 +34,6 @@ const MyProfilePage = ({
       toast.error("An error occurred while deleting your profile.");
     }
   };
-
   // Fetch user profile data
   useEffect(() => {
     if (user && user._id) {
@@ -64,7 +60,6 @@ const MyProfilePage = ({
       setLoading(false);
     }
   }, [user]);
-
   // Handle adoption and event deletion
   const handleDeleteAdoption = async (adoptionId) => {
     try {
@@ -78,7 +73,6 @@ const MyProfilePage = ({
       toast.error("Failed to delete the adoption.");
     }
   };
-
   const handleDeleteEvent = async (eventId) => {
     try {
       await axios.delete(`${API_URL}/api/events/${eventId}`);
@@ -91,16 +85,13 @@ const MyProfilePage = ({
       toast.error("Failed to delete the event.");
     }
   };
-
   if (errorMessage) return <div>{errorMessage}</div>;
   if (loading) return <div>Loading...</div>;
-
   // Filtering for only user created adoptions and events
   const userAdoptions = adoptions.filter(
     (adoption) => adoption.user === user._id
   );
   const userEvents = events.filter((event) => event.organizerId === user._id);
-
   return (
     <div className="my-profile-page-container">
       <div className="user-detail-container">
@@ -120,7 +111,6 @@ const MyProfilePage = ({
             <h5>0{userProfile?.phone}</h5>
             <p>{userProfile?.description}</p>
           </div>
-
           <div className="button-edit-add-container">
             <Link to="/EditProfile">
               <button>Edit Profile</button>
@@ -172,7 +162,7 @@ const MyProfilePage = ({
           <p>No events available.</p>
         )}
       </div>
-
+      <h2 style={{ margin: "50px" }}>Your Adoptions</h2>
       <div className="user-adoption-container">
         {userAdoptions.length > 0 ? (
           userAdoptions.map((adoption) => (
@@ -202,5 +192,4 @@ const MyProfilePage = ({
     </div>
   );
 };
-
 export default MyProfilePage;

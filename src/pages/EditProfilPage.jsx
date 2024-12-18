@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
-import "react-toastify/dist/ReactToastify.css"; // Import the CSS for react-toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { API_URL } from "../config/apiUrl.config";
 
 const EditProfilPage = () => {
@@ -16,79 +16,45 @@ const EditProfilPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     e.preventDefault();
 
-    const requestBody = {
-      name,
-      lastName,
-      description,
-      picture,
-    };
+    try {
+      //Step 1: upload images to Cloudinary
 
-    // Send PUT request to the server
-    axios
-      .put(`${API_URL}/api/user/${user._id}`, requestBody)
-      .then(() => {
-        toast.success("Profil updated !");
-        navigate("/MyProfile");
-      })
-      .catch((error) => {
-        const errorDescription =
-          error.response?.data?.message || "An error occurred";
-        setErrorMessage(errorDescription);
-      });
+      const uploadImage = async (file) => {
+        const formData = new FormData();
+        formData.append("imageUrl", file);
+
+        //API call to upload the images
+
+        const response = await axios.post(
+          `${API_URL}/uploads/multiple-uploads`,
+          formData
+        );
+        return response.data.imageUrls[0];
+      };
+
+      const uploadedProfilePicture = await uploadImage(picture);
+
+      const requestBody = {
+        name,
+        lastName,
+        description,
+        picture: uploadedProfilePicture || "",
+      };
+
+      // Send PUT request to the server
+      await axios.put(`${API_URL}/api/user/${user._id}`, requestBody);
+
+      toast.success("Profil updated !");
+      navigate("/MyProfile");
+    } catch (error) {
+      const errorDescription =
+        error.response?.data?.message || "An error occurred";
+      setErrorMessage(errorDescription);
+    }
   };
-
-  // List of locations to populate the dropdown
-  const locations = [
-    "Álava",
-    "Albacete",
-    "Alicante",
-    "Almería",
-    "Asturias",
-    "Ávila",
-    "Badajoz",
-    "Barcelona",
-    "Burgos",
-    "Cáceres",
-    "Cádiz",
-    "Cantabria",
-    "Castellón",
-    "Ciudad Real",
-    "Córdoba",
-    "Cuenca",
-    "Girona",
-    "Granada",
-    "Guadalajara",
-    "Gipuzkoa",
-    "Huelva",
-    "Huesca",
-    "Jaén",
-    "La Coruña",
-    "León",
-    "Lleida",
-    "Lugo",
-    "Madrid",
-    "Málaga",
-    "Murcia",
-    "Navarra",
-    "Ourense",
-    "Palencia",
-    "Pontevedra",
-    "Salamanca",
-    "Segovia",
-    "Sevilla",
-    "Soria",
-    "Tarragona",
-    "Teruel",
-    "Toledo",
-    "Valencia",
-    "Valladolid",
-    "Vizcaya",
-    "Zamora",
-    "Zaragoza",
-  ];
 
   return (
     <>
@@ -133,11 +99,10 @@ const EditProfilPage = () => {
               Picture
             </label>
             <input
-              type="url"
+              type="file"
               name="picture"
               id="picture"
-              value={picture}
-              onChange={(e) => setPicture(e.target.value)}
+              onChange={(e) => setPicture(e.target.files[0])}
               className="form-input"
               placeholder="Enter URL "
             />
@@ -168,6 +133,7 @@ const EditProfilPage = () => {
       </form>
 
       {errorMessage && <div className="error-message">{errorMessage}</div>}
+      <ToastContainer />
     </>
   );
 };

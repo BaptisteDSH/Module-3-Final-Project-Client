@@ -180,7 +180,7 @@ const CreateEventPage = ({ events, setEvents }) => {
         <div>
           <label>Date</label>
           <input
-            type="text"
+            type="date"
             name="date"
             value={newEvent.date}
             onChange={handleChange}
