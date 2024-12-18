@@ -3,6 +3,10 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import icon from "../assets/location-icon.png";
+//for carousel effect
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 const AdoptionDetails = ({ adoptions, setAdoptions }) => {
   const { adoptionId } = useParams();
@@ -18,7 +22,7 @@ const AdoptionDetails = ({ adoptions, setAdoptions }) => {
     //   setAdoptionsDetails(existingAdoption);
     // }
 
-    // Always fetch adoption from the backend
+    // Fetch adoption from the backend
     const fetchAdoption = async () => {
       try {
         const response = await axios.get(
@@ -38,62 +42,87 @@ const AdoptionDetails = ({ adoptions, setAdoptions }) => {
     return <p>Loading adoption details...</p>;
   }
 
+  // Carousel settings for react-slick
+  const settings = {
+    dots: true, // Show navigation dots
+    infinite: true, // Loop through images
+    speed: 500, // Transition speed
+    slidesToShow: 1, // Show one image at a time
+    slidesToScroll: 1, // Scroll one image at a time
+    arrows: true, // Show arrows for navigation
+    adaptiveHeight: true, // Adjust the height to the image size
+  };
+
   return (
     <div>
       <div className="adoption-details-name">
         <h1>Hey there! I am {adoptionsDetail.pet?.name || "Unnamed Pet"}</h1>
       </div>
 
-      {/* Render pictures if available */}
-      {adoptionsDetail.pictures && adoptionsDetail.pictures.length > 0 ? (
-        <div>
-          {adoptionsDetail.pictures.map((picture, index) => (
-            <img
-              className="adoption-details-picture"
-              key={index}
-              src={picture}
-              alt={`${adoptionsDetail.pet?.name || "Pet"} - Image ${index + 1}`}
-            />
-          ))}
-        </div>
-      ) : (
-        <p>No pictures available.</p>
-      )}
+      <div className="adoption-details-picture-container">
+        {adoptionsDetail.pictures && adoptionsDetail.pictures.length > 0 ? (
+          // Displaying the images in a carousel
+          <Slider {...settings}>
+            {adoptionsDetail.pictures.map((picture, index) => (
+              <div key={index}>
+                <img
+                  className="adoption-details-picture"
+                  src={picture}
+                  alt={`${adoptionsDetail.pet?.name || "Pet"} - Image ${
+                    index + 1
+                  }`}
+                />
+              </div>
+            ))}
+          </Slider>
+        ) : (
+          <p>No pictures available.</p> // Fallback message if no pictures are available
+        )}
+      </div>
+
       <div className="adoption-details-info-container">
         <div className="adoption-details-description">
-          <p>{adoptionsDetail.description || "No description available."}</p>
+          <p>{adoptionsDetail.description || "No description available."}</p>{" "}
+          {/* Description of the adoption */}
         </div>
 
         <div className="adoption-details-information">
           <div className="adoption-details-location">
             <img src={icon} alt="location" style={{ height: "50px" }} />
-            <p>{adoptionsDetail.location || "Not specified"}</p>
+            <p>{adoptionsDetail.location || "Not specified"}</p>{" "}
+            {/* Location of the pet */}
           </div>
 
           <p className="adoption-details-date">
             <strong>Date Posted:</strong>{" "}
-            {new Date(adoptionsDetail.datePosted).toLocaleDateString()}
+            {new Date(adoptionsDetail.datePosted).toLocaleDateString()}{" "}
+            {/* Display the date the adoption was posted */}
           </p>
+
           <div className="adoption-details-owner-details">
             {/* Check if user details are available */}
             {adoptionsDetail.user && (
               <p>
                 <strong>Owner:</strong>{" "}
-                {adoptionsDetail.user.name || "Unknown user"}
+                {adoptionsDetail.user.name || "Unknown user"}{" "}
+                {/* Display the owner's name */}
               </p>
             )}
+
             {adoptionsDetail.user && (
               <img
                 src={adoptionsDetail.user.picture || "Unknown user"}
                 alt="owner-photo"
-                className="adoption-details-owner-photo"
+                className="adoption-details-owner-photo" // Owner's photo
               />
             )}
+
             {/* Additional debugging info */}
             {adoptionsDetail.user && (
               <p>
                 <strong>Contact:</strong>{" "}
-                {adoptionsDetail.user.email || "No contact information"}
+                {adoptionsDetail.user.email || "No contact information"}{" "}
+                {/* Contact information of the owner */}
               </p>
             )}
           </div>
