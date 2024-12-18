@@ -39,7 +39,7 @@ const AdoptPage = ({ adoptions, setAdoptions }) => {
 
         {/* Search Bar and Add Adoption Button */}
         <div className="button-add-event-container">
-          <div>
+          <div className="search-bar-wrapper">
             <div className="search-bar-title">Looking for a pet near you?</div>
             <div className="search-bar-container">
               <input

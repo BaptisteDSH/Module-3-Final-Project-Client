@@ -57,11 +57,11 @@ const EventsPage = () => {
           </div>
         </div>
         <div className="button-add-event-container">
-          <div>
+          <div className="search-bar-wrapper">
             <div className="search-bar-title">
               Curious if there's something happening near you?
             </div>
-            {/* Search Bar added by Emi*/}
+            {/* Search Bar */}
             <div className="search-bar-container">
               <input
                 type="text"
@@ -71,9 +71,6 @@ const EventsPage = () => {
                 className="search-bar"
               />
             </div>
-          </div>
-
-          <div>
             <Link to="/events/create">
               <div className="log-button">Add an event</div>
             </Link>

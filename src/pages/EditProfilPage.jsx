@@ -10,33 +10,53 @@ const EditProfilPage = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState("");
+  const [picture, setPicture] = useState(null);
 
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     e.preventDefault();
 
-    const requestBody = {
-      name,
-      lastName,
-      description,
-      picture,
-    };
+    try {
+      //Step 1: upload images to Cloudinary
 
-    // Send PUT request to the server
-    axios
-      .put(`http://localhost:5005/api/user/${user._id}`, requestBody)
-      .then(() => {
-        toast.success("Profil updated !");
-        navigate("/MyProfile");
-      })
-      .catch((error) => {
-        const errorDescription =
-          error.response?.data?.message || "An error occurred";
-        setErrorMessage(errorDescription);
-      });
+      const uploadImage = async (file) => {
+        const formData = new FormData();
+        formData.append("imageUrl", file);
+
+        //API call to upload the images
+
+        const response = await axios.post(
+          "http://localhost:5005/uploads/multiple-uploads",
+          formData
+        );
+        return response.data.imageUrls[0];
+      };
+
+      const uploadedProfilePicture = await uploadImage(picture);
+      
+
+      const requestBody = {
+        name,
+        lastName,
+        description,
+        picture: uploadedProfilePicture || "",
+      };
+
+      // Send PUT request to the server
+      await axios.put(
+        `http://localhost:5005/api/user/${user._id}`,
+        requestBody
+      );
+
+      toast.success("Profil updated !");
+      navigate("/MyProfile");
+    } catch (error) {
+      const errorDescription =
+        error.response?.data?.message || "An error occurred";
+      setErrorMessage(errorDescription);
+    }
   };
 
   // List of locations to populate the dropdown
@@ -132,11 +152,11 @@ const EditProfilPage = () => {
               Picture
             </label>
             <input
-              type="url"
+              type="file"
               name="picture"
               id="picture"
-              value={picture}
-              onChange={(e) => setPicture(e.target.value)}
+          
+              onChange={(e) => setPicture(e.target.files[0])}
               className="form-input"
               placeholder="Enter URL "
             />
