@@ -5,11 +5,12 @@ import AdoptionCard from "../components/AdoptionCard";
 const HomePage = ({ events, setEvents, adoptions, setAdoptions }) => {
   const sortedEvents = [...events].sort((a, b) => b.date - a.date);
   const sortedAdoptions = [...adoptions].sort((a, b) => b.date - a.date);
+
   return (
     <>
       <div className="home-page-container">
         <div className="header-home-page">
-          <h1>HEY BUDDY !</h1>
+          <h1> HEY BUDDY !</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime,
             porro beatae nisi molestiae ipsam quia, <span />
