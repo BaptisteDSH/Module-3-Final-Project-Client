@@ -28,33 +28,10 @@ const EventDetailPage = () => {
       <div>
         {event && (
           <>
-            <div className="event-detail-title">
+            <div className="event-details-page-title">
               <h1>{event.title}</h1>
-            </div>
-            <div>
-              <img
-                src={event.pictures}
-                alt="event-picture"
-                className="event-detail-picture"
-              />
-            </div>
-            <div className="event-detail">
-              <div className="event-detail-location">
-                <img src={icon} alt="location" style={{ height: "50px" }} />
-                <p>{event.location}</p>
-              </div>
-              <div className="event-detail-date">
-                <img src={clock} alt="time" style={{ height: "50px" }} />
-                <p> {new Date(event.date).toLocaleDateString()}</p>
-              </div>
-              <div className="event-detail-price">
-                <p>Price of the event: €{event.price}</p>
-              </div>
-            </div>
-            <div className="event-detail-description">
-              <p>{event.description}</p>
-            </div>
-            <div className="event-detail-description">
+            </div>{" "}
+            <div className="event-details-organizer">
               {event.organizerId && (
                 <p>
                   <strong>Posted by:</strong>{" "}
@@ -69,6 +46,29 @@ const EventDetailPage = () => {
                     : "No contact information"}
                 </p>
               )}
+            </div>
+            <div>
+              <img
+                src={event.pictures}
+                alt="event-picture"
+                className="event-details-page-picture"
+              />
+            </div>
+            <div className="event-details-info-container">
+              <div className="event-details-location">
+                <img src={icon} alt="location" style={{ height: "50px" }} />
+                <p>{event.location}</p>
+              </div>
+              <div className="event-details-date">
+                <img src={clock} alt="time" style={{ height: "50px" }} />
+                <p> {new Date(event.date).toLocaleDateString()}</p>
+              </div>
+              <div className="event-details-price">
+                <p>Price of the event: €{event.price}</p>
+              </div>
+            </div>
+            <div className="event-details-description">
+              <p>{event.description}</p>
             </div>
           </>
         )}
