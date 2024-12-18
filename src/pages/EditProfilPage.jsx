@@ -16,29 +16,44 @@ const EditProfilPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     e.preventDefault();
 
-    const requestBody = {
-      name,
-      lastName,
-      description,
-      picture,
-    };
+    try {
+      //Step 1: upload images to Cloudinary
 
-    // Send PUT request to the server
-    axios
-      .put(`${API_URL}/api/user/${user._id}`, requestBody)
-      .then(() => {
-        toast.success("Profile updated successfully!");
-        navigate("/MyProfile");
-      })
-      .catch((error) => {
-        const errorDescription =
-          error.response?.data?.message ||
-          "An error occurred. Please try again.";
-        setErrorMessage(errorDescription);
-      });
+      const uploadImage = async (file) => {
+        const formData = new FormData();
+        formData.append("imageUrl", file);
+
+        //API call to upload the images
+
+        const response = await axios.post(
+          `${API_URL}/uploads/multiple-uploads`,
+          formData
+        );
+        return response.data.imageUrls[0];
+      };
+
+      const uploadedProfilePicture = await uploadImage(picture);
+
+      const requestBody = {
+        name,
+        lastName,
+        description,
+        picture: uploadedProfilePicture || "",
+      };
+
+      // Send PUT request to the server
+      await axios.put(`${API_URL}/api/user/${user._id}`, requestBody);
+
+      toast.success("Profil updated !");
+      navigate("/MyProfile");
+    } catch (error) {
+      const errorDescription =
+        error.response?.data?.message || "An error occurred";
+      setErrorMessage(errorDescription);
+    }
   };
 
   return (
@@ -84,13 +99,12 @@ const EditProfilPage = () => {
               Picture
             </label>
             <input
-              type="url"
+              type="file"
               name="picture"
               id="picture"
-              value={picture}
-              onChange={(e) => setPicture(e.target.value)}
+              onChange={(e) => setPicture(e.target.files[0])}
               className="form-input"
-              placeholder="Enter picture URL"
+              placeholder="Enter URL "
             />
           </div>
         </div>

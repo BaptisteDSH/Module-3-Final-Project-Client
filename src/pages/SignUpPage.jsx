@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"; // Import toast
-import "react-toastify/dist/ReactToastify.css"; // Import CSS
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { API_URL } from "../config/apiUrl.config";
 
 const SignUpPage = () => {
@@ -13,16 +13,43 @@ const SignUpPage = () => {
   const [location, setLocation] = useState("");
   const [age, setAge] = useState("");
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState(null);
+  const [picture, setPicture] = useState("");
   const [phone, setPhone] = useState("");
   const [pet, setPet] = useState({
     petType: "",
     petName: "",
     petDescription: "",
-    petPicture: null,
+    petPicture: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+
+  // List of locations
+  const locations = [
+    "Madrid",
+    "Barcelona",
+    "Valencia",
+    "Sevilla",
+    "Zaragoza",
+    "Malaga",
+    "Murcia",
+    "Bilbao",
+    "Alicante",
+    "Cordoba",
+  ];
+
+  // List of pet types
+  const petTypes = [
+    "dog",
+    "cat",
+    "bird",
+    "snake",
+    "spider",
+    "hamster",
+    "ferret",
+    "fish",
+    "guinea pigs",
+  ];
 
   // Handle changes in pet details
   const handlePetChange = (e) => {
@@ -31,6 +58,28 @@ const SignUpPage = () => {
       ...prevPet,
       [name]: value,
     }));
+  };
+
+  // Validate the form before submitting
+  const validateForm = () => {
+    if (!name || !lastName || !email || !password || !location) {
+      setErrorMessage("Please fill in all required fields.");
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorMessage("Please enter a valid email address.");
+      return false;
+    }
+    if (password.length < 6) {
+      setErrorMessage("Password must be at least 6 characters long.");
+      return false;
+    }
+    if (isNaN(age) || age < 1) {
+      setErrorMessage("Please enter a valid age.");
+      return false;
+    }
+    return true;
   };
 
   // Handle file selection
@@ -88,68 +137,42 @@ const SignUpPage = () => {
     }
   };
 
-  // List of locations to populate the dropdown
-  const locations = [
-    "Álava",
-    "Albacete",
-    "Alicante",
-    "Almería",
-    "Asturias",
-    "Ávila",
-    "Badajoz",
-    "Barcelona",
-    "Burgos",
-    "Cáceres",
-    "Cádiz",
-    "Cantabria",
-    "Castellón",
-    "Ciudad Real",
-    "Córdoba",
-    "Cuenca",
-    "Girona",
-    "Granada",
-    "Guadalajara",
-    "Gipuzkoa",
-    "Huelva",
-    "Huesca",
-    "Jaén",
-    "La Coruña",
-    "León",
-    "Lleida",
-    "Lugo",
-    "Madrid",
-    "Málaga",
-    "Murcia",
-    "Navarra",
-    "Ourense",
-    "Palencia",
-    "Pontevedra",
-    "Salamanca",
-    "Segovia",
-    "Sevilla",
-    "Soria",
-    "Tarragona",
-    "Teruel",
-    "Toledo",
-    "Valencia",
-    "Valladolid",
-    "Vizcaya",
-    "Zamora",
-    "Zaragoza",
-  ];
+  // Handle form submission
+  // const handleSignUpSubmit = (e) => {
+  //   e.preventDefault();
+  //   setErrorMessage("");
 
-  // List of pet types to populate the dropdown
-  const petTypes = [
-    "dog",
-    "cat",
-    "bird",
-    "snake",
-    "spider",
-    "hamster",
-    "ferret",
-    "fish",
-    "guinea pigs",
-  ];
+  //   if (!validateForm()) return;
+
+  //   const requestBody = {
+  //     name,
+  //     lastName,
+  //     email,
+  //     password,
+  //     location,
+  //     age,
+  //     description,
+  //     picture,
+  //     phone,
+  //     pet,
+  //   };
+
+  //   console.log("Request body:", requestBody); // Debugging
+
+  //   axios
+  //     .post(`${API_URL}/api/user/signup`, requestBody)
+  //     .then(() => {
+  //       toast.success("Your profile has been created!");
+  //       navigate("/login");
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error during signup:", error); // Debugging
+  //       const errorDescription =
+  //         error.response?.data?.message ||
+  //         "An unexpected error occurred. Please try again.";
+  //       setErrorMessage(errorDescription);
+  //     });
+  // };
 
   return (
     <>
@@ -159,7 +182,7 @@ const SignUpPage = () => {
         <div className="signup-names">
           <div className="form-group">
             <label htmlFor="name" className="form-label">
-              First Name
+              Name
             </label>
             <input
               type="text"
@@ -169,6 +192,7 @@ const SignUpPage = () => {
               onChange={(e) => setName(e.target.value)}
               className="form-input"
               placeholder="Enter your first name"
+              required
             />
           </div>
 
@@ -184,6 +208,7 @@ const SignUpPage = () => {
               onChange={(e) => setLastName(e.target.value)}
               className="form-input"
               placeholder="Enter your last name"
+              required
             />
           </div>
         </div>
@@ -201,6 +226,8 @@ const SignUpPage = () => {
               onChange={(e) => setAge(e.target.value)}
               className="form-input"
               placeholder="Enter your age"
+              required
+              min="1"
             />
           </div>
 
@@ -248,6 +275,7 @@ const SignUpPage = () => {
             onChange={(e) => setEmail(e.target.value)}
             className="form-input"
             placeholder="Enter your email address"
+            required
           />
         </div>
 
@@ -263,10 +291,10 @@ const SignUpPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="form-input"
             placeholder="Choose a secure password"
+            required
           />
         </div>
 
-        {/* Location dropdown */}
         <div className="form-group">
           <label htmlFor="location" className="form-label">
             Location
@@ -277,6 +305,7 @@ const SignUpPage = () => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             className="form-input"
+            required
           >
             <option value="">Select a location</option>
             {locations.map((loc, index) => (
@@ -287,26 +316,9 @@ const SignUpPage = () => {
           </select>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="description" className="form-label">
-            Description
-          </label>
-          <input
-            type="text"
-            name="description"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="form-input"
-            placeholder="Tell us a little about yourself"
-          />
-        </div>
-
-        {/* Pet Info Section */}
-        <h2 className="sign-up-title-h2">Pet Informations</h2>
+        <h2 className="sign-up-title-h2">Pet Information</h2>
 
         <div className="pet-infos">
-          {/* Pet type dropdown */}
           <div className="form-group">
             <label htmlFor="petType" className="form-label">
               Pet Type
@@ -376,7 +388,6 @@ const SignUpPage = () => {
           </div>
         </div>
 
-        {/* Submit Button */}
         <div className="form-group">
           <button type="submit" className="form-button">
             Sign Up
@@ -386,11 +397,12 @@ const SignUpPage = () => {
 
       <div className="redirection-container">
         <p>Already have an account?</p>
-        <Link to="/Login">
+        <Link to="/login">
           <div>Login</div>
         </Link>
       </div>
       {errorMessage && <p className="error">{errorMessage}</p>}
+      <ToastContainer />
     </>
   );
 };
