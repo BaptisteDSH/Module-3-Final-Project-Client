@@ -166,7 +166,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
-  height: 20vh;
+  height: 25vh;
   /*Added by Emi to keep the navbar in place*/
   /* position: fixed;
   top: 0;
@@ -428,6 +428,7 @@ h3 {
   transform: scale(1.05);
 }
 
+/************************************************************************/
 /* Search Bar Styling */
 .button-add-event-container {
   display: flex;
@@ -440,7 +441,7 @@ h3 {
 .search-bar-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
   max-width: 900px;
@@ -448,18 +449,21 @@ h3 {
 }
 
 .search-bar-title {
-  width: 100%;
-  text-align: center;
   font-size: 18px;
   color: #333;
   margin-bottom: 15px;
+  flex: 1 1 100%;
+  text-align: center;
 }
 
 .search-bar-container {
   flex-grow: 1;
+  max-width: 700px;
 }
 
 .search-bar {
+  margin-left: 40px;
+  margin-right: 40px;
   text-align: center;
   padding: 10px;
   font-size: 16px;
@@ -467,25 +471,25 @@ h3 {
   border-radius: 8px;
   outline: none;
   width: 100%;
-  max-width: 700px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease;
 }
-
+/* 
 .search-bar input:focus {
   border-color: #4caf50;
   box-shadow: 0 0 8px rgba(0, 128, 0, 0.5);
-}
+} */
 
+/************************************************************************/
 /* Containers General */
-.adoption-container,
-.event-container {
+.adoption-details-container,
+.event-details-container {
   padding: 80px;
-  background-color: blueviolet;
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 20px;
+  background-color: violet;
 }
 
 .adoption-box-container,
@@ -500,7 +504,7 @@ h3 {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  flex: 1 1 calc(33.333% - 40px);
+  flex: 1 1 calc(50.333% - 40px);
   max-width: 500px;
 }
 
@@ -589,16 +593,6 @@ h3 {
 }
 
 /* Card Container */
-.event-container {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  max-height: 200px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .card-container img {
   width: 100%;

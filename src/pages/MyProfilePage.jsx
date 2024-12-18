@@ -6,6 +6,7 @@ import { toast } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css"; // Import CSS
 import AdoptionCard from "../components/AdoptionCard";
 import EventCard from "../components/EventCard";
+import { API_URL } from "../config/apiUrl.config";
 
 const MyProfilePage = ({
   adoptions = [],
@@ -25,7 +26,7 @@ const MyProfilePage = ({
   const handleDeleteProfile = async (e) => {
     e.preventDefault();
     try {
-      await axios.delete(`http://localhost:5005/api/user/${user._id}`);
+      await axios.delete(`${API_URL}/api/user/${user._id}`);
       setUserProfile(null);
       setIsLoggedIn(false);
       logOutUser();
@@ -43,7 +44,7 @@ const MyProfilePage = ({
       const storedToken = localStorage.getItem("authToken");
       if (storedToken) {
         axios
-          .get(`http://localhost:5005/api/user/${user._id}`, {
+          .get(`${API_URL}/api/user/${user._id}`, {
             headers: { Authorization: `Bearer ${storedToken}` },
           })
           .then((response) => {
@@ -67,7 +68,7 @@ const MyProfilePage = ({
   // Handle adoption and event deletion
   const handleDeleteAdoption = async (adoptionId) => {
     try {
-      await axios.delete(`http://localhost:5005/api/adoptions/${adoptionId}`);
+      await axios.delete(`${API_URL}/api/adoptions/${adoptionId}`);
       setAdoptions((prev) =>
         prev.filter((adoption) => adoption._id !== adoptionId)
       );
@@ -80,7 +81,7 @@ const MyProfilePage = ({
 
   const handleDeleteEvent = async (eventId) => {
     try {
-      await axios.delete(`http://localhost:5005/api/events/${eventId}`);
+      await axios.delete(`${API_URL}/api/events/${eventId}`);
       setEvents((prevEvents) =>
         prevEvents.filter((event) => event._id !== eventId)
       );

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify"; // Import toast
 import "react-toastify/dist/ReactToastify.css"; // Import CSS
+import { API_URL } from "../config/apiUrl.config";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
@@ -51,7 +52,7 @@ const SignUpPage = () => {
 
     // Send POST request to the server
     axios
-      .post("http://localhost:5005/api/user/signup", requestBody)
+      .post(`${API_URL}/api/user/signup`, requestBody)
       .then(() => {
         toast.success("Your profile has been created!");
         navigate("/login");

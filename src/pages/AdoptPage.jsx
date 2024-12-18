@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AdoptionCard from "../components/AdoptionCard";
+import { API_URL } from "../config/apiUrl.config";
 
 const AdoptPage = ({ adoptions, setAdoptions }) => {
   const [query, setQuery] = useState(""); // State for search query
@@ -59,7 +60,7 @@ const AdoptPage = ({ adoptions, setAdoptions }) => {
         </div>
 
         {/* Adoption Cards */}
-        <div className="adoption-container">
+        <div className="adoption-details-container">
           {sortedAdoptions.length > 0 ? (
             sortedAdoptions.map((oneAdoption) => (
               <div key={oneAdoption._id} className="adoption-box-container">

@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config/apiUrl.config";
 
 const CreateAdoption = ({ adoptions, setAdoptions }) => {
   const { user, isLoading } = useContext(AuthContext);
@@ -57,7 +58,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
 
       //API call to upload the multiple images
       const { data } = await axios.post(
-        "http://localhost:5005/uploads/multiple-uploads",
+        `${API_URL}/uploads/multiple-uploads`,
         myFormData
       );
 
@@ -73,7 +74,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
       //Step 3: sending the POST request to create adoption
 
       const response = await axios.post(
-        "http://localhost:5005/api/adoptions",
+        `${API_URL}/api/adoptions`,
         adoptionPayload
       );
 
