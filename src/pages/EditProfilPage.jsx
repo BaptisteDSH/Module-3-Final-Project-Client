@@ -2,112 +2,44 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
-import "react-toastify/dist/ReactToastify.css"; // Import the CSS for react-toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { API_URL } from "../config/apiUrl.config";
 
 const EditProfilPage = () => {
   const { user } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState(null);
+  const [picture, setPicture] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleSignUpSubmit = async (e) => {
+  const handleSignUpSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      //Step 1: upload images to Cloudinary
+    const requestBody = {
+      name,
+      lastName,
+      description,
+      picture,
+    };
 
-      const uploadImage = async (file) => {
-        const formData = new FormData();
-        formData.append("imageUrl", file);
-
-        //API call to upload the images
-
-        const response = await axios.post(
-          "http://localhost:5005/uploads/multiple-uploads",
-          formData
-        );
-        return response.data.imageUrls[0];
-      };
-
-      const uploadedProfilePicture = await uploadImage(picture);
-      
-
-      const requestBody = {
-        name,
-        lastName,
-        description,
-        picture: uploadedProfilePicture || "",
-      };
-
-      // Send PUT request to the server
-      await axios.put(
-        `http://localhost:5005/api/user/${user._id}`,
-        requestBody
-      );
-
-      toast.success("Profil updated !");
-      navigate("/MyProfile");
-    } catch (error) {
-      const errorDescription =
-        error.response?.data?.message || "An error occurred";
-      setErrorMessage(errorDescription);
-    }
+    // Send PUT request to the server
+    axios
+      .put(`${API_URL}/api/user/${user._id}`, requestBody)
+      .then(() => {
+        toast.success("Profile updated successfully!");
+        navigate("/MyProfile");
+      })
+      .catch((error) => {
+        const errorDescription =
+          error.response?.data?.message ||
+          "An error occurred. Please try again.";
+        setErrorMessage(errorDescription);
+      });
   };
-
-  // List of locations to populate the dropdown
-  const locations = [
-    "Álava",
-    "Albacete",
-    "Alicante",
-    "Almería",
-    "Asturias",
-    "Ávila",
-    "Badajoz",
-    "Barcelona",
-    "Burgos",
-    "Cáceres",
-    "Cádiz",
-    "Cantabria",
-    "Castellón",
-    "Ciudad Real",
-    "Córdoba",
-    "Cuenca",
-    "Girona",
-    "Granada",
-    "Guadalajara",
-    "Gipuzkoa",
-    "Huelva",
-    "Huesca",
-    "Jaén",
-    "La Coruña",
-    "León",
-    "Lleida",
-    "Lugo",
-    "Madrid",
-    "Málaga",
-    "Murcia",
-    "Navarra",
-    "Ourense",
-    "Palencia",
-    "Pontevedra",
-    "Salamanca",
-    "Segovia",
-    "Sevilla",
-    "Soria",
-    "Tarragona",
-    "Teruel",
-    "Toledo",
-    "Valencia",
-    "Valladolid",
-    "Vizcaya",
-    "Zamora",
-    "Zaragoza",
-  ];
 
   return (
     <>
@@ -152,13 +84,13 @@ const EditProfilPage = () => {
               Picture
             </label>
             <input
-              type="file"
+              type="url"
               name="picture"
               id="picture"
-          
-              onChange={(e) => setPicture(e.target.files[0])}
+              value={picture}
+              onChange={(e) => setPicture(e.target.value)}
               className="form-input"
-              placeholder="Enter URL "
+              placeholder="Enter picture URL"
             />
           </div>
         </div>
@@ -187,6 +119,7 @@ const EditProfilPage = () => {
       </form>
 
       {errorMessage && <div className="error-message">{errorMessage}</div>}
+      <ToastContainer />
     </>
   );
 };

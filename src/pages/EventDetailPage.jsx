@@ -3,8 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import icon from "../assets/location-icon.png";
 import clock from "../assets/clock-icon.png";
-
-const API_URL = `http://localhost:5005`;
+import { API_URL } from "../config/apiUrl.config";
 
 const EventDetailPage = () => {
   const [event, setEvent] = useState(null);

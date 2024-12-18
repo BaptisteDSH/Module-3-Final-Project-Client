@@ -3,12 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import IsPrivate from "./components/IsPrivate";
-
 import { ThemeContext } from "./context/ThemeContext";
+import { API_URL } from "./config/apiUrl.config";
 
 // Pages
 import HomePage from "./pages/HomePage";
@@ -32,16 +31,15 @@ const App = () => {
   const [events, setEvents] = useState([]);
   const [adoptions, setAdoptions] = useState([]);
   const { darkTheme } = useContext(ThemeContext);
+  console.log(API_URL);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsData = await axios.get("http://localhost:5005/api/events");
+        const eventsData = await axios.get(`${API_URL}/api/events`);
         setEvents(eventsData.data);
 
-        const adoptionsData = await axios.get(
-          "http://localhost:5005/api/adoptions"
-        );
+        const adoptionsData = await axios.get(`${API_URL}/api/adoptions`);
         setAdoptions(adoptionsData.data);
       } catch (error) {
         console.error("Something is wrong with fetching all the data");

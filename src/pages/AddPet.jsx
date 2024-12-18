@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"; // Context to manage user data
 import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast
 import "react-toastify/dist/ReactToastify.css"; // Import the CSS for react-toastify
+import { API_URL } from "../config/apiUrl.config";
 
 const AddPet = () => {
   const { user, setUser } = useContext(AuthContext); // Use context to get and update user data
@@ -21,7 +22,7 @@ const AddPet = () => {
   useEffect(() => {
     if (user && user._id) {
       axios
-        .get(`http://localhost:5005/api/user/${user._id}`)
+        .get(`${API_URL}/api/user/${user._id}`)
         .then((response) => {
           setExistingPets(response.data.pet || []); // Update with the user's existing pets
         })
@@ -57,7 +58,7 @@ const AddPet = () => {
 
     // Make PUT request to update the user with the new pet
     axios
-      .put(`http://localhost:5005/api/user/${user._id}`, requestBody)
+      .put(`${API_URL}/api/user/${user._id}`, requestBody)
       .then((response) => {
         setUser(response.data); // Update the user context with the latest data
         setExistingPets(response.data.pet); // Update existing pets to include the new pet

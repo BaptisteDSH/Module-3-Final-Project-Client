@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AdoptionCard from "../components/AdoptionCard";
+import { API_URL } from "../config/apiUrl.config";
 
 const AdoptPage = ({ adoptions, setAdoptions }) => {
   const [query, setQuery] = useState(""); // State for search query
@@ -26,13 +27,13 @@ const AdoptPage = ({ adoptions, setAdoptions }) => {
   return (
     <>
       {/* Image Header */}
-      <div className="events-page-container">
-        <div className="event-image-container">
+      <div className="adoption-page-container">
+        <div className="adoption-image-container">
           <img
             src="https://media.newyorker.com/photos/606b51c2313f23423168acbe/master/w_2240,c_limit/Brewer-CompanionDogApplication.jpg"
             alt="adoption-img"
           />
-          <div className="event-text-overlay">
+          <div className="adoption-text-overlay">
             <h1>Find Your Furever Friend!</h1>
           </div>
         </div>
@@ -59,7 +60,7 @@ const AdoptPage = ({ adoptions, setAdoptions }) => {
         </div>
 
         {/* Adoption Cards */}
-        <div className="adoption-container">
+        <div className="adoption-details-container">
           {sortedAdoptions.length > 0 ? (
             sortedAdoptions.map((oneAdoption) => (
               <div key={oneAdoption._id} className="adoption-box-container">
