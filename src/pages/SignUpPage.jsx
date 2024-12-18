@@ -26,16 +26,52 @@ const SignUpPage = () => {
 
   // List of locations
   const locations = [
-    "Madrid",
-    "Barcelona",
-    "Valencia",
-    "Sevilla",
-    "Zaragoza",
-    "Malaga",
-    "Murcia",
-    "Bilbao",
+    "Álava",
+    "Albacete",
     "Alicante",
-    "Cordoba",
+    "Almería",
+    "Asturias",
+    "Ávila",
+    "Badajoz",
+    "Barcelona",
+    "Burgos",
+    "Cáceres",
+    "Cádiz",
+    "Cantabria",
+    "Castellón",
+    "Ciudad Real",
+    "Córdoba",
+    "Cuenca",
+    "Girona",
+    "Granada",
+    "Guadalajara",
+    "Gipuzkoa",
+    "Huelva",
+    "Huesca",
+    "Jaén",
+    "La Coruña",
+    "León",
+    "Lleida",
+    "Lugo",
+    "Madrid",
+    "Málaga",
+    "Murcia",
+    "Navarra",
+    "Ourense",
+    "Palencia",
+    "Pontevedra",
+    "Salamanca",
+    "Segovia",
+    "Sevilla",
+    "Soria",
+    "Tarragona",
+    "Teruel",
+    "Toledo",
+    "Valencia",
+    "Valladolid",
+    "Vizcaya",
+    "Zamora",
+    "Zaragoza",
   ];
 
   // List of pet types
@@ -136,6 +172,44 @@ const SignUpPage = () => {
       setErrorMessage(errorDescription);
     }
   };
+
+  // Handle form submission
+  // const handleSignUpSubmit = (e) => {
+  //   e.preventDefault();
+  //   setErrorMessage("");
+
+  //   if (!validateForm()) return;
+
+  //   const requestBody = {
+  //     name,
+  //     lastName,
+  //     email,
+  //     password,
+  //     location,
+  //     age,
+  //     description,
+  //     picture,
+  //     phone,
+  //     pet,
+  //   };
+
+  //   console.log("Request body:", requestBody); // Debugging
+
+  //   axios
+  //     .post(`${API_URL}/api/user/signup`, requestBody)
+  //     .then(() => {
+  //       toast.success("Your profile has been created!");
+  //       navigate("/login");
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error during signup:", error); // Debugging
+  //       const errorDescription =
+  //         error.response?.data?.message ||
+  //         "An unexpected error occurred. Please try again.";
+  //       setErrorMessage(errorDescription);
+  //     });
+  // };
+
   return (
     <>
       <h1 className="sign-up-title-h1">Sign Up</h1>

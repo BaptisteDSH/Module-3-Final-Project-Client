@@ -12,9 +12,18 @@ h6 {
   margin: 0;
   padding: 0;
 }
+
+/* General Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 /* Apply Open Sans by default to the entire body */
 body {
   font-family: "Open Sans", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Apply Lora to headings */
@@ -26,12 +35,6 @@ h5,
 h6 {
   font-family: "Lora", serif;
 }
-
-/*Added by Emi to keep the navbar in place*/
-/* main {
-  padding-top: 15vh !important;
-  margin: 0;
-} */
 
 /* Global style for dark theme */
 .dark-theme {
@@ -128,36 +131,9 @@ h6 {
   color: whitesmoke; /* Light color for title */
 }
 
-/* Redirection container */
-.redirection-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.redirection-container p {
-  margin-right: 10px;
-}
-
-.redirection-container div {
-  text-decoration: none;
-  color: #111;
-}
-
-/* Apply dark theme styles for redirection container */
-.dark-theme .redirection-container div {
-  color: #ddd; /* Lighter color for links in dark mode */
-}
-
 /* Login page container */
 .login-page-container {
   min-height: 480px;
-}
-
-/* Add transitions for dark theme switches */
-body {
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Navbar styles */
@@ -269,6 +245,8 @@ footer {
   margin: 10px;
 }
 
+/* DON'T touch all the things before this line !!!! */
+
 /* Main container */
 .home-page-container {
   font-family: "Arial", sans-serif;
@@ -303,129 +281,6 @@ footer {
 .header-home-page span {
   font-weight: bold;
   color: #f39c12; /* Highlighted span color */
-}
-
-/* Section headers for Events and Adoptions */
-h3 {
-  font-size: 2em;
-  color: #2d3e50; /* Dark color for section titles */
-  margin-bottom: 20px; /* Space below the section title */
-}
-
-/* Container for event elements */
-.event-block-home-page-container,
-.adoption-block-home-page-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; /* Space between items */
-  justify-content: space-between;
-}
-
-.event-list,
-.adoption-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.event-element,
-.adoption-element {
-  width: calc(33.33% - 20px); /* Three items per row */
-  border-radius: 10px; /* Rounded corners for each card */
-  border: 1px solid gray;
-  padding: 20px;
-}
-
-/* Title and description for event elements */
-.event-element h4,
-.adoption-element h4 {
-  font-size: 1.5em;
-  color: #2d3e50;
-  margin-bottom: 10px; /* Space below the title */
-}
-
-.event-element p,
-.adoption-element p {
-  font-size: 1em;
-  color: #6c7a89;
-}
-
-/* Image styling */
-.event-element img,
-.adoption-element img {
-  width: 100%; /* Image takes up the full width of the card */
-  height: 200px; /* Fixed height for images */
-  object-fit: contain; /* Ensures the image is fully visible and contained */
-  border-radius: 8px; /* Rounded corners for images */
-  margin-bottom: 15px; /* Space below the image */
-  display: block; /* Ensures the image is displayed as a block element */
-}
-
-/* Make layout responsive */
-@media (max-width: 768px) {
-  .event-element,
-  .adoption-element {
-    width: calc(50% - 20px); /* Two items per row on smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .event-element,
-  .adoption-element {
-    width: 100%; /* One item per row on very small screens */
-  }
-}
-
-.adopt-page-container {
-  background-color: green;
-}
-
-.image-container {
-  position: relative;
-  width: 100%;
-  max-height: 100vh;
-  overflow: hidden;
-}
-
-.image-container img {
-  width: 100%;
-  height: auto; /* Assure un bon ratio */
-  display: block;
-}
-
-.button-add-adoption-container {
-  margin: 30px 20px;
-}
-/* General Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* Buttons General Styling */
-.button-add-adoption-container h4,
-.button-add-event-container h4 {
-  margin: 10px;
-}
-
-.button-add-adoption-container button,
-.button-add-event-container button {
-  background-color: black;
-  color: whitesmoke;
-  padding: 8px 15px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.button-add-adoption-container button:hover,
-.button-add-event-container button:hover {
-  background-color: #333;
-  transform: scale(1.05);
 }
 
 /************************************************************************/
@@ -474,131 +329,8 @@ h3 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease;
 }
-/* 
-.search-bar input:focus {
-  border-color: #4caf50;
-  box-shadow: 0 0 8px rgba(0, 128, 0, 0.5);
-} */
 
 /************************************************************************/
-/* Containers General */
-.adoption-details-container,
-.event-details-container {
-  padding: 80px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-  background-color: violet;
-}
-
-.adoption-box-container,
-.event-box-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  flex: 1 1 calc(50.333% - 40px);
-  max-width: 500px;
-}
-
-.adoption-box-container:hover,
-.event-box-container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.adoption-box-container img,
-.event-box-container img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-/* List Pages */
-.adoption-page-container,
-.event-page-container {
-  background-color: green;
-}
-
-.event-title h1 {
-  font-size: 2.5rem;
-  margin: 20px 0;
-  text-align: center;
-}
-
-.event-detail {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 10%;
-}
-
-.event-detail-title {
-  padding: 3% 0;
-  font-size: 2.5rem;
-  text-align: center;
-}
-
-.event-detail-location,
-.event-detail-date,
-.event-detail-price {
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin: 10px 0;
-}
-
-.event-detail-description {
-  padding: 5%;
-  font-size: 1.2rem;
-  text-align: justify;
-}
-
-/* Cover Image Containers */
-.adoption-image-container,
-.event-image-container {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-  height: 60vh;
-}
-
-.adoption-image-container img,
-.event-image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.adoption-text-overlay,
-.event-text-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  font-size: 2rem;
-}
-
-/* Card Container */
-
-.card-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 /* Founders Section */
 .founders {
@@ -638,34 +370,6 @@ h3 {
   max-width: 1000px;
   margin: 0 auto;
   text-align: center;
-}
-
-/* Root variables for light and dark mode */
-:root {
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --card-bg-color: #f9f9f9;
-  --button-bg: #4caf50;
-  --button-hover-bg: #45a049;
-  --link-color: #2196f3;
-  --link-hover-color: #1976d2;
-  --danger-bg: #f44336;
-  --danger-hover-bg: #d32f2f;
-}
-
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --card-bg-color: #1e1e1e;
-    --button-bg: #388e3c;
-    --button-hover-bg: #2e7d32;
-    --link-color: #64b5f6;
-    --link-hover-color: #42a5f5;
-    --danger-bg: #e53935;
-    --danger-hover-bg: #c62828;
-  }
 }
 
 /* General container */
@@ -749,44 +453,14 @@ button:hover {
   background-color: var(--button-hover-bg);
 }
 
-/* Pets Section */
-.user-pet-container,
-.user-event-container,
-.user-adoption-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.pet-detail-box,
-.user-event-container > div,
-.adoption-box-container {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  width: 200px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s, background-color 0.3s;
-}
-
-.pet-detail-box:hover,
-.user-event-container > div:hover,
-.adoption-box-container:hover {
-  transform: translateY(-5px);
-}
-
-/* Images */
+/* My profile page styling */
 .pet-detail-box img {
-  width: 100%;
-  height: 150px;
+  height: 200px;
   object-fit: cover;
   border-radius: 5px;
 }
 
-/* Delete Section */
+/* Delete Section in my profile page */
 .button-delete-container {
   display: flex;
   justify-content: center;
@@ -794,32 +468,11 @@ button:hover {
 }
 
 .button-delete-container button {
-  background-color: var(--danger-bg);
+  background-color: red;
 }
 
-.button-delete-container button:hover {
-  background-color: var(--danger-hover-bg);
-}
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .user-detail-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .user-pet-container,
-  .user-event-container,
-  .user-adoption-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .pet-detail-box,
-  .user-event-container > div,
-  .adoption-box-container {
-    width: 90%;
-  }
+.button-edit-add-container {
+  background-color: #45a049;
 }
 
 /* Sign-Up Form */
@@ -1054,3 +707,23 @@ button:hover {
 .login-page-container {
   min-height: 480px;
 }
+/*-----------------------------------------------Start Emilia section-------------------------------------------*/
+
+/*Emilia's code starts here */
+
+/*Emilia's code finishes here */
+/*-----------------------------------------------End Emilia section-------------------------------------------*/
+
+/*-----------------------------------------------Start Edvige section------------------------------------------ */
+/*Edvige's code starts here */
+
+/*Edvige's code finishes here */
+
+/*-----------------------------------------------End Edvige section------------------------------------------ */
+
+/*-----------------------------------------------Start Baptiste section------------------------------------------ */
+/*Baptiste's code starts here */
+
+/*Baptiste's code finishes here */
+
+/*-----------------------------------------------End Baptiste section------------------------------------------ */
