@@ -277,8 +277,8 @@ const SignUpPage = () => {
               id="phone"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="form-input"
               placeholder="+33 1 23 45 67 89"
+              className="form-input-cloudify"
               required
             />
           </div>
@@ -293,7 +293,7 @@ const SignUpPage = () => {
               id="picture"
               // value={picture}
               onChange={(e) => handleFileChange(e, setPicture)}
-              className="form-input"
+              className="form-input-cloudify"
               placeholder="Enter URL "
             />
           </div>

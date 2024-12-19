@@ -39,12 +39,12 @@ const Navbar = () => {
 
       <div>
         {isLoggedIn ? (
-          <div className="log-button" onClick={logOutUser}>
+          <div className="logout-button" onClick={logOutUser}>
             Logout
           </div>
         ) : (
           <Link to="/Signup">
-            <div className="log-button">SignUp</div>
+            <div className="signup-button">SignUp</div>
           </Link>
         )}
       </div>

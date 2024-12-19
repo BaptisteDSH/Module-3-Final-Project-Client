@@ -121,9 +121,9 @@ h6 {
 /* Login title */
 .login-title {
   text-align: center;
-  font-size: 40px;
+  font-size: 3em;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 50px;
   font-weight: bold;
 }
 
@@ -134,7 +134,10 @@ h6 {
 
 /* Login page container */
 .login-page-container {
-  min-height: 480px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Navbar styles */
@@ -142,7 +145,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
+
   height: 25vh;
   /*Added by Emi to keep the navbar in place*/
   /* position: fixed;
@@ -209,18 +212,46 @@ nav .active {
   color: #66b366; /* Lighter hover color in dark mode */
 }
 
-.log-button:hover {
+.logout-button,
+.signup-button {
+  padding: 10px 20px;
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.logout-button:hover,
+.signup-button:hover,
+.myprofile-button:hover,
+.add-event-button:hover,
+.add-adoption-button:hover {
   background-color: #333; /* Slightly lighter color on hover */
   transform: scale(1.05); /* Zoom effect on hover */
 }
 
-.log-button:active {
+.logout-button,
+.signup-button,
+.myprofile-button,
+.add-event-button,
+.add-adoption-button {
   background-color: #111; /* Darker color when clicked */
   transform: scale(0.95); /* Slight reduction for a click effect */
 }
 
+.dark-theme .logout-button,
+.dark-theme .signup-button,
+.dark-theme .myprofile-button,
+.dark-theme .add-event-button,
+.dark-theme .add-adoption-button {
+  background-color: #333; /* Dark background for button */
+  border: solid #ddd; /* Corrected border syntax */
+}
+
 footer {
-  border: 1px solid black;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -605,9 +636,10 @@ button:hover {
 
 /* General styles for the form Login*/
 .form-login {
-  margin: 40px 430px;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
   border: 0.3px solid gray;
+  width: 50%;
   border-radius: 15px;
   justify-content: center;
   background-color: #f9f9f9;
@@ -681,9 +713,6 @@ button:hover {
   color: whitesmoke; /* Light color for title */
 }
 
-.login-page-container {
-  min-height: 480px;
-}
 /*-----------------------------------------------Start Emilia section-------------------------------------------*/
 
 /*Emilia's code starts here */
@@ -1090,15 +1119,11 @@ button:hover {
   margin-left: 5%;
   padding: 10px 20px;
   background-color: #000;
-  color: white;
+
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-}
-
-.log-button:hover {
-  background-color: #444;
 }
 
 /* Event Cards Section */
@@ -1265,7 +1290,6 @@ button:hover {
   font-weight: 800;
   font-size: 2em;
   text-align: start;
-  color: #080808;
 }
 
 /* Pets, Events, and Adoptions Containers */
@@ -1315,11 +1339,9 @@ button:hover {
   padding: 10px;
   border-radius: 5px;
 
-  height: 50px;
+  height: 30px;
   margin-bottom: 15px;
   font-size: 16px;
-
-  color: black; /* Dark text for input fields */
 }
 
 /*the rest of the settings are the form-group existing classes*/
@@ -1357,7 +1379,6 @@ button:hover {
 }
 
 .founder h3 {
-  color: #030303;
   font-weight: 600;
 }
 
@@ -1365,20 +1386,18 @@ button:hover {
   color: #636262;
 }
 
+.darktheme .header-about-page h1,
+.darktheme .header-about-page h3,
+.darktheme .founder h3,
+.darktheme .founder a {
+  color: #fff !important; /* Use !important if necessary to enforce */
+}
+
 /*ABOUT PAGE END*/
 
 /*Edvige's code finishes here */
 
 /*-----------------------------------------------End Edvige section------------------------------------------ */
-
-
-
-
-
-
-
-
-
 
 /*iPads, Tablets.*/
 @media only screen and (min-width: 481px) and (max-width: 768px) {
@@ -1421,7 +1440,8 @@ button:hover {
     text-align: center;
   }
 
-  .log-button {
+  .signup-button,
+  .logout-button {
     padding: 8px 12px;
     font-size: 14px;
     margin: 15px 0;
@@ -1649,6 +1669,3 @@ button:hover {
     width: 250px;
     height: 250px;
   } */
-
-
-

@@ -241,7 +241,7 @@ const CreateEventPage = ({ events, setEvents }) => {
           />
         </div>
         <div>
-          <button className="log-button"> Add Event</button>
+          <button className="add-event-button"> Add Event</button>
         </div>
       </form>
     </>

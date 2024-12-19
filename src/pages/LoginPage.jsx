@@ -84,9 +84,9 @@ const LoginPage = () => {
           </div>
         </form>
         <div className="redirection-container">
-          <p>Already have an account?</p>
+          <p>No account?</p>
           <Link to="/Signup">
-            <div>SignUp</div>
+            <div>SignUp!</div>
           </Link>
         </div>
         {errorMessage && <p className="error">{errorMessage}</p>}
