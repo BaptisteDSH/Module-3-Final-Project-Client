@@ -155,6 +155,7 @@ nav {
   padding: 0px 20px; */
   background-color: white; /* Light background for navbar */
   padding: 10px 30px;
+  position: relative;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -167,6 +168,8 @@ nav {
 /* Navbar logo */
 nav img {
   margin: 20px 30px;
+  width: 100px;
+  height: 130px;
 }
 
 /* Navbar button container */
@@ -962,9 +965,9 @@ button:hover {
   margin-left: 5%;
   margin-top: 5%;
   margin-bottom: 2%;
-
   font-weight: 700;
   color: #333;
+  font-size: 1.5rem;
 }
 
 .adoption-search-bar-wrapper {
@@ -1053,7 +1056,6 @@ button:hover {
   margin-left: 5%;
   margin-top: 5%;
   margin-bottom: 2%;
-
   font-weight: 700;
   color: #333;
 }
@@ -1178,6 +1180,8 @@ button:hover {
   width: 300px;
   height: 300px;
   max-width: 300px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
   overflow: hidden;
   border-radius: 3%;
   transition: transform 0.3s ease-in-out;
@@ -1187,6 +1191,7 @@ button:hover {
   margin-top: 10px;
   margin-left: 30px;
 
+/* .pet-detail-description {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1328,3 +1333,154 @@ button:hover {
 /*Edvige's code finishes here */
 
 /*-----------------------------------------------End Edvige section------------------------------------------ */
+
+/*Media Query for Responsiveness*/
+
+/*iPads, Tablets.*/
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  /* Navbar */
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  nav img {
+    width: 80px;
+    height: auto;
+    margin: 10px;
+  }
+
+  .nav-button-container {
+    flex-direction: column;
+    margin: 0;
+    align-items: center;
+    display: none;
+  }
+
+  .nav-button-container.open {
+    display: flex;
+  }
+
+  .nav-button-container a {
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .log-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    margin: 15px 0;
+  }
+
+  .nav-button-container .switch {
+    display: none;
+  }
+
+  /*Adoptions Page*/
+  .adoption-cover-image {
+    height: 200px;
+  }
+
+  .adoption-text-overlay {
+    font-size: 0.7rem;
+  }
+
+  .add-adoption-title {
+    font-size: 1rem;
+    align-items: center;
+    margin-left: 10%;
+  }
+
+  .adoption-search-bar-wrapper {
+    margin: 0 5%;
+  }
+
+  .adoption-search-bar-title {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .adoption-search-bar-container input {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 5%;
+  }
+
+  .add-adoption-button {
+    width: 90%;
+    margin-top: 10px;
+  }
+
+  .adoption-details-container {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .adoption-card {
+    width: 100%;
+  }
+
+  /*Events Page*/
+  .event-cover-image {
+    height: 200px;
+  }
+
+  .event-text-overlay {
+    font-size: 0.7rem;
+  }
+  .add-event-title {
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .event-search-bar-wrapper {
+    margin: 0 5%;
+  }
+
+  .event-search-bar-title {
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 5%;
+  }
+
+  .event-search-bar-container input {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 5%;
+  }
+
+  .add-event-button {
+    width: 90%;
+    margin-top: 10px;
+  }
+
+  .event-details-container {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .adoption-card {
+    width: 100%;
+  }
+}

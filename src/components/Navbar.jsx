@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import logoLight from "../assets/logo.png";
 import logoDark from "../assets/darkLogo.png";
 import { Link, NavLink } from "react-router-dom";
@@ -9,6 +9,11 @@ import { ThemeContext } from "../context/ThemeContext";
 const Navbar = () => {
   const { isLoggedIn, logOutUser, user } = useContext(AuthContext);
   const { darkTheme, setDarkTheme } = useContext(ThemeContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
     <nav>
@@ -19,7 +24,12 @@ const Navbar = () => {
           style={{ width: "100px", height: "130px" }} // Width set, height adjusts automatically
         />
       </Link>
-      <div className="nav-button-container">
+
+      <div className="hamburger" onClick={toggleMenu}>
+        &#9776;
+      </div>
+
+      <div className={`nav-button-container ${menuOpen ? "open" : ""}`}>
         <NavLink to="/Adopt">Adopt</NavLink>
         <NavLink to="/MyProfile">My Profile</NavLink>
         <NavLink to="/Events">Events</NavLink>
