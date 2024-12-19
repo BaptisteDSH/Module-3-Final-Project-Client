@@ -90,6 +90,13 @@ function AuthProviderWrapper(props) {
     }
   }, []); // This useEffect runs only once on the first render
 
+  //Initialising pet
+  useEffect(() => {
+    if (user && user.pet) {
+      setPets(user.pet);
+    }
+  }, [user]);
+
   return (
     <AuthContext.Provider
       value={{

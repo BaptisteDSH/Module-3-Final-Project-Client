@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { AuthContext } from "../context/auth.context";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_URL } from "../config/apiUrl.config";
 
-const EditProfilePage = ({ userId }) => {
+const EditProfilPage = () => {
+  const { user } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,34 +15,15 @@ const EditProfilePage = ({ userId }) => {
   const [location, setLocation] = useState("");
   const [phone, setPhone] = useState("");
   const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState(null);
-  const [pets, setPets] = useState([]);
+  const [picture, setPicture] = useState("");
+  const [pets, setPets] = useState([
+    { petName: "", petType: "", petDescription: "", petPicture: "" },
+  ]);
+
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  // Fetch user and pet data
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/api/user/${userId}`);
-        const user = response.data;
-
-        setName(user.name);
-        setLastName(user.lastName);
-        setEmail(user.email);
-        setAge(user.age || "");
-        setLocation(user.location);
-        setPhone(user.phone || "");
-        setDescription(user.description || "");
-        setPicture(user.picture);
-        setPets(user.pet || []); // Pet details
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchUserData();
-  }, [userId]);
+  // Include updatedPets in the API request body
 
   // Handle updates to pet details
   const handlePetChange = (index, field, value) => {
@@ -55,41 +38,46 @@ const EditProfilePage = ({ userId }) => {
     setPets(updatedPets);
   };
 
-  // Handle form submission
-  const handleUpdateSubmit = async (e) => {
+  const handleSignUpSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      let uploadedProfilePicture = picture;
+      //Step 1: upload images to Cloudinary
 
-      // Upload profile picture if a new one is selected
-      if (picture instanceof File) {
+      const uploadImage = async (file) => {
         const formData = new FormData();
-        formData.append("imageUrl", picture);
-        const uploadResponse = await axios.post(
+        formData.append("imageUrl", file);
+
+        //API call to upload the images
+
+        const response = await axios.post(
           `${API_URL}/uploads/multiple-uploads`,
           formData
         );
-        uploadedProfilePicture = uploadResponse.data.imageUrls[0];
-      }
+        return response.data.imageUrls[0];
+      };
 
-      // Upload pet pictures
+      const uploadedProfilePicture = await uploadImage(picture);
+
+      //Upload pet pictures and prepare updatedPets
+
       const updatedPets = await Promise.all(
         pets.map(async (pet) => {
           if (pet.petPicture instanceof File) {
             const formData = new FormData();
             formData.append("imageUrl", pet.petPicture);
+
             const uploadResponse = await axios.post(
               `${API_URL}/uploads/multiple-uploads`,
               formData
             );
+
             return { ...pet, petPicture: uploadResponse.data.imageUrls[0] };
           }
           return pet;
         })
       );
 
-      // Prepare the payload
       const requestBody = {
         name,
         lastName,
@@ -98,15 +86,17 @@ const EditProfilePage = ({ userId }) => {
         location,
         phone,
         description,
-        picture: uploadedProfilePicture,
+        picture: uploadedProfilePicture || "",
         pet: updatedPets,
       };
 
-      // Send update request
-      await axios.put(`${API_URL}/api/user/${userId}`, requestBody);
-      toast.success("Profile updated successfully!");
+      // Send PUT request to the server
+      await axios.put(`${API_URL}/api/user/${user._id}`, requestBody);
+
+      toast.success("Profil updated !");
       navigate("/MyProfile");
     } catch (error) {
+      console.error("Error during profile update:", error);
       const errorDescription =
         error.response?.data?.message || "An error occurred";
       setErrorMessage(errorDescription);
@@ -116,28 +106,36 @@ const EditProfilePage = ({ userId }) => {
   return (
     <>
       <h1 className="sign-up-title-h1">Update Profile</h1>
-      <form onSubmit={handleUpdateSubmit} className="form-signup">
+
+      <form onSubmit={handleSignUpSubmit} className="form-signup">
         <div className="signup-names">
           <div className="form-group">
             <label htmlFor="name" className="form-label">
-              First Name
+              Name
             </label>
             <input
               type="text"
+              name="name"
+              id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="form-input"
+              placeholder="Enter your first name"
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="lastName" className="form-label">
               Last Name
             </label>
             <input
               type="text"
+              name="lastName"
+              id="lastName"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               className="form-input"
+              placeholder="Enter your last name"
             />
           </div>
         </div>
@@ -145,23 +143,15 @@ const EditProfilePage = ({ userId }) => {
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="picture" className="form-label">
-              Profile Picture
+              Picture
             </label>
             <input
               type="file"
+              name="picture"
+              id="picture"
               onChange={(e) => setPicture(e.target.files[0])}
               className="form-input"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="age" className="form-label">
-              Age
-            </label>
-            <input
-              type="number"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              className="form-input"
+              placeholder="Enter URL "
             />
           </div>
         </div>
@@ -170,13 +160,16 @@ const EditProfilePage = ({ userId }) => {
           <label htmlFor="description" className="form-label">
             Description
           </label>
-          <textarea
+          <input
+            type="text"
+            name="description"
+            id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="form-input"
+            placeholder="Tell us a little about yourself"
           />
         </div>
-
         <h2>Your Pets</h2>
         {pets.map((pet, index) => (
           <div key={index} className="pet-update-container">
@@ -235,4 +228,4 @@ const EditProfilePage = ({ userId }) => {
   );
 };
 
-export default EditProfilePage;
+export default EditProfilPage;
