@@ -212,7 +212,7 @@ const SignUpPage = () => {
 
   return (
     <>
-      <h1 className="sign-up-title-h1">Sign Up</h1>
+      <h1 className="sign-up-title-h1">Welcome!</h1>
 
       <form onSubmit={handleSignUpSubmit} className="form-signup">
         <div className="signup-names">
@@ -352,7 +352,7 @@ const SignUpPage = () => {
           </select>
         </div>
 
-        <h2 className="sign-up-title-h2">Pet Information</h2>
+        <h2 className="sign-up-title-h2">Tell us about your pet!</h2>
 
         <div className="pet-infos">
           <div className="form-group">
@@ -366,7 +366,7 @@ const SignUpPage = () => {
               onChange={handlePetChange}
               className="form-input"
             >
-              <option value="">Select a pet type</option>
+              <option value=""></option>
               {petTypes.map((type, index) => (
                 <option key={index} value={type}>
                   {type}
@@ -410,6 +410,7 @@ const SignUpPage = () => {
               Pet Picture
             </label>
             <input
+              className="form-input-cloudify"
               type="file"
               name="petPicture"
               id="petPicture"
@@ -418,7 +419,6 @@ const SignUpPage = () => {
                 const file = e.target.files[0];
                 setPet((prev) => ({ ...prev, petPicture: file }));
               }}
-              className="form-input-cloudify"
               placeholder="Enter URL for your pet's picture"
             />
           </div>

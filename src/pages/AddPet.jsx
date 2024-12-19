@@ -79,105 +79,106 @@ const AddPet = () => {
 
   return (
     <>
-      <h1 className="sign-up-title-h1">Add a Pet</h1>
+      <div className="create-page-container">
+        <h1 className="add-a-pet-h1">Well done for getting a new pet!</h1>
 
-      <form onSubmit={handlePetSubmit} className="form-signup">
-        <div className="pet-infos">
-          {/* Pet type dropdown */}
-          <div className="form-group">
-            <label htmlFor="petType" className="form-label">
-              Pet Type
-            </label>
-            <select
-              name="petType"
-              id="petType"
-              value={pet.petType}
-              onChange={handlePetChange}
-              className="form-input"
-            >
-              <option value="">Select a pet type</option>
-              {petTypes.map((type, index) => (
-                <option key={index} value={type}>
-                  {type}
-                </option>
+        {/* Display existing pets */}
+        {existingPets.length > 0 && (
+          <div className="existing-pets">
+            <h2>Your Pets:</h2>
+            <ul>
+              {existingPets.map((pet, index) => (
+                <li key={index}>
+                  <strong>{pet.petName}</strong> ({pet.petType})
+                  <br />
+                </li>
               ))}
-            </select>
+            </ul>
+          </div>
+        )}
+
+        <form onSubmit={handlePetSubmit} className="form-signup">
+          <div className="pet-infos">
+            {/* Pet type dropdown */}
+            <div className="form-group">
+              <label htmlFor="petType" className="form-label">
+                Pet Type
+              </label>
+              <select
+                name="petType"
+                id="petType"
+                value={pet.petType}
+                onChange={handlePetChange}
+                className="form-input"
+              >
+                <option value=""></option>
+                {petTypes.map((type, index) => (
+                  <option key={index} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Pet name input */}
+            <div className="form-group">
+              <label htmlFor="petName" className="form-label">
+                Pet Name
+              </label>
+              <input
+                type="text"
+                name="petName"
+                id="petName"
+                value={pet.petName}
+                onChange={handlePetChange}
+                className="form-input"
+                placeholder="Enter your pet's name"
+              />
+            </div>
+
+            {/* Pet description input */}
+            <div className="form-group">
+              <label htmlFor="petDescription" className="form-label">
+                Pet Description
+              </label>
+              <input
+                type="text"
+                name="petDescription"
+                id="petDescription"
+                value={pet.petDescription}
+                onChange={handlePetChange}
+                className="form-input"
+                placeholder="Describe your pet"
+              />
+            </div>
+
+            {/* Pet picture input */}
+            <div className="form-group">
+              <label htmlFor="petPicture" className="form-label">
+                Pet Picture
+              </label>
+              <input
+                type="url"
+                name="petPicture"
+                id="petPicture"
+                value={pet.petPicture}
+                onChange={handlePetChange}
+                className="form-input"
+                placeholder="Enter URL for your pet's picture"
+              />
+            </div>
           </div>
 
-          {/* Pet name input */}
+          {/* Submit button */}
           <div className="form-group">
-            <label htmlFor="petName" className="form-label">
-              Pet Name
-            </label>
-            <input
-              type="text"
-              name="petName"
-              id="petName"
-              value={pet.petName}
-              onChange={handlePetChange}
-              className="form-input"
-              placeholder="Enter your pet's name"
-            />
+            <button type="submit" className="form-button">
+              Add your Pet
+            </button>
           </div>
+        </form>
 
-          {/* Pet description input */}
-          <div className="form-group">
-            <label htmlFor="petDescription" className="form-label">
-              Pet Description
-            </label>
-            <input
-              type="text"
-              name="petDescription"
-              id="petDescription"
-              value={pet.petDescription}
-              onChange={handlePetChange}
-              className="form-input"
-              placeholder="Describe your pet"
-            />
-          </div>
-
-          {/* Pet picture input */}
-          <div className="form-group">
-            <label htmlFor="petPicture" className="form-label">
-              Pet Picture
-            </label>
-            <input
-              type="url"
-              name="petPicture"
-              id="petPicture"
-              value={pet.petPicture}
-              onChange={handlePetChange}
-              className="form-input"
-              placeholder="Enter URL for your pet's picture"
-            />
-          </div>
-        </div>
-
-        {/* Submit button */}
-        <div className="form-group">
-          <button type="submit" className="form-button">
-            Add the Pet
-          </button>
-        </div>
-      </form>
-
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
-
-      {/* Display existing pets */}
-      {existingPets.length > 0 && (
-        <div className="existing-pets">
-          <h2>Your Pets</h2>
-          <ul>
-            {existingPets.map((pet, index) => (
-              <li key={index}>
-                <strong>{pet.petName}</strong> ({pet.petType}):{" "}
-                {pet.petDescription}
-                <br />
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+      </div>
     </>
   );
 };

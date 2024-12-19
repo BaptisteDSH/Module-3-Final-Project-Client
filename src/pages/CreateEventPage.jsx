@@ -143,107 +143,109 @@ const CreateEventPage = ({ events, setEvents }) => {
 
   return (
     <>
-      <h2 className="form-h2">Create a new event!</h2>
-      <form onSubmit={handleEventSubmit} className="form-signup">
-        <div className="form-group">
-          <label>Title</label>
-          <input
-            type="text"
-            name="title"
-            value={newEvent.title}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Enter the title of the event"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="location" className="form-label">
-            Location
-          </label>
-          <select
-            name="location"
-            id="location"
-            value={newEvent.location}
-            onChange={handleChange}
-            className="form-input"
-            required
-          >
-            <option value=""></option>
-            {locations.map((loc, index) => (
-              <option key={index} value={loc}>
-                {loc}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Date</label>
-          <input
-            type="date"
-            name="date"
-            value={newEvent.date}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Enter the date of the event"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="eventPicture" className="form-label">
-            Upload Pictures
-          </label>
-          <input
-            type="file"
-            name="pictures"
-            id="eventPicture"
-            placeholder="Upload your adoptions' pictures"
-            onChange={(e) => {
-              const files = Array.from(e.target.files);
-              setNewEvent((prevState) => ({
-                ...prevState,
-                pictures: files, // Store files directly in the state
-              }));
-            }}
-            className="form-input-cloudify"
-          />
-        </div>
-        <div>
-          {/*the uploaded pictures below*/}
-          <ul>
-            {newEvent.pictures.map((url, index) => (
-              <li key={index}>
-                <img src={url} alt={`Uploaded ${index}`} width="100" />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <label>Price</label>
-          <input
-            type="number"
-            name="price"
-            value={newEvent.price}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Enter the price of the event or leave it blank if it is free"
-          />
-        </div>
-        <div>
-          <label>Description</label>
-          <input
-            type="string"
-            name="description"
-            value={newEvent.description}
-            onChange={handleChange}
-            className="form-input"
-            placeholder="Enter the description of the event"
-          />
-        </div>
-        <div>
-          <button className="add-event-button"> Add Event</button>
-        </div>
-      </form>
+      <div className="create-page-container">
+        <h1 className="form-h2">Let's get this pawty started!</h1>
+        <form onSubmit={handleEventSubmit} className="form-signup">
+          <div className="form-group">
+            <label>Title</label>
+            <input
+              type="text"
+              name="title"
+              value={newEvent.title}
+              onChange={handleChange}
+              className="form-input"
+              placeholder="Enter the title of the event"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="location" className="form-label">
+              Location
+            </label>
+            <select
+              name="location"
+              id="location"
+              value={newEvent.location}
+              onChange={handleChange}
+              className="form-input"
+              required
+            >
+              <option value=""></option>
+              {locations.map((loc, index) => (
+                <option key={index} value={loc}>
+                  {loc}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Date</label>
+            <input
+              type="date"
+              name="date"
+              value={newEvent.date}
+              onChange={handleChange}
+              className="form-input"
+              placeholder="Enter the date of the event"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="eventPicture" className="form-label">
+              Upload Pictures
+            </label>
+            <input
+              type="file"
+              name="pictures"
+              id="eventPicture"
+              placeholder="Upload your adoptions' pictures"
+              onChange={(e) => {
+                const files = Array.from(e.target.files);
+                setNewEvent((prevState) => ({
+                  ...prevState,
+                  pictures: files, // Store files directly in the state
+                }));
+              }}
+              className="form-input-cloudify"
+            />
+          </div>
+          <div>
+            {/*the uploaded pictures below*/}
+            <ul>
+              {newEvent.pictures.map((url, index) => (
+                <li key={index}>
+                  <img src={url} alt={`Uploaded ${index}`} width="100" />
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <label>Price</label>
+            <input
+              type="number"
+              name="price"
+              value={newEvent.price}
+              onChange={handleChange}
+              className="form-input"
+              placeholder="Enter the price of the event or leave it blank if it is free"
+            />
+          </div>
+          <div>
+            <label>Description</label>
+            <input
+              type="string"
+              name="description"
+              value={newEvent.description}
+              onChange={handleChange}
+              className="form-input"
+              placeholder="Enter the description of the event"
+            />
+          </div>
+          <div>
+            <button className="add-event-button"> Add Event</button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };

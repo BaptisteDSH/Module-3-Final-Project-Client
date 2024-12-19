@@ -103,12 +103,14 @@ const MyProfilePage = ({
           alt="Profile"
         />
         <div className="myprofile-infos">
-          <h1>{userProfile?.name}</h1>
-          <h5>{userProfile?.lastName}</h5>
-          <h5>{userProfile?.age} years</h5>
-          <h5>{userProfile?.phone}</h5>
-          <br></br>
-          <p>{userProfile?.description}</p>
+          <div className="myprofile-text-infos">
+            <h1>{userProfile?.name}</h1>
+            <h5>{userProfile?.lastName}</h5>
+            <h5>{userProfile?.age} years</h5>
+            <h5>{userProfile?.phone}</h5>
+            <br></br>
+            <p>{userProfile?.description}</p>
+          </div>
 
           <div className="myprofile-buttons-edit-add-container">
             <Link to="/EditProfile">
@@ -123,27 +125,23 @@ const MyProfilePage = ({
       <h2 className="myprofile-h2">Your Pets</h2>
       <br></br>
       <div className="user-cards-container">
-        
-          {userProfile?.pet?.length > 0 ? (
+        {userProfile?.pet?.length > 0 ? (
           userProfile.pet.map((pet, index) => (
-              
-              <div className= "pet-detail-box" key={index}>
-                <img
-                  src={pet.petPicture || "defaultPetPicture.jpg"}
-                  alt={pet.petName}
-                  
-                />
-                <div className="pet-detail-description">
-                  <h3>{pet.petName}</h3>
-                  <p>{pet.petType}</p>
-                  <p>{pet.petDescription}</p>
-                </div>
+            <div className="pet-detail-box" key={index}>
+              <img
+                src={pet.petPicture || "defaultPetPicture.jpg"}
+                alt={pet.petName}
+              />
+              <div className="pet-detail-description">
+                <h3>{pet.petName}</h3>
+                <p>{pet.petType}</p>
+                <p>{pet.petDescription}</p>
               </div>
-            ))
-          ) : (
-            <p>No pets added yet.</p>
-          )}
-        
+            </div>
+          ))
+        ) : (
+          <p>No pets added yet.</p>
+        )}
       </div>
       <h2 className="myprofile-h2">Your Events</h2>
       <div className="user-cards-container">

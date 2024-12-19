@@ -121,9 +121,8 @@ h6 {
 /* Login title */
 .login-title {
   text-align: center;
-  font-size: 3em;
-  margin-bottom: 20px;
-  margin-top: 50px;
+  font-size: 4em;
+  margin: 5%;
   font-weight: bold;
 }
 
@@ -134,6 +133,7 @@ h6 {
 
 /* Login page container */
 .login-page-container {
+  margin-top: 5%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -146,7 +146,7 @@ nav {
   justify-content: space-between;
   align-items: center;
 
-  height: 25vh;
+  height: 15vh;
   /*Added by Emi to keep the navbar in place*/
   /* position: fixed;
   top: 0;
@@ -166,8 +166,7 @@ nav {
 
 /* Apply dark theme styles for navbar */
 .dark-theme nav {
-  background-color: #333; /* Dark background for navbar */
-  border-color: #444; /* Darker border for navbar */
+  background-color: #000000; /* Dark background for navbar */
 }
 
 /* Navbar logo */
@@ -253,9 +252,15 @@ nav .active {
 
 footer {
   display: flex;
-  justify-content: space-around;
+  margin: 3%;
+  justify-content: space-between;
   align-items: center;
   height: 15vh;
+}
+
+.our-names-container {
+  font-weight: 600;
+  margin: 5%;
 }
 
 .our-names-container {
@@ -276,31 +281,6 @@ footer {
 
 .dark-theme .home-page-container {
   background-color: black;
-}
-
-/* Header section */
-.header-home-page {
-  text-align: center;
-  margin-bottom: 40px; /* Space below header */
-}
-
-.header-home-page h1 {
-  font-size: 3em;
-  color: #2d3e50; /* Dark text color */
-  margin-bottom: 10px; /* Space below the title */
-}
-
-.header-home-page p {
-  font-size: 1.2em;
-  color: #6c7a89; /* Gray text color */
-  line-height: 1.6; /* Increase line height for readability */
-  max-width: 800px;
-  margin: 0 auto; /* Center the paragraph */
-}
-
-.header-home-page span {
-  font-weight: bold;
-  color: #f39c12; /* Highlighted span color */
 }
 
 /************************************************************************/
@@ -483,10 +463,16 @@ button:hover {
 }
 
 /* Sign-Up Form */
-.sign-up-title-h1,
+.sign-up-title-h1 {
+  text-align: center;
+  font-size: 3em;
+  margin: 7%;
+}
+
 .sign-up-title-h2 {
   text-align: center;
-  margin: 30px 0;
+  font-size: 2em;
+  margin: 7%;
 }
 
 .form-signup {
@@ -912,6 +898,8 @@ button:hover {
 
 /*INDIVIDUAL CARD STYLING*/
 .card-container {
+  margin-top: 20%;
+  margin-bottom: 20%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1107,6 +1095,7 @@ button:hover {
 }
 
 .event-search-bar-container input {
+  margin-bottom: 5%;
   margin-left: 5%;
   width: 90%;
   padding: 10px;
@@ -1146,45 +1135,62 @@ button:hover {
   margin: 0 auto;
 }
 
-.user-details-container {
+.user-detail-container {
   display: flex;
-  gap: 20px;
   align-items: center;
-  justify-content: space-around;
-  margin-bottom: 30px;
+  justify-content: space-between; /* Add space between the image and description */
+  margin: 5%; /* Optional: Add padding around the container */
 }
 
 .user-detail-container img {
-  width: 400px;
-  height: 400px;
-  margin: 5%;
+  width: 500px;
+  height: 500px;
+  margin-right: 5%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .myprofile-infos {
+  flex: 1; /* Take up remaining space next to the image */
+  margin-left: 5%; /* Space between the description and image */
+}
+
+.myprofile-text-infos {
   display: flex;
+  align-items: flex-start;
+  margin-left: 30%;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .myprofile-infos h1 {
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: bold;
   margin-bottom: 3%;
 }
 
 .myprofile-infos h5 {
+  margin-top: 3%;
   font-size: 1rem;
   margin: 5px 0;
-  color: #555;
+  color: #888888;
+  line-height: 200%;
+}
+
+.myprofile-infos p {
+  margin-top: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .myprofile-h2 {
   padding: 5%;
   margin: 1%;
-  font-size: 1.8em;
+  font-size: 3em;
 }
 
 .myprofile-buttons-edit-add-container {
+  margin: 5%;
+  padding: 100px;
   display: flex;
   justify-content: space-around;
 }
@@ -1236,7 +1242,7 @@ button:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 550;
 }
 
@@ -1254,7 +1260,7 @@ button:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 550;
   transition: background-color 0.3s ease;
 }
@@ -1269,9 +1275,22 @@ button:hover {
   margin: 0 auto;
 }
 
+/* Header section */
+
+.header-home-page h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.header-home-page span {
+  font-weight: bold;
+  color: #f39c12;
+}
+
 .header-home-page {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 50px;
   margin: 5%;
 }
@@ -1280,7 +1299,6 @@ button:hover {
   width: 100%;
   font-weight: 100;
   text-align: start;
-  color: #636262;
 }
 
 .home-page-container h2 {
@@ -1328,10 +1346,14 @@ button:hover {
 /*HOMEPAGE ENDS HERE*/
 
 /*CREATE A NEW ADOPTION STARTS HERE*/
+
+.create-page-container {
+  height: 100vh;
+}
 .form-h2 {
   padding: 3%;
-  margin: 1%;
-  font-size: 2em;
+  margin: 5%;
+  font-size: 3em;
   text-align: center;
 }
 
@@ -1374,7 +1396,7 @@ button:hover {
   width: 100%;
   font-weight: 100;
   text-align: start;
-  color: #636262;
+
   margin-bottom: 5%;
 }
 
@@ -1394,6 +1416,34 @@ button:hover {
 }
 
 /*ABOUT PAGE END*/
+
+/*ADD PETS PAGE START*/
+
+.add-a-pet-h1 {
+  margin: 7%;
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.existing-pets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.existing-pets h2 {
+  margin-top: 5%;
+}
+
+.existing-pets ul {
+  list-style-type: none;
+}
+.existing-pets li {
+  margin: 10px;
+}
+
+/*ADD PETS PAGE END*/
 
 /*Edvige's code finishes here */
 

@@ -154,7 +154,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
   ];
 
   return (
-    <div>
+    <div className="create-page-container">
       <h2 className="form-h2">Create a new Adoption</h2>
       <form onSubmit={handleSubmit} className="form-signup">
         <div className="form-group">
