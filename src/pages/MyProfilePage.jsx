@@ -119,48 +119,54 @@ const MyProfilePage = ({
           <br></br>
           <p>{userProfile?.description}</p>
 
-          <div className="myprofile-buttons-edit-add">
+          <div className="myprofile-buttons-edit-add-container">
             <Link to="/EditProfile">
-              <button>Edit Profile</button>
+              <button className="myprofile-button">Edit Profile</button>
             </Link>
             <Link to="/AddPet">
-              <button>Add pet</button>
+              <button className="myprofile-button">Add pet</button>
             </Link>
           </div>
         </div>
       </div>
-      <h2>Your Pets</h2>
+      <h2 className="myprofile-h2">Your Pets</h2>
       <br></br>
-      <div className="myprofile-pet-container">
-        {userProfile?.pet?.length > 0 ? (
-          userProfile.pet.map((pet, index) => (
-            <div key={index} className="pet-detail-box">
-              <img
-                src={pet.petPicture || "defaultPetPicture.jpg"}
-                alt={pet.petName}
-              />
-              <h3>{pet.petName}</h3>
-              <h5>{pet.petType}</h5>
-              <p>{pet.petDescription}</p>
-            </div>
-          ))
-        ) : (
-          <p>No pets added yet.</p>
-        )}
+      <div className="user-cards-container">
+        {/* <div className="pet-detail-box"> */}
+          {userProfile?.pet?.length > 0 ? (
+            userProfile.pet.map((pet, index) => (
+              <div key={index}>
+                <img
+                  src={pet.petPicture || "defaultPetPicture.jpg"}
+                  alt={pet.petName}
+                  
+                />
+                <div className="pet-detail-description">
+                  <h3>{pet.petName}</h3>
+                  <h5>{pet.petType}</h5>
+                  <p>{pet.petDescription}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No pets added yet.</p>
+          )}
+        {/* </div> */}
       </div>
-      <h2 style={{ margin: "50px" }}>Your Events</h2>
+      <h2 className="myprofile-h2">Your Events</h2>
       <div className="user-cards-container">
         {userEvents.length > 0 ? (
           userEvents.map((event) => (
             <div key={event._id}>
               <EventCard {...event} setEvents={setEvents} />
-              <div>
+              <div className="myprofile-card-button-container">
                 <Link to={`/Event/Update/${event._id}`}>
-                  <button className="log-button">Edit </button>
+                  <button className="myprofile-button">Edit </button>
                 </Link>
+
                 <button
                   onClick={() => handleDeleteEvent(event._id)}
-                  className="log-button"
+                  className="myprofile-button-delete"
                 >
                   Delete
                 </button>
@@ -171,7 +177,7 @@ const MyProfilePage = ({
           <p>No events available.</p>
         )}
       </div>
-      <h2 style={{ margin: "50px" }}>Your Adoptions</h2>
+      <h2 className="myprofile-h2">Your Adoptions</h2>
       <div className="user-cards-container">
         {userAdoptions.length > 0 ? (
           userAdoptions.map((adoption) => (
@@ -180,15 +186,18 @@ const MyProfilePage = ({
                 oneAdoption={adoption}
                 setAdoptions={setAdoptions}
               />
-              <Link to={`/UpdateAdoptions/${adoption._id}`}>
-                <button className="myprofile-button">Edit </button>
-              </Link>
-              <button
-                onClick={() => handleDeleteAdoption(adoption._id)}
-                className="log-button"
-              >
-                Delete
-              </button>
+              <div className="myprofile-card-button-container">
+                <Link to={`/UpdateAdoptions/${adoption._id}`}>
+                  <button className="myprofile-button">Edit </button>
+                </Link>
+
+                <button
+                  onClick={() => handleDeleteAdoption(adoption._id)}
+                  className="myprofile-button-delete"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))
         ) : (
