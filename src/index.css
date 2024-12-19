@@ -1206,54 +1206,6 @@ button:hover {
   padding: 4%;
 }
 
-/* Section Headers */
-.myprofile-section-title {
-  font-size: 1.5rem;
-  color: #333;
-  margin: 30px 0 20px 0;
-  text-transform: uppercase;
-  font-weight: bold;
-  text-align: left;
-}
-
-.pet-detail-box:hover,
-.event-detail-box:hover,
-.adoption-box-container:hover {
-  transform: translateY(-5px);
-}
-
-.pet-detail-box img,
-.event-detail-box img,
-.adoption-box-container img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.pet-detail-box h3,
-.event-detail-box h3,
-.adoption-box-container h3 {
-  margin: 10px 0 5px 0;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-}
-
-.pet-detail-box h5,
-.event-detail-box h5,
-.adoption-box-container h5 {
-  color: #777;
-  margin-bottom: 5px;
-}
-
-.pet-detail-box p,
-.event-detail-box p,
-.adoption-box-container p {
-  font-size: 0.9rem;
-  color: #555;
-}
-
 /* Edit/Delete Buttons */
 .myprofile-button {
   margin-top: 20px;
@@ -1286,11 +1238,73 @@ button:hover {
   transition: background-color 0.3s ease;
 }
 
-.button-delete-container button:hover {
-  background-color: #b71c1c;
+/*MY PROFILE PAGE END*/
+
+/*HOMEPAGE STARTS HERE*/
+
+/* Page Container */
+.home-page-container {
+  width: 100%;
+  margin: 0 auto;
 }
 
-/*MY PROFILE PAGE END*/
+.header-home-page {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin: 5%;
+}
+
+.header-home-page h3 {
+  width: 100%;
+  font-weight: 100;
+  text-align: start;
+  color: #636262;
+}
+
+.home-page-container h2 {
+  padding: 5%;
+  margin-top: 3%;
+  width: 100%;
+  font-weight: 800;
+  font-size: 2em;
+  text-align: start;
+  color: #080808;
+}
+
+/* Pets, Events, and Adoptions Containers */
+.homepage-cards-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 3%;
+  padding: 3%;
+  margin: 3%;
+}
+
+.pet-detail-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+  height: 300px;
+  max-width: 300px;
+  overflow: hidden;
+  border-radius: 3%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.pet-detail-description {
+  margin-top: 10px;
+  margin-left: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 4%;
+}
+
+/*HOMEPAGE ENDS HERE*/
 
 /*Edvige's code finishes here */
 
