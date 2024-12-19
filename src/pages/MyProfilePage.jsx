@@ -123,10 +123,11 @@ const MyProfilePage = ({
       <h2 className="myprofile-h2">Your Pets</h2>
       <br></br>
       <div className="user-cards-container">
-        {/* <div className="pet-detail-box"> */}
+        
           {userProfile?.pet?.length > 0 ? (
-            userProfile.pet.map((pet, index) => (
-              <div key={index}>
+          userProfile.pet.map((pet, index) => (
+              
+              <div className= "pet-detail-box" key={index}>
                 <img
                   src={pet.petPicture || "defaultPetPicture.jpg"}
                   alt={pet.petName}
@@ -134,7 +135,7 @@ const MyProfilePage = ({
                 />
                 <div className="pet-detail-description">
                   <h3>{pet.petName}</h3>
-                  <h5>{pet.petType}</h5>
+                  <p>{pet.petType}</p>
                   <p>{pet.petDescription}</p>
                 </div>
               </div>
@@ -142,7 +143,7 @@ const MyProfilePage = ({
           ) : (
             <p>No pets added yet.</p>
           )}
-        {/* </div> */}
+        
       </div>
       <h2 className="myprofile-h2">Your Events</h2>
       <div className="user-cards-container">
@@ -195,7 +196,7 @@ const MyProfilePage = ({
           <p>No adoptions available.</p>
         )}
       </div>
-      <div>
+      <div className="myprofile-button-delete-container">
         <button
           className="myprofile-button-delete"
           onClick={handleDeleteProfile}
