@@ -171,7 +171,8 @@ nav {
 
 /* Navbar logo */
 nav img {
-  margin: 20px 30px;
+  margin: 10px 30px;
+  height: 120px;
 }
 
 /* Navbar button container */
@@ -596,6 +597,7 @@ button:hover {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2%;
 }
 
 .redirection-container p {
@@ -1358,7 +1360,7 @@ button:hover {
 }
 
 .form-input-cloudify {
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 5px;
 
   height: 30px;
@@ -1449,6 +1451,322 @@ button:hover {
 
 /*-----------------------------------------------End Edvige section------------------------------------------ */
 
+/*-----------------------------------------------MEDIA QUERY------------------------------------------ */
+/*Mobile devices..*/
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  /* Navbar */
+  nav {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 10px;
+  }
+
+  .hamburger {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  nav img {
+    width: 50px;
+    height: auto;
+    margin: 0px;
+  }
+
+  .nav-button-container {
+    flex-direction: column;
+    margin: 0;
+    align-items: center;
+    display: none;
+  }
+
+  .nav-button-container.open {
+    display: flex;
+  }
+
+  .nav-button-container a {
+    margin: 10px 0;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .log-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    margin: 15px 0;
+  }
+
+  .nav-button-container .switch {
+    display: none;
+  }
+
+  /***********************/
+
+  /* Footer */
+  footer {
+    font-size: 10px;
+  }
+
+  /***********************/
+
+  /* Adoptions Page */
+  .adoption-cover-image {
+    height: 150px;
+  }
+
+  .adoption-text-overlay {
+    font-size: 0.7rem;
+  }
+
+  .add-adoption-title {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .adoption-search-bar-wrapper {
+    margin: 0 5%;
+  }
+
+  .adoption-search-bar-title {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .adoption-search-bar-container input {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 5%;
+  }
+
+  .add-adoption-button {
+    width: 90%;
+    margin-top: 10px;
+  }
+
+  .adoption-details-container {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .adoption-card {
+    width: 100%;
+  }
+
+  /***********************/
+
+  /* Adoptions Details Page */
+  .adoption-details-name {
+    font-size: 15px;
+    margin-top: 8%;
+  }
+
+  .adoption-details-info-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .adoption-details-description {
+    width: 100%;
+  }
+
+  .adoption-details-information {
+    padding: 0%;
+    margin-top: 8%;
+    width: 100%;
+    align-items: center;
+  }
+
+  /***********************/
+
+  /* Events Page */
+  .event-cover-image {
+    height: 150px;
+  }
+
+  .event-text-overlay {
+    font-size: 0.7rem;
+  }
+
+  .add-event-title {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: center;
+  }
+
+  .event-search-bar-wrapper {
+    margin: 0 5%;
+  }
+
+  .event-search-bar-title {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 5%;
+  }
+
+  .event-search-bar-container input {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 5%;
+  }
+
+  .add-event-button {
+    width: 90%;
+    margin-top: 10px;
+  }
+
+  .event-details-container {
+    flex-direction: column;
+    padding: 0%;
+    margin: 0%;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .adoption-card {
+    width: 100%;
+  }
+
+  /* Event Details Page */
+  .event-details-page-title {
+    font-size: 18px;
+    margin-top: 8%;
+  }
+
+  .event-details-info-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0%;
+    margin: 0%;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 10%;
+    margin-bottom: 10%;
+  }
+
+  .event-details-description {
+    text-align: center;
+    margin: 5%;
+  }
+
+  /***********************/
+
+  /* Homepage - Slide Cards */
+  .homepage-cards-container {
+    flex-wrap: nowrap;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .header-home-page h1 {
+    font-size: 30px;
+  }
+  .home-page-container h2 {
+    font-size: 20px;
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .event-element,
+  .adoption-element {
+    width: 220px;
+  }
+
+  .header-home-page h3 {
+    font-size: 1rem;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  /* Scrollbar Styling */
+  .homepage-cards-container::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .homepage-cards-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+  .homepage-cards-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /***********************/
+
+  /* My Profile Page */
+  .user-cards-container {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .user-detail-container img {
+    width: 150px;
+    height: 150px;
+    margin: 5%;
+  }
+
+  .user-cards-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px;
+    gap: 20px;
+  }
+
+  .pet-detail-box,
+  .event-card {
+    width: 250px;
+    height: 250px;
+  }
+
+  /***********************/
+
+  /* About Us Page */
+  .founders {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .header-about-page h3 {
+    text-align: center;
+  }
+
+  /***********************/
+
+  /* Sign Up Page */
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .redirection-container {
+    margin-bottom: 10%;
+  }
+
+  /***********************/
+
+  /* Login Page */
+  .form-login {
+    margin: 10px;
+  }
+}
+
 /*iPads, Tablets.*/
 @media only screen and (min-width: 481px) and (max-width: 768px) {
   /* Navbar */
@@ -1468,9 +1786,9 @@ button:hover {
   }
 
   nav img {
-    width: 80px;
+    width: 60px;
     height: auto;
-    margin: 10px;
+    margin: 0px;
   }
 
   .nav-button-container {
@@ -1668,54 +1986,36 @@ button:hover {
   }
 
   /***********************/
-}
 
-/* @media only screen and (min-width: 768px) and (max-width: 1024px) {
-  /*Navbar*/
-
-/* .hamburger {
-    display: block;
-  }
-
-  .nav-button-container {
+  /*About Us Page*/
+  .founders {
     display: flex;
-    flex-direction: row;
-    margin-left: auto;
-    margin-right: 0;
-  }
-
-  .nav-button-container a {
-    margin: 0 20px;
-    font-size: 18px;
-  }
-
-  .log-button {
-    font-size: 16px;
-    padding: 10px 20px;
-    margin: 10px;
-  } */
-
-/*My Profile Page*/
-/* 
-  .user-detail-container {
     flex-direction: column;
-    align-items: center;
+    gap: 80px;
   }
 
-  .user-detail-container img {
-    width: 250px; /* Adjust image size for mobile view */
-/* height: 250px; */
-
-/* Cards scroll horizontally */
-/* .user-cards-container {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding: 0;
-    gap: 20px;
+  .header-about-page h3 {
+    text-align: center;
   }
 
-  .pet-detail-box,
-  .event-card {
-    width: 250px;
-    height: 250px;
-  } */
+  /***********************/
+
+  /*Sign Up Page*/
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .redirection-container {
+    margin-bottom: 10%;
+  }
+
+  /***********************/
+
+  /*Login Page*/
+  .form-login {
+    margin: 10px;
+  }
+}
