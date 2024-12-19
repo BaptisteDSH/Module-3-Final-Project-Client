@@ -36,14 +36,10 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsData = await axios.get(`${API_URL}/api/events`, {
-          withCredentials: true,
-        });
+        const eventsData = await axios.get(`${API_URL}/api/events`);
         setEvents(eventsData.data);
 
-        const adoptionsData = await axios.get(`${API_URL}/api/adoptions`, {
-          withCredentials: true,
-        });
+        const adoptionsData = await axios.get(`${API_URL}/api/adoptions`);
         setAdoptions(adoptionsData.data);
       } catch (error) {
         console.error("Something is wrong with fetching all the data");
