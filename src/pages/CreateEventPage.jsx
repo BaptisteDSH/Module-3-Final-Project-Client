@@ -143,9 +143,9 @@ const CreateEventPage = ({ events, setEvents }) => {
 
   return (
     <>
-      <h1>Create a new event!</h1>
-      <form onSubmit={handleEventSubmit}>
-        <div>
+      <h2 className="form-h2">Create a new event!</h2>
+      <form onSubmit={handleEventSubmit} className="form-signup">
+        <div className="form-group">
           <label>Title</label>
           <input
             type="text"
@@ -169,7 +169,7 @@ const CreateEventPage = ({ events, setEvents }) => {
             className="form-input"
             required
           >
-            <option value="">Select a location</option>
+            <option value=""></option>
             {locations.map((loc, index) => (
               <option key={index} value={loc}>
                 {loc}
@@ -177,7 +177,7 @@ const CreateEventPage = ({ events, setEvents }) => {
             ))}
           </select>
         </div>
-        <div>
+        <div className="form-group">
           <label>Date</label>
           <input
             type="date"

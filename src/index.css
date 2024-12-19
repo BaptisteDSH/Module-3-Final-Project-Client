@@ -66,7 +66,6 @@ h6 {
 
 /* Input fields styling */
 
-
 .form-input {
   padding: 10px;
   border-radius: 5px;
@@ -324,6 +323,7 @@ footer {
   justify-content: space-around;
   align-items: center;
   padding: 20px;
+  margin-bottom: 10%;
 }
 
 .founders img {
@@ -888,6 +888,7 @@ button:hover {
   overflow: hidden;
   border-radius: 3%;
   transition: transform 0.3s ease-in-out;
+  min-width: 0;
 }
 
 .card-container:hover {
@@ -942,7 +943,7 @@ button:hover {
 
 .adoption-cover-image img {
   width: 100%;
-  height: 100%;
+  height: 500px;
   object-fit: cover;
 }
 
@@ -1011,6 +1012,7 @@ button:hover {
   gap: 3%;
   padding: 3%;
   margin: 3%;
+  flex-wrap: wrap;
 }
 
 /* ADOPTION PAGE END */
@@ -1102,6 +1104,7 @@ button:hover {
   gap: 3%;
   padding: 3%;
   margin: 3%;
+  flex-wrap: wrap;
 }
 
 /*EVENTS PAGE END*/
@@ -1169,6 +1172,7 @@ button:hover {
   gap: 3%;
   padding: 3%;
   margin: 3%;
+  flex-wrap: wrap;
 }
 
 .pet-detail-box {
@@ -1267,6 +1271,7 @@ button:hover {
   gap: 3%;
   padding: 3%;
   margin: 3%;
+  flex-wrap: wrap;
 }
 
 .pet-detail-box {
@@ -1295,35 +1300,68 @@ button:hover {
 /*HOMEPAGE ENDS HERE*/
 
 /*CREATE A NEW ADOPTION STARTS HERE*/
-.form-h2{
+.form-h2 {
   padding: 3%;
   margin: 1%;
   font-size: 2em;
   text-align: center;
-
 }
 
-.form-input-cloudify{
+.form-input-cloudify {
   padding: 10px;
   border-radius: 5px;
-  
+
   height: 50px;
   margin-bottom: 15px;
   font-size: 16px;
-  
-  color: black; /* Dark text for input fields */
 
+  color: black; /* Dark text for input fields */
 }
 
 /*the rest of the settings are the form-group existing classes*/
 /*CREATE A NEW ADOPTION ENDS HERE*/
 
-
 /*CREATE A NEW EVENT STARTS HERE*/
-
 
 /*the settings are the same as in create a new adoption */
 /*CREATE A NEW EVENT ENDS HERE*/
+
+/*ABOUT PAGE START*/
+.aboutUs-page-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header-about-page {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin: 5%;
+}
+
+.header-about-page h1 {
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 5%;
+}
+.header-about-page h3 {
+  width: 100%;
+  font-weight: 100;
+  text-align: start;
+  color: #636262;
+  margin-bottom: 5%;
+}
+
+.founder h3 {
+  color: #030303;
+  font-weight: 600;
+}
+
+.founder a {
+  color: #636262;
+}
+
+/*ABOUT PAGE END*/
 
 /*Edvige's code finishes here */
 
