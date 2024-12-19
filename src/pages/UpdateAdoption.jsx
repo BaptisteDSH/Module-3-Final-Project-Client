@@ -155,6 +155,7 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
             name="pictures"
             multiple
             placeholder="Upload your adoptions' pictures"
+            className="form-input-cloudify"
             onChange={(e) => {
               const files = Array.from(e.target.files);
               setUpdatedAdoption((prevState) => ({

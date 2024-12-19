@@ -25,7 +25,7 @@ import EditProfilPage from "./pages/EditProfilPage";
 import AddPet from "./pages/AddPet";
 import CreateAdoption from "./pages/CreateAdoption";
 import UpdateAdoption from "./pages/UpdateAdoption";
-import MultipleImages from "./pages/MultipleImages";
+// import MultipleImages from "./pages/MultipleImages";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -121,7 +121,7 @@ const App = () => {
             <UpdateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
           }
         />
-        <Route path="/multiple-uploads" element={<MultipleImages />} />
+        {/* <Route path="/multiple-uploads" element={<MultipleImages />} /> */}
       </Routes>
 
       <Footer />

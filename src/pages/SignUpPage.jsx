@@ -283,7 +283,7 @@ const SignUpPage = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-input-cloudify">
             <label htmlFor="picture" className="form-label">
               Picture
             </label>
@@ -418,7 +418,7 @@ const SignUpPage = () => {
                 const file = e.target.files[0];
                 setPet((prev) => ({ ...prev, petPicture: file }));
               }}
-              className="form-input"
+              className="form-input-cloudify"
               placeholder="Enter URL for your pet's picture"
             />
           </div>

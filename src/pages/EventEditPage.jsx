@@ -224,6 +224,7 @@ const EventEditPage = () => {
             name="pictures"
             multiple
             onChange={handleImageChange}
+            className="form-input-cloudify"
           />
         </div>
         <div>

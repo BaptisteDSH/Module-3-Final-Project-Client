@@ -150,7 +150,7 @@ const EditProfilPage = () => {
               name="picture"
               id="picture"
               onChange={(e) => setPicture(e.target.files[0])}
-              className="form-input"
+              className="form-input-cloudify"
               placeholder="Enter URL "
             />
           </div>
@@ -202,7 +202,7 @@ const EditProfilPage = () => {
                 onChange={(e) =>
                   handlePetPictureChange(index, e.target.files[0])
                 }
-                className="form-input"
+                className="form-input-cloudify"
               />
             </div>
             <div className="form-group">

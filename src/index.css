@@ -65,6 +65,8 @@ h6 {
 }
 
 /* Input fields styling */
+
+
 .form-input {
   padding: 10px;
   border-radius: 5px;
@@ -435,20 +437,6 @@ button {
 
 button:hover {
   background-color: var(--button-hover-bg);
-}
-
-/* My profile page styling */
-.pet-detail-box img {
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-/* Delete Section in my profile page */
-.button-delete-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
 }
 
 .button-delete-container button {
@@ -1305,6 +1293,37 @@ button:hover {
 }
 
 /*HOMEPAGE ENDS HERE*/
+
+/*CREATE A NEW ADOPTION STARTS HERE*/
+.form-h2{
+  padding: 3%;
+  margin: 1%;
+  font-size: 2em;
+  text-align: center;
+
+}
+
+.form-input-cloudify{
+  padding: 10px;
+  border-radius: 5px;
+  
+  height: 50px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  
+  color: black; /* Dark text for input fields */
+
+}
+
+/*the rest of the settings are the form-group existing classes*/
+/*CREATE A NEW ADOPTION ENDS HERE*/
+
+
+/*CREATE A NEW EVENT STARTS HERE*/
+
+
+/*the settings are the same as in create a new adoption */
+/*CREATE A NEW EVENT ENDS HERE*/
 
 /*Edvige's code finishes here */
 

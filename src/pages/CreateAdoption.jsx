@@ -155,15 +155,16 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
 
   return (
     <div>
-      <h2>Create a new Adoption</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <h2 className="form-h2">Create a new Adoption</h2>
+      <form onSubmit={handleSubmit} className="form-signup">
+        <div className="form-group">
           <label>Date Posted:</label>
           <input
             type="date"
             name="datePosted"
             value={newAdoption.datePosted}
             onChange={handleChange}
+            className="form-input"
             required
           />
         </div>
@@ -179,7 +180,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             className="form-input"
             required
           >
-            <option value="">Select a location</option>
+            <option value=""></option>
             {locations.map((loc, index) => (
               <option key={index} value={loc}>
                 {loc}
@@ -187,7 +188,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             ))}
           </select>
         </div>
-        <div>
+        <div className="form-group">
           <label>Description:</label>
 
           <textarea
@@ -195,11 +196,12 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             value={newAdoption.description}
             onChange={handleChange}
             placeholder="Enter description"
+            className="form-input"
             required
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Pet Name:</label>
           <input
             type="text"
@@ -207,16 +209,18 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
             value={newAdoption.pet.name}
             onChange={handleChange}
             placeholder="Enter pet name"
+            className="form-input"
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Upload Pictures</label>
           <input
             type="file"
             name="pictures"
             multiple
             placeholder="Upload your adoptions' pictures"
+            className="form-input-cloudify"
             onChange={(e) => {
               const files = Array.from(e.target.files);
               setNewAdoption((prevState) => ({
@@ -238,7 +242,9 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
           </ul>
         </div>
 
-        <button type="submit">Create Adoption</button>
+        <button className="form-button" type="submit">
+          Create Adoption
+        </button>
       </form>
       {/* <form onChange={handleImageUpload}></form> */}
     </div>
