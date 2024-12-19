@@ -18,11 +18,7 @@ const Navbar = () => {
   return (
     <nav>
       <Link to="/">
-        <img
-          src={darkTheme ? logoDark : logoLight}
-          alt="logo"
-          style={{ width: "100px", height: "130px" }} // Width set, height adjusts automatically
-        />
+        <img src={darkTheme ? logoDark : logoLight} alt="logo" />
       </Link>
 
       <div className="hamburger" onClick={toggleMenu}>
