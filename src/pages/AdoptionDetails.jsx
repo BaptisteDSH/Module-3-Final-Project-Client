@@ -27,7 +27,7 @@ const AdoptionDetails = ({ adoptions, setAdoptions }) => {
     const fetchAdoption = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}}/api/adoptions/${adoptionId}`
+          `${API_URL}/api/adoptions/${adoptionId}`
         ); // GET request to fetch adoption details
         setAdoptionsDetails(response.data); // Set the fetched adoption details to state
         console.log(response.data);
