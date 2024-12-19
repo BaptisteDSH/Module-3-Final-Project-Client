@@ -157,7 +157,9 @@ nav {
   position: relative;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-
+.hamburger {
+  display: none;
+}
 /* Apply dark theme styles for navbar */
 .dark-theme nav {
   background-color: #333; /* Dark background for navbar */
@@ -1264,7 +1266,7 @@ button:hover {
 /* Pets, Events, and Adoptions Containers */
 .homepage-cards-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   gap: 3%;
   padding: 3%;
   margin: 3%;
@@ -1331,12 +1333,12 @@ button:hover {
 /*iPads, Tablets.*/
 @media only screen and (min-width: 481px) and (max-width: 768px) {
   /* Navbar */
+
   nav {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     height: auto;
     padding: 10px;
-    align-items: center;
   }
 
   .hamburger {
@@ -1379,6 +1381,8 @@ button:hover {
     display: none;
   }
 
+  /***********************/
+
   /*Adoptions Page*/
   .adoption-cover-image {
     height: 200px;
@@ -1390,8 +1394,9 @@ button:hover {
 
   .add-adoption-title {
     font-size: 1rem;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin-left: 10%;
   }
 
   .adoption-search-bar-wrapper {
@@ -1425,6 +1430,8 @@ button:hover {
   .adoption-card {
     width: 100%;
   }
+
+  /***********************/
 
   /*Events Page*/
   .event-cover-image {
@@ -1475,4 +1482,120 @@ button:hover {
   .adoption-card {
     width: 100%;
   }
+
+  /***********************/
+
+  /*Homepage*/
+
+  /*Slide cards*/
+  .homepage-cards-container {
+    flex-wrap: nowrap;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .event-element,
+  .adoption-element {
+    width: 250px;
+  }
+
+  .header-home-page h3 {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  /*Scrollbar styling */
+  .homepage-cards-container::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .homepage-cards-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+  .homepage-cards-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /***********************/
+
+  /*My Profile Page*/
+
+  .user-cards-container {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+  .user-detail-container img {
+    width: 200px;
+    height: 200px;
+    margin: 5%;
+  }
+
+  /* Cards in row, no wrap and smooth scroll */
+  .user-cards-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px;
+    gap: 30px;
+  }
+
+  .pet-detail-box,
+  .event-card {
+    width: 300px;
+    height: 300px;
+  }
+
+  /***********************/
 }
+
+/* @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  /*Navbar*/
+
+/* .hamburger {
+    display: block;
+  }
+
+  .nav-button-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .nav-button-container a {
+    margin: 0 20px;
+    font-size: 18px;
+  }
+
+  .log-button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px;
+  } */
+
+/*My Profile Page*/
+/* 
+  .user-detail-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-detail-container img {
+    width: 250px; /* Adjust image size for mobile view */
+/* height: 250px; */
+
+/* Cards scroll horizontally */
+/* .user-cards-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0;
+    gap: 20px;
+  }
+
+  .pet-detail-box,
+  .event-card {
+    width: 250px;
+    height: 250px;
+  } */
