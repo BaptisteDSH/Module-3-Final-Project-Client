@@ -7,6 +7,7 @@ import icon from "../assets/location-icon.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { API_URL } from "../config/apiUrl.config";
 
 const AdoptionDetails = ({ adoptions, setAdoptions }) => {
   const { adoptionId } = useParams();
