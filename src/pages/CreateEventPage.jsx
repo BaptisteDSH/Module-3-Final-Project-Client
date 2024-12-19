@@ -205,7 +205,7 @@ const CreateEventPage = ({ events, setEvents }) => {
                 pictures: files, // Store files directly in the state
               }));
             }}
-            className="form-input"
+            className="form-input-cloudify"
           />
         </div>
         <div>

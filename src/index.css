@@ -65,6 +65,7 @@ h6 {
 }
 
 /* Input fields styling */
+
 .form-input {
   padding: 10px;
   border-radius: 5px;
@@ -207,21 +208,6 @@ nav .active {
   color: #66b366; /* Lighter hover color in dark mode */
 }
 
-.log-button {
-  display: inline-block; /* Ensures proper alignment of the button */
-  padding: 10px 15px; /* Adds a bit more space for visual comfort */
-  border-radius: 5px; /* Rounded corners */
-  background-color: black; /* Background color */
-  color: aliceblue; /* Text color */
-  font-size: 16px; /* Slightly increased text size */
-  font-weight: bold; /* Makes the text a bit more impactful */
-  margin: 20px 30px; /* Spacing around the button */
-  text-decoration: none; /* Removes underlining */
-  text-align: center; /* Centers the text inside */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth animation */
-  cursor: pointer; /* Changes the cursor on hover */
-}
-
 .log-button:hover {
   background-color: #333; /* Slightly lighter color on hover */
   transform: scale(1.05); /* Zoom effect on hover */
@@ -254,7 +240,6 @@ footer {
 .home-page-container {
   font-family: "Arial", sans-serif;
   padding: 20px;
-  background-color: #f4f7fb; /* Light background color */
 }
 
 .dark-theme .home-page-container {
@@ -385,7 +370,7 @@ footer {
 }
 
 .light-theme .my-profile-page-container {
-  background-color: #f4f7fb;
+  background-color: #ffffff;
 }
 
 /* Links - remove text decoration */
@@ -454,20 +439,6 @@ button {
 
 button:hover {
   background-color: var(--button-hover-bg);
-}
-
-/* My profile page styling */
-.pet-detail-box img {
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-/* Delete Section in my profile page */
-.button-delete-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
 }
 
 .button-delete-container button {
@@ -996,6 +967,7 @@ button:hover {
   font-weight: 700;
   color: #333;
   font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .adoption-search-bar-wrapper {
@@ -1202,6 +1174,12 @@ button:hover {
 }
 
 .pet-detail-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+  height: 300px;
+  max-width: 300px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   overflow: hidden;
@@ -1213,60 +1191,8 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 18%;
-  margin-left: 5%;
-} */
-
-.button-edit-add-container button:hover {
-  background-color: #39823c;
-}
-
-/* Section Headers */
-.myprofile-section-title {
-  font-size: 1.5rem;
-  color: #333;
-  margin: 30px 0 20px 0;
-  text-transform: uppercase;
-  font-weight: bold;
   text-align: left;
-}
-
-.pet-detail-box:hover,
-.event-detail-box:hover,
-.adoption-box-container:hover {
-  transform: translateY(-5px);
-}
-
-.pet-detail-box img,
-.event-detail-box img,
-.adoption-box-container img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.pet-detail-box h3,
-.event-detail-box h3,
-.adoption-box-container h3 {
-  margin: 10px 0 5px 0;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-}
-
-.pet-detail-box h5,
-.event-detail-box h5,
-.adoption-box-container h5 {
-  color: #777;
-  margin-bottom: 5px;
-}
-
-.pet-detail-box p,
-.event-detail-box p,
-.adoption-box-container p {
-  font-size: 0.9rem;
-  color: #555;
+  padding: 4%;
 }
 
 /* Edit/Delete Buttons */
@@ -1283,7 +1209,7 @@ button:hover {
 }
 
 /* Delete Profile Button */
-.button-delete-container {
+.myprofile-button-delete-container {
   text-align: center;
   margin: 30px 0;
 }
@@ -1301,11 +1227,100 @@ button:hover {
   transition: background-color 0.3s ease;
 }
 
-.button-delete-container button:hover {
-  background-color: #b71c1c;
+/*MY PROFILE PAGE END*/
+
+/*HOMEPAGE STARTS HERE*/
+
+/* Page Container */
+.home-page-container {
+  width: 100%;
+  margin: 0 auto;
 }
 
-/*MY PROFILE PAGE END*/
+.header-home-page {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin: 5%;
+}
+
+.header-home-page h3 {
+  width: 100%;
+  font-weight: 100;
+  text-align: start;
+  color: #636262;
+}
+
+.home-page-container h2 {
+  padding: 5%;
+  margin-top: 3%;
+  width: 100%;
+  font-weight: 800;
+  font-size: 2em;
+  text-align: start;
+  color: #080808;
+}
+
+/* Pets, Events, and Adoptions Containers */
+.homepage-cards-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 3%;
+  padding: 3%;
+  margin: 3%;
+}
+
+.pet-detail-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 300px;
+  height: 300px;
+  max-width: 300px;
+  overflow: hidden;
+  border-radius: 3%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.pet-detail-description {
+  margin-top: 10px;
+  margin-left: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 4%;
+}
+
+/*HOMEPAGE ENDS HERE*/
+
+/*CREATE A NEW ADOPTION STARTS HERE*/
+.form-h2 {
+  padding: 3%;
+  margin: 1%;
+  font-size: 2em;
+  text-align: center;
+}
+
+.form-input-cloudify {
+  padding: 10px;
+  border-radius: 5px;
+
+  height: 50px;
+  margin-bottom: 15px;
+  font-size: 16px;
+
+  color: black; /* Dark text for input fields */
+}
+
+/*the rest of the settings are the form-group existing classes*/
+/*CREATE A NEW ADOPTION ENDS HERE*/
+
+/*CREATE A NEW EVENT STARTS HERE*/
+
+/*the settings are the same as in create a new adoption */
+/*CREATE A NEW EVENT ENDS HERE*/
 
 /*Edvige's code finishes here */
 

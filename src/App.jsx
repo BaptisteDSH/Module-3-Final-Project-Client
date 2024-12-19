@@ -25,7 +25,7 @@ import EditProfilPage from "./pages/EditProfilPage";
 import AddPet from "./pages/AddPet";
 import CreateAdoption from "./pages/CreateAdoption";
 import UpdateAdoption from "./pages/UpdateAdoption";
-import MultipleImages from "./pages/MultipleImages";
+// import MultipleImages from "./pages/MultipleImages";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -36,10 +36,14 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventsData = await axios.get(`${API_URL}/api/events`);
+        const eventsData = await axios.get(`${API_URL}/api/events`, {
+          withCredentials: true,
+        });
         setEvents(eventsData.data);
 
-        const adoptionsData = await axios.get(`${API_URL}/api/adoptions`);
+        const adoptionsData = await axios.get(`${API_URL}/api/adoptions`, {
+          withCredentials: true,
+        });
         setAdoptions(adoptionsData.data);
       } catch (error) {
         console.error("Something is wrong with fetching all the data");
@@ -121,7 +125,7 @@ const App = () => {
             <UpdateAdoption adoptions={adoptions} setAdoptions={setAdoptions} />
           }
         />
-        <Route path="/multiple-uploads" element={<MultipleImages />} />
+        {/* <Route path="/multiple-uploads" element={<MultipleImages />} /> */}
       </Routes>
 
       <Footer />
