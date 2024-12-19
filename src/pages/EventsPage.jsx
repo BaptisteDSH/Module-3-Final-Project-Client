@@ -81,19 +81,15 @@ const EventsPage = () => {
 
         {/* <div className="search-bar">SEARCH BAR TO CREATE</div> */}
         <div className="event-details-container">
-          <div>
-            <div>
-              {filteredEvents && filteredEvents.length > 0 ? (
-                filteredEvents.map((event) => (
-                  <div key={event._id}>
-                    <EventCard {...event} />
-                  </div>
-                ))
-              ) : (
-                <p>No events found matching your search.</p>
-              )}
-            </div>
-          </div>
+          {filteredEvents && filteredEvents.length > 0 ? (
+            filteredEvents.map((event) => (
+              <div key={event._id}>
+                <EventCard {...event} />
+              </div>
+            ))
+          ) : (
+            <p>No events found matching your search.</p>
+          )}
         </div>
       </div>
     </>
