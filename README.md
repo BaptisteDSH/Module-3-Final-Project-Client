@@ -106,7 +106,7 @@ Pawty Time is a platform dedicated to creating adoptions and events for animals.
 
 ## Live Demo
 
-Check out the live application: [Pawty Time](https://module-3-final-project-server.onrender.com)
+Check out the live application: [Pawty Time](https://pawty.netlify.app/)
 
 ## Contributions
 
