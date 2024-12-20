@@ -83,6 +83,7 @@ const CreateEventPage = ({ events, setEvents }) => {
 
         //redirect to the events page, afte we can change it to details page of created event
         navigate("/Events");
+        window.location.reload();
       } else {
         alert("Error when creating the event.");
       }

@@ -162,26 +162,30 @@ const EventEditPage = () => {
 
   return (
     <div>
-      <h1>Edit the Event</h1>
-      <form onSubmit={handleUpdateEvent}>
-        <div>
-          <label>Title:</label>
+      <h1 className="sign-up-title-h1">Edit the Event</h1>
+      <form onSubmit={handleUpdateEvent} className="form-signup">
+        <div className="form-group">
+          <label className="form-label">Title:</label>
           <input
             type="text"
             name="title"
             value={updatedEvent.title}
             onChange={handleChange}
+            className="form-input"
             placeholder="Enter the event title"
           />
         </div>
-        <div>
-          <label>Location:</label>
+        <div className="form-group">
+          <label className="form-label">Location:</label>
           <select
             name="location"
             value={updatedEvent.location}
             onChange={handleChange}
+            className="form-input"
           >
-            <option value="">Select a location</option>
+            <option className="form-input" value="">
+              Select a location
+            </option>
             {locations.map((loc, index) => (
               <option key={index} value={loc}>
                 {loc}
@@ -189,36 +193,39 @@ const EventEditPage = () => {
             ))}
           </select>
         </div>
-        <div>
-          <label>Date:</label>
+        <div className="form-group">
+          <label className="form-label">Date:</label>
           <input
             type="date"
             name="date"
             value={updatedEvent.date}
             onChange={handleChange}
+            className="form-input"
           />
         </div>
-        <div>
-          <label>Price:</label>
+        <div className="form-group">
+          <label className="form-label">Price:</label>
           <input
             type="number"
             name="price"
             value={updatedEvent.price}
             onChange={handleChange}
+            className="form-input"
             placeholder="Enter the event price"
           />
         </div>
-        <div>
-          <label>Description:</label>
+        <div className="form-group">
+          <label className="form-label">Description:</label>
           <textarea
             name="description"
             value={updatedEvent.description}
             onChange={handleChange}
+            className="form-input"
             placeholder="Enter a description"
           />
         </div>
-        <div>
-          <label>Upload Pictures:</label>
+        <div className="form-group">
+          <label className="form-label">Upload Pictures:</label>
           <input
             type="file"
             name="pictures"
@@ -240,7 +247,9 @@ const EventEditPage = () => {
             ))}
           </ul>
         </div>
-        <button type="submit">Update Event</button>
+        <button className="form-button" type="submit">
+          Update Event
+        </button>
       </form>
     </div>
   );

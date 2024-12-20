@@ -115,41 +115,44 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
 
   return (
     <div>
-      <h2>Update this Adoption</h2>
-      <form onSubmit={handleSubmit}>
+      <h1 className="sign-up-title-h1">Update this Adoption</h1>
+      <form onSubmit={handleSubmit} className="form-signup">
         <div>
-          <label>Date Posted:</label>
+          <label className="form-label">Date Posted:</label>
           <input
             type="date"
             name="datePosted"
             value={updatedAdoption.datePosted}
             onChange={handleChange}
+            className="form-input"
             required
           />
         </div>
         <div>
-          <label>Description:</label>
+          <label className="form-label">Description:</label>
           <textarea
             name="description"
             value={updatedAdoption.description}
             onChange={handleChange}
+            className="form-input"
             placeholder="Enter description"
             required
           />
         </div>
         <div>
-          <label>Pet Name:</label>
+          <label className="form-label">Pet Name:</label>
           <input
             type="text"
             name="petName"
             value={updatedAdoption.pet.name}
             onChange={handleChange}
+            className="form-input"
             placeholder="Enter pet name"
             required
           />
         </div>
         <div>
-          <label>Upload Pictures</label>
+          <label className="form-label">Upload Pictures</label>
           <input
             type="file"
             name="pictures"
@@ -176,7 +179,9 @@ const UpdateAdoption = ({ adoptions, setAdoptions }) => {
             ))}
           </ul>
         </div>
-        <button type="submit">Update Adoption</button>
+        <button type="submit" className="form-button">
+          Update Adoption
+        </button>
       </form>
     </div>
   );
