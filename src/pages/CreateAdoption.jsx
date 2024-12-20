@@ -94,6 +94,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
 
       //Navigating to the adoption page
       navigate("/Adopt");
+      window.location.reload();
     } catch (error) {
       console.log(
         "This is why you cannot create the adoption",
@@ -155,7 +156,7 @@ const CreateAdoption = ({ adoptions, setAdoptions }) => {
 
   return (
     <div className="create-page-container">
-      <h2 className="form-h2">Create a new Adoption</h2>
+      <h2 className="form-h2">Let's find a home for your pet!</h2>
       <form onSubmit={handleSubmit} className="form-signup">
         <div className="form-group">
           <label>Date Posted:</label>

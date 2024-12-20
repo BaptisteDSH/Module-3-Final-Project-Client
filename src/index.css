@@ -906,7 +906,7 @@ button:hover {
   flex-direction: column;
   align-items: flex-start;
   width: 300px;
-  height: 280px;
+  height: 320px;
   max-width: 300px;
   overflow: hidden;
   border-radius: 3%;
@@ -1145,8 +1145,8 @@ button:hover {
 }
 
 .user-detail-container img {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   margin-right: 5%;
   border-radius: 50%;
   object-fit: cover;
@@ -1192,7 +1192,7 @@ button:hover {
 
 .myprofile-buttons-edit-add-container {
   margin: 5%;
-  padding: 100px;
+  padding: 80px;
   display: flex;
   justify-content: space-around;
 }

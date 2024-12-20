@@ -95,6 +95,7 @@ const EditProfilPage = () => {
 
       toast.success("Profil updated !");
       navigate("/MyProfile");
+      window.location.reload();
     } catch (error) {
       console.error("Error during profile update:", error);
       const errorDescription =
