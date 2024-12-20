@@ -123,6 +123,7 @@ Also, our app is responsive!
 
 8. Open your browser at [http://localhost:5173](http://localhost:5173).
 
+Check out the live application: [Pawty Time](https://module-3-final-project-server.onrender.com)
 
 ## Contributions
 
