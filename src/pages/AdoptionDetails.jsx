@@ -7,6 +7,7 @@ import icon from "../assets/location-icon.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { API_URL } from "../config/apiUrl.config";
 
 const AdoptionDetails = ({ adoptions, setAdoptions }) => {
   const { adoptionId } = useParams();
@@ -26,7 +27,7 @@ const AdoptionDetails = ({ adoptions, setAdoptions }) => {
     const fetchAdoption = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5005/api/adoptions/${adoptionId}`
+          `${API_URL}/api/adoptions/${adoptionId}`
         ); // GET request to fetch adoption details
         setAdoptionsDetails(response.data); // Set the fetched adoption details to state
         console.log(response.data);
