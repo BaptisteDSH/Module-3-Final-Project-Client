@@ -2,14 +2,24 @@
 
 Pawty Time is a platform dedicated to creating adoptions and events for animals. This project aims to bring animal lovers together and facilitate responsible adoption while promoting community events around animals.
 
+<img src="/src/assets/homepagelight.png" alt="Home Page Light" width="600">
+
+<img src="/src/assets/adoptpagedark.png" alt="Adopt Page Dark" width="600">
+
+
 ## Table of Contents
 
+- [Live Demo](#live-demo)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Installation and Setup](#installation-and-setup)
-- [Live Demo](#live-demo)
 - [Contributions](#contributions)
-- [Contact](#contact)
+
+
+## Live Demo
+
+Check out the live application: [Pawty Time](https://module-3-final-project-server.onrender.com)
+
 
 ## Features
 
@@ -18,6 +28,13 @@ Pawty Time is a platform dedicated to creating adoptions and events for animals.
 - **Authentication System**: User registration, login, and management.
 - **Intuitive Interface**: Designed for simple and efficient navigation.
 - **Image Carousel**: View animals through a gallery of images.
+
+Also, our app is responsive!
+
+<img src="/src/assets/homepageresponsive.png" alt="Home Page Responsive" width="600">
+
+<img src="/src/assets/adoptpageresponsive.png" alt="Adopt Page Responsive" width="600">
+
 
 ## Technologies Used
 
@@ -80,12 +97,14 @@ Pawty Time is a platform dedicated to creating adoptions and events for animals.
 
      ```javascript
      export const API_URL =
-       "https://module-3-final-project-server.onrender.com";
+       export const API_URL = "http://localhost:5005"; 
+       // For local development
+;
      ```
 
    - **Backend**: Create a `.env` file in the backend root directory and add the following:
      ```
-     PORT=5000
+     PORT=5005
      MONGODB_URI=<your-mongodb-connection-string>
      JWT_SECRET=<your-secret-key>
      ```
@@ -102,9 +121,7 @@ Pawty Time is a platform dedicated to creating adoptions and events for animals.
    npm start
    ```
 
-8. Open your browser at [http://localhost:3000](http://localhost:3000).
-
-## Live Demo
+8. Open your browser at [http://localhost:5173](http://localhost:5173).
 
 Check out the live application: [Pawty Time](https://module-3-final-project-server.onrender.com)
 
@@ -127,8 +144,7 @@ Contributions are welcome! To contribute:
    ```
 5. Create a Pull Request.
 
-## Contact
+<img src="/src/assets/aboutpageresponsive.png" alt="Home Page Responsive" width="600">
 
-For questions or suggestions, contact us at: contact@pawtytime.com.
 
 Thank you for supporting Pawty Time! 🐾
