@@ -9,6 +9,7 @@ function AuthProviderWrapper(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [authError, setAuthError] = useState(null);
+  const [pets, setPets] = useState([]); // Added state for pets
 
   // Function to store the token in localStorage
   const storeToken = (token) => {
@@ -34,9 +35,10 @@ function AuthProviderWrapper(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          const user = response.data; // User data from the response
-          console.log("User verified:", user);
-          setUser(user);
+          const userData = response.data; // User data from the response
+          console.log("User verified:", userData);
+          setUser(userData);
+          setPets(userData.pet || []); // Set pets if available
           setIsLoggedIn(true);
           setIsLoading(false);
         })
@@ -76,6 +78,7 @@ function AuthProviderWrapper(props) {
     removeToken();
     setIsLoggedIn(false);
     setUser(null);
+    setPets([]); // Clear pets on logout
   };
 
   // useEffect hook that runs on initial render to verify the token
@@ -90,12 +93,12 @@ function AuthProviderWrapper(props) {
     }
   }, []); // This useEffect runs only once on the first render
 
-  //Initialising pet
+  // This effect runs when the user state is updated to set pets
   useEffect(() => {
     if (user && user.pet) {
       setPets(user.pet);
     }
-  }, [user]);
+  }, [user]); // Only run this when the user data changes
 
   return (
     <AuthContext.Provider
@@ -104,6 +107,7 @@ function AuthProviderWrapper(props) {
         setIsLoggedIn,
         isLoading,
         user,
+        pets, // Pass pets state to context
         setUser,
         storeToken,
         authenticateUser,
