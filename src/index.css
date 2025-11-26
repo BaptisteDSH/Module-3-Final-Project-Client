@@ -44,8 +44,22 @@ h6 {
 
 /* Global style for light theme */
 .light-theme {
-  background-color: white; /* Light background */
-  color: black; /* Dark text */
+  background-color: #f6f3ee; /* soft modern light pink/cream */
+  color: #3d2f2b; /* primary brown used across navbar/buttons */
+}
+
+/* Ensure all main page containers use the same light background color */
+.light-theme,
+.light-theme body,
+.light-theme #root,
+.light-theme .home-page-container,
+.light-theme .adoption-page-container,
+.light-theme .event-page-container,
+.light-theme .aboutUs-page-container,
+.light-theme .my-profile-page-container,
+.light-theme .sign-up-page-container,
+.light-theme .create-page-container {
+  background-color: #f6f3ee !important;
 }
 
 /* Form container */
@@ -93,135 +107,174 @@ h6 {
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  width: 100%;
+  .home-page-container {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
 }
 
-/* Button hover */
-.form-button:hover {
-  background-color: #45a049;
+/* Header section (homepage) - ensure centered hero content */
+.header-home-page h1 {
+  font-size: 2.6rem;
+  margin-bottom: 8px;
 }
 
-/* Apply dark theme styles for the submit button */
-.dark-theme .form-button {
-  background-color: #444; /* Darker background for button */
-}
-
-/* Button hover in dark theme */
-.dark-theme .form-button:hover {
-  background-color: #666; /* Lighter background on hover */
-}
-
-/* Error message styling */
-.error {
-  color: red;
-  font-size: 14px;
-  text-align: center;
-}
-
-/* Login title */
-.login-title {
-  text-align: center;
-  font-size: 4em;
-  margin: 5%;
+.header-home-page span {
   font-weight: bold;
+  color: #f39c12;
 }
 
-/* Adjust for dark theme */
-.dark-theme .login-title {
-  color: whitesmoke; /* Light color for title */
-}
-
-/* Login page container */
-.login-page-container {
-  margin-top: 5%;
-  height: 100vh;
+.header-home-page {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0;
+  padding: 28px 18px;
+}
+
+.header-home-page h3 {
+  width: 100%;
+  font-weight: 300;
+  text-align: center; /* center the hero paragraph */
+  max-width: 920px;
+}
+
+.home-page-container h2 {
+  padding: 0 6px;
+  margin-top: 28px;
+  width: 100%;
+  font-weight: 800;
+  font-size: 1.6rem;
+  text-align: left;
+}
+
+/* Pets, Events, and Adoptions Containers */
+.homepage-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 36px; /* increased gap for more breathing room between cards */
+  width: 100%;
+  margin: 18px 0;
+  padding: 0 12px;
+  justify-items: center;
   align-items: center;
 }
 
 /* Navbar styles */
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-
-  height: 18vh;
-  /*Added by Emi to keep the navbar in place*/
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: white;
-  padding: 0px 20px; */
-  background-color: white; /* Light background for navbar */
-  padding: 10px 30px;
+  background-color: #3d2f2b; /* primary navbar color */
+  padding: 12px 20px;
   transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* ensure we can absolutely position the hamburger inside the navbar */
+nav {
+  position: relative;
 }
 
 .hamburger {
   display: none;
 }
 
+/* Mobile: show hamburger and pin it to the right */
+@media (max-width: 900px) {
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #f6f3ee;
+    font-size: 1.6rem;
+    z-index: 60;
+    cursor: pointer;
+  }
+
+  /* Keep nav-inner layout usable on small screens */
+  .nav-inner {
+    padding-right: 56px; /* leave space for the absolute hamburger */
+  }
+}
+
+/* Desktop by default: hide the mobile auth group */
+.mobile-auth-buttons {
+  display: none;
+}
+
+/* Desktop auth visible by default */
+.desktop-auth {
+  display: block;
+}
+
 /* Apply dark theme styles for navbar */
 .dark-theme nav {
-  background-color: #000000; /* Dark background for navbar */
+  background-color: #241915; /* slightly darker than primary for dark theme */
 }
 
 /* Navbar logo */
 nav img {
-  margin: 10px 30px;
-  height: 120px;
+  margin: 6px 12px;
+  height: 64px;
 }
 
 /* Navbar button container */
 .nav-button-container {
   margin: 10px;
   display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 /* Navbar links */
 .nav-button-container a {
   text-decoration: none;
-  margin: 10px 30px;
-  border: none;
-  background: none;
-  font-size: 18px;
-  color: black; /* Dark text for links */
-  transition: color 0.3s ease;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 16px;
+  color: #f6f3ee; /* light text on dark navbar */
+  transition: background-color 0.18s ease, color 0.18s ease,
+    transform 0.15s ease;
 }
 
 /* Apply dark theme styles for navbar links */
 .dark-theme .nav-button-container a {
-  color: whitesmoke; /* Light text for links in dark mode */
+  color: #f6f3ee; /* keep links readable in dark-theme */
 }
 
 /* Navbar active link */
 nav .active {
-  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  text-decoration: none;
 }
 
 /* Hover effect for navbar links */
 .nav-button-container a:hover {
-  color: #45a049; /* Hover color */
-}
-
-/* Apply dark theme hover effect for navbar links */
-.dark-theme .nav-button-container a:hover {
-  color: #66b366; /* Lighter hover color in dark mode */
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .logout-button,
 .signup-button {
-  padding: 10px 20px;
-  background-color: #000;
-  color: white;
+  padding: 8px 14px;
+  background-color: #3d2f2b; /* match navbar */
+  color: #f6f3ee;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .logout-button:hover,
@@ -229,7 +282,7 @@ nav .active {
 .myprofile-button:hover,
 .add-event-button:hover,
 .add-adoption-button:hover {
-  background-color: #333; /* Slightly lighter color on hover */
+  background-color: #333333; /* Slightly lighter color on hover */
   transform: scale(1.05); /* Zoom effect on hover */
 }
 
@@ -238,8 +291,7 @@ nav .active {
 .myprofile-button,
 .add-event-button,
 .add-adoption-button {
-  background-color: #111; /* Darker color when clicked */
-  transform: scale(0.95); /* Slight reduction for a click effect */
+  background-color: #2e634b; /* Primary brand color */
 }
 
 .dark-theme .logout-button,
@@ -247,16 +299,19 @@ nav .active {
 .dark-theme .myprofile-button,
 .dark-theme .add-event-button,
 .dark-theme .add-adoption-button {
-  background-color: #333; /* Dark background for button */
-  border: solid #ddd; /* Corrected border syntax */
+  background-color: #2b201d; /* darker variant */
+  border: solid rgba(255, 255, 255, 0.04);
 }
 
 footer {
   display: flex;
-  margin: 3%;
+  margin: 2% 4%;
   justify-content: space-between;
   align-items: center;
-  height: 15vh;
+  padding: 18px 24px;
+  border-top: 1px solid #e6e6e6;
+  background: transparent;
+  color: #3d2f2b;
 }
 
 .our-names-container {
@@ -277,11 +332,222 @@ footer {
 /* Main container */
 .home-page-container {
   font-family: "Arial", sans-serif;
-  padding: 20px;
+  padding: 28px 20px;
+  max-width: 1200px;
+  margin: 0 auto; /* center the main container */
+  box-sizing: border-box;
 }
 
 .dark-theme .home-page-container {
   background-color: black;
+}
+
+/* Home header / hero */
+.header-home-page {
+  width: 100%;
+  margin: 24px 0;
+  /* Use flexbox to center content vertically/horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f7fff8 0%, #ffffff 100%);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.header-home-page h1 {
+  font-size: 2.6rem;
+  margin-bottom: 12px;
+  color: #0b3b2a;
+}
+
+.header-home-page h1 {
+  margin-top: 0;
+}
+
+.header-home-page h3 {
+  font-size: 1.05rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+/* Dark theme overrides: keep hero heading and paragraph black per request */
+.dark-theme .header-home-page h1,
+.dark-theme .header-home-page h3 {
+  color: #000 !important;
+}
+
+/* Hero call-to-action buttons */
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.cta-button {
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: #e6eef0;
+  color: #06241a;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid rgba(6, 36, 26, 0.06);
+}
+
+.cta-primary {
+  background: #3d2f2b;
+  color: white;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+}
+
+.homepage-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 36px; /* increased gap for better spacing between cards */
+  width: 100%;
+  margin: 22px 0;
+  padding: 0 12px;
+  align-items: start;
+  justify-items: center; /* center cards inside each grid cell */
+}
+
+/* Ensure the wrapper elements that contain cards center their content */
+.event-element,
+.adoption-element {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Make sure any direct children (cards) don't exceed cell width and stay centered */
+.homepage-cards-container > * {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Specific layout: keep events left-aligned, adoptions centered */
+
+.events-container {
+  /* Switch events section to a horizontal row with horizontal scroll
+     This makes cards appear aligned horizontally and works well on narrow screens */
+  display: flex;
+  flex-direction: row;
+  gap: 36px; /* slightly larger horizontal gap between event cards */
+  overflow-x: auto;
+  padding: 0 18px; /* a bit more horizontal padding to breathe */
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  align-items: flex-start;
+}
+
+.events-container > * {
+  /* children are flex items that don't grow, keeping horizontal layout */
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.events-container .event-element {
+  min-width: 300px; /* ensure cards have a readable width */
+  scroll-snap-align: start;
+  justify-content: flex-start;
+}
+
+.adoptions-container {
+  /* Make adoptions a horizontal scroller matching the events section
+     This keeps visual consistency and allows horizontal swipe on mobile */
+  display: flex;
+  flex-direction: row;
+  gap: 36px; /* match events spacing */
+  overflow-x: auto;
+  padding: 0 18px; /* consistent horizontal padding with events */
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  align-items: flex-start;
+}
+
+.adoptions-container > * {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.adoptions-container .adoption-element {
+  /* ensure adoption cards have a readable width and snap into place */
+  min-width: 300px;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+}
+
+/* Add spacing between sections */
+.home-page-container h2 {
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+.event-element,
+.adoption-element {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  padding: 8px; /* small padding so cards don't touch each other */
+}
+
+.event-element:hover .card-container,
+.adoption-element:hover .card-container {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+}
+
+/* Skeleton styles for loading placeholders */
+.skeleton-card {
+  background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+}
+
+.skeleton-img {
+  width: 100%;
+  height: 140px;
+  background: linear-gradient(90deg, #e6e6e6 25%, #f6f6f6 50%, #e6e6e6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+  border-radius: 6px;
+}
+
+.skeleton-line {
+  height: 12px;
+  background: linear-gradient(90deg, #e6e6e6 25%, #f6f6f6 50%, #e6e6e6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
+.skeleton-line.short {
+  width: 50%;
+}
+.skeleton-line.tiny {
+  width: 30%;
+  height: 10px;
+}
+.skeleton-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /************************************************************************/
@@ -318,17 +584,27 @@ footer {
 }
 
 .search-bar {
-  margin-left: 40px;
-  margin-right: 40px;
-  text-align: center;
-  padding: 10px;
+  text-align: left;
+  padding: 10px 12px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
   outline: none;
   width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+/* Make search layout more compact on small screens */
+@media (max-width: 700px) {
+  .search-bar-wrapper {
+    max-width: 100%;
+    padding: 0 12px;
+  }
+  .hero-cta {
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
 /************************************************************************/
@@ -487,6 +763,94 @@ button:hover {
   overflow-y: auto; /* Scroll if the content exceeds viewport */
 }
 
+/* Signup page layout */
+.sign-up-page-container {
+  padding: 28px 20px 60px;
+}
+
+.signup-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 520px;
+  gap: 28px;
+  align-items: start;
+}
+
+.signup-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-visual img {
+  width: 100%;
+  max-height: 620px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.signup-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.signup-card .sign-up-title-h1 {
+  margin: 0 0 12px 0;
+  font-size: 2rem;
+}
+
+.login-redirect {
+  display: inline-block;
+  margin-left: 8px;
+  color: #3d2f2b;
+  font-weight: 600;
+}
+
+.dark-theme .signup-card {
+  background: linear-gradient(180deg, #0b0b0b 0%, #0c1012 100%);
+  color: #e6eef0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.dark-theme .signup-visual img {
+  filter: brightness(0.6) saturate(0.85) contrast(0.9);
+}
+
+/* Make form full width inside the card */
+.signup-card .form-signup {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Improve spacing inside form rows */
+.form-row,
+.signup-names,
+.pet-infos {
+  gap: 18px;
+}
+
+/* Responsive: stack columns on small screens */
+@media only screen and (max-width: 900px) {
+  .signup-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .signup-visual img {
+    max-height: 320px;
+  }
+
+  .signup-card {
+    margin-top: 12px;
+  }
+}
+
 .dark-theme .form-signup {
   background-color: #333;
   border-color: #444;
@@ -547,6 +911,24 @@ button:hover {
 
 .form-row .form-group {
   flex: 1;
+}
+
+/* Make the age input area wider on larger screens */
+.age-group {
+  flex: 0 0 260px; /* increased fixed width column for age to improve visibility */
+}
+
+/* Larger input inside the age-group for better visibility */
+.age-group .form-input {
+  height: 42px;
+  font-size: 16px;
+  padding: 8px 10px;
+}
+
+@media only screen and (max-width: 900px) {
+  .age-group {
+    flex: 1; /* full width on small screens */
+  }
 }
 
 /* Pet information fields */
@@ -630,6 +1012,8 @@ button:hover {
   width: 50%;
   border-radius: 15px;
   justify-content: center;
+  margin: 40px auto;
+
   background-color: #f9f9f9;
 }
 
@@ -900,51 +1284,65 @@ button:hover {
 
 /*INDIVIDUAL CARD STYLING*/
 .card-container {
-  margin-top: 20%;
-  margin-bottom: 20%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 300px;
-  height: 320px;
-  max-width: 300px;
+  width: 100%;
+  height: 100%;
+  max-width: 360px;
   overflow: hidden;
-  border-radius: 3%;
-  transition: transform 0.3s ease-in-out;
-  min-width: 0;
+  border-radius: 12px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
 }
 
 .card-container:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
 }
 
 .card-container img {
-  margin-left: 50px;
-  border-radius: 3%;
-  width: 210px;
-  height: 160px;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 }
 
 .card-p-container {
-  margin-top: 10px;
-  margin-left: 30px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  padding: 4%;
+  gap: 6px;
 }
 
 .card-name {
-  font-weight: 900;
-  font-family: Arial, Helvetica, sans-serif;
-  margin-bottom: 10%;
-  color: #0b0b0b;
+  font-weight: 800;
+  font-family: Lora, serif;
+  margin-bottom: 6px;
+  color: #0f1720;
 }
 
 .card-p-container p {
-  color: #7c7979;
-  font-weight: 100;
+  color: #6b7280;
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+.card-excerpt {
+  color: #4b5563;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.muted {
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+.repo-link {
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #111827;
 }
 
 /* ADOPTION PAGE START */
@@ -954,6 +1352,16 @@ button:hover {
 .adoption-page-container {
   width: 100%;
   margin: 0 auto;
+}
+
+.adoption-page-container {
+  /* Soft modern pink gradient */
+  padding-bottom: 48px;
+}
+
+.dark-theme .adoption-page-container {
+  /* Muted dark variant with warm undertone for pink theme */
+  background: linear-gradient(180deg, #0b0a0c 0%, #1a0f14 60%, #24151a 100%);
 }
 
 /* Header Image Section */
@@ -966,7 +1374,7 @@ button:hover {
 
 .adoption-cover-image img {
   width: 100%;
-  height: 500px;
+  height: 520px;
   object-fit: cover;
 }
 
@@ -982,46 +1390,70 @@ button:hover {
   text-shadow: 5px 2px 10px rgba(255, 255, 255, 0.5);
 }
 
-.add-adoption-title {
-  margin-left: 5%;
-  margin-top: 5%;
-  margin-bottom: 2%;
+.dark-theme .adoption-text-overlay {
+  color: #e6f7f0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
 
+.add-adoption-title {
+  margin: 3% 5% 1% 5%;
   font-weight: 700;
-  color: #333;
+  color: #06241a;
+}
+
+.dark-theme .add-adoption-title {
+  color: #d1f2e6;
 }
 
 .adoption-search-bar-wrapper {
   display: flex;
   flex-direction: column;
+  gap: 18px;
+  margin: 0 5%;
 }
 
 .adoption-search-bar-title {
-  margin-left: 5%;
-  margin-top: 5%;
-  margin-bottom: 2%;
+  margin: 0;
+  color: #05221a;
+}
 
-  color: #030303;
+.dark-theme .adoption-search-bar-title {
+  color: #cbeee0;
 }
 
 .adoption-search-bar-container input {
-  margin-left: 5%;
-  width: 90%;
-  padding: 10px;
+  margin-left: 0;
+  width: 100%;
+  padding: 12px 14px;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #ffffff;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.dark-theme .adoption-search-bar-container input,
+.dark-theme .search-bar {
+  background: #0f1724;
+  color: #e6eef0;
+  border: 1px solid #23303a;
 }
 
 .add-adoption-button {
-  margin-left: 5%;
+  margin: 0 5% 2% 5%;
   padding: 10px 20px;
-  background-color: #000;
+  background-color: #3d2f2b;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 1rem;
+  box-shadow: 0 6px 18px rgba(11, 106, 58, 0.12);
+}
+
+.dark-theme .add-adoption-button {
+  background-color: #3d2f2b;
 }
 
 .log-button:hover {
@@ -1030,12 +1462,35 @@ button:hover {
 
 /* Adoption Cards Section */
 .adoption-details-container {
-  display: flex;
-  justify-content: space-around;
-  gap: 3%;
-  padding: 3%;
-  margin: 3%;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 28px 5%;
+  margin: 8px 0 40px 0;
+  align-items: start;
+}
+
+/* (dark-theme container tweaks are handled on card elements) */
+
+/* Card dark-mode overrides */
+.dark-theme .card-container {
+  background: linear-gradient(180deg, #07131a 0%, #06121a 100%);
+  color: #e6eef0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.dark-theme .card-p-container p,
+.dark-theme .card-excerpt,
+.dark-theme .muted {
+  color: #9fb4b0;
+}
+
+.dark-theme .card-name {
+  color: #dff8ef;
+}
+
+.dark-theme footer {
+  border-top-color: rgba(255, 255, 255, 0.06);
 }
 
 /* ADOPTION PAGE END */
@@ -1075,57 +1530,72 @@ button:hover {
 }
 
 .add-event-title {
-  margin-left: 5%;
-  margin-top: 5%;
-  margin-bottom: 2%;
-
+  margin: 3% 5% 1% 5%;
   font-weight: 700;
-  color: #333;
+  color: #06241a;
+}
+
+.dark-theme .add-event-title {
+  color: #d1f2e6;
 }
 
 .event-search-bar-wrapper {
   display: flex;
   flex-direction: column;
+  gap: 18px;
+  margin: 0 5%;
 }
 
 .event-search-bar-title {
-  margin-left: 5%;
-  margin-top: 5%;
-  margin-bottom: 2%;
+  margin: 0;
+  color: #05221a;
+}
 
-  color: #030303;
+.dark-theme .event-search-bar-title {
+  color: #cbeee0;
 }
 
 .event-search-bar-container input {
-  margin-bottom: 5%;
-  margin-left: 5%;
-  width: 90%;
-  padding: 10px;
+  margin-left: 0;
+  width: 100%;
+  padding: 12px 14px;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #ffffff;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.dark-theme .event-search-bar-container input,
+.dark-theme .search-bar {
+  background: #0f1724;
+  color: #e6eef0;
+  border: 1px solid #23303a;
 }
 
 .add-event-button {
-  margin-left: 5%;
+  margin: 0 5% 2% 5%;
   padding: 10px 20px;
-  background-color: #000;
-
+  background-color: #3d2f2b;
+  color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 1rem;
 }
 
 /* Event Cards Section */
 .event-details-container {
-  display: flex;
-  justify-content: space-around;
-  gap: 3%;
-  padding: 3%;
-  margin: 3%;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 28px 5%;
+  margin: 8px 0 40px 0;
+  align-items: start;
 }
+
+/* (dark-theme container tweaks are handled on card elements) */
 
 /*EVENTS PAGE END*/
 
@@ -1293,8 +1763,6 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px;
-  margin: 5%;
 }
 
 .header-home-page h3 {
@@ -1479,10 +1947,24 @@ button:hover {
     margin: 0;
     align-items: center;
     display: none;
+    width: 100%;
+  }
+
+  /* Ensure nav-inner stacks so the menu appears below the main row */
+  .nav-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100%;
   }
 
   .nav-button-container.open {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 12px 16px;
+    background: #3d2f2b; /* match navbar background */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   }
 
   .nav-button-container a {
@@ -1499,6 +1981,58 @@ button:hover {
 
   .nav-button-container .switch {
     display: none;
+  }
+
+  /* Center common page containers and make images/forms responsive on small screens */
+  .home-page-container,
+  .adoption-page-container,
+  .event-page-container,
+  .aboutUs-page-container,
+  .my-profile-page-container,
+  .sign-up-page-container,
+  .create-page-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 16px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    align-items: center;
+    text-align: center;
+  }
+
+  .header-home-page {
+    padding: 18px 12px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .homepage-cards-container {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    padding: 0 12px;
+    overflow-x: auto;
+  }
+
+  .homepage-cards-container > * {
+    flex: 0 0 auto;
+    width: 220px;
+  }
+
+  .form-login,
+  .form-signup,
+  .signup-card {
+    width: 100%;
+    max-width: 100%;
+    margin: 12px auto;
+    padding: 12px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
   }
 
   /***********************/
@@ -1796,10 +2330,37 @@ button:hover {
     margin: 0;
     align-items: center;
     display: none;
+    width: 100%;
+  }
+
+  .nav-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100%;
   }
 
   .nav-button-container.open {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 12px 16px;
+    background: #3d2f2b;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    /* slide-down animation for a smoother open effect */
+    animation: slideDown 0.28s ease forwards;
+  }
+
+  /* When the burger menu is open, hide any standalone desktop auth
+     and optionally hide mobile auth inside the menu if you want no auth shown */
+  .nav-button-container.open + .desktop-auth {
+    display: none !important;
+  }
+
+  /* If you prefer to hide mobile auth buttons too when open, uncomment below.
+     Currently this will remove auth controls from the visible menu entirely. */
+  .nav-button-container.open .mobile-auth-buttons {
+    display: none !important;
   }
 
   .nav-button-container a {
@@ -1816,6 +2377,18 @@ button:hover {
   }
 
   .nav-button-container .switch {
+    display: none;
+  }
+
+  /* Mobile-specific: show mobile auth group, hide desktop auth */
+  .mobile-auth-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .desktop-auth {
     display: none;
   }
 
@@ -2017,5 +2590,32 @@ button:hover {
   /*Login Page*/
   .form-login {
     margin: 10px;
+  }
+}
+
+/* Slide down keyframes used for mobile menu open animation */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Extra safety: hide auth buttons when mobile menu is open (covers multiple browsers)
+   Targets both immediate sibling and general sibling, plus uses :has as a fallback
+   where supported. Scoped to small viewports. */
+@media (max-width: 900px) {
+  .nav-button-container.open + .desktop-auth,
+  .nav-button-container.open ~ .desktop-auth,
+  nav:has(.nav-button-container.open) .desktop-auth {
+    display: none !important;
+  }
+
+  .nav-button-container.open .mobile-auth-buttons {
+    display: none !important;
   }
 }

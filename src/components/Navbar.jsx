@@ -1,48 +1,130 @@
 import React, { useContext, useState } from "react";
-import logoLight from "../assets/logo.png";
-import logoDark from "../assets/darkLogo.png";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Switch from "./Switch";
-import { ThemeContext } from "../context/ThemeContext";
 
 const Navbar = () => {
-  const { isLoggedIn, logOutUser, user } = useContext(AuthContext);
-  const { darkTheme, setDarkTheme } = useContext(ThemeContext);
+  const { isLoggedIn, logOutUser } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const closeMenu = () => setMenuOpen(false);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 900 && menuOpen) {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [menuOpen]);
+
   return (
     <nav>
-      <Link to="/">
-        <img src={darkTheme ? logoDark : logoLight} alt="logo" />
-      </Link>
+      <div
+        className="nav-inner"
+        style={{
+          width: "100%",
+          maxWidth: 1200,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Link to="/">
+          <img src="src/assets/darkLogo.png" alt="logo" />
+        </Link>
 
-      <div className="hamburger" onClick={toggleMenu}>
-        &#9776;
-      </div>
+        <button
+          className="hamburger"
+          onClick={toggleMenu}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          type="button"
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
 
-      <div className={`nav-button-container ${menuOpen ? "open" : ""}`}>
-        <NavLink to="/Adopt">Adopt</NavLink>
-        <NavLink to="/MyProfile">My Profile</NavLink>
-        <NavLink to="/Events">Events</NavLink>
-        <NavLink to="/AboutUs">About us</NavLink>
-        <Switch />
-      </div>
-
-      <div>
-        {isLoggedIn ? (
-          <div className="logout-button" onClick={logOutUser}>
-            Logout
+        <div className={`nav-button-container ${menuOpen ? "open" : ""}`}>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+            to="/Adopt"
+            onClick={closeMenu}
+          >
+            Adopt
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+            to="/MyProfile"
+            onClick={closeMenu}
+          >
+            My Profile
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+            to="/Events"
+            onClick={closeMenu}
+          >
+            Events
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+            to="/AboutUs"
+            onClick={closeMenu}
+          >
+            About us
+          </NavLink>
+          <Switch />
+          {/* Mobile-only auth buttons: duplicated here so mobile menu shows login/signup */}
+          <div className="mobile-auth-buttons">
+            {isLoggedIn ? (
+              <button
+                className="logout-button"
+                onClick={() => {
+                  logOutUser();
+                  closeMenu();
+                }}
+              >
+                Logout
+              </button>
+            ) : (
+              <Link to="/Signup" onClick={closeMenu}>
+                <button className="signup-button">Sign Up</button>
+              </Link>
+            )}
           </div>
-        ) : (
-          <Link to="/Signup">
-            <div className="signup-button">SignUp</div>
-          </Link>
-        )}
+        </div>
+
+        <div className="desktop-auth">
+          {isLoggedIn ? (
+            <button
+              className="logout-button"
+              onClick={() => {
+                logOutUser();
+                closeMenu();
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to="/Signup" onClick={closeMenu}>
+              <button className="signup-button">Sign Up</button>
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );
