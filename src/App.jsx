@@ -143,10 +143,11 @@ const App = () => {
       <Footer />
       <ToastContainer
         position="bottom-right"
-        autoClose={2000}
+        autoClose={3000}
         hideProgressBar={false}
         closeOnClick
         pauseOnHover
+        theme="colored"
       />
     </div>
   );

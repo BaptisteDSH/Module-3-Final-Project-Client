@@ -29,14 +29,20 @@ const LoginPage = () => {
 
         storeToken(response.data.authToken);
         authenticateUser();
-        toast.success("You are logged In!");
-        navigate("/");
+        toast.success("Successfully logged in! Welcome back!");
+
+        // Wait for the toast to be visible before navigating
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       })
       .catch((error) => {
         console.log(error);
         const errorDescription =
-          error.response?.data?.message || "Login failed"; // Ajout de la sécurité
+          error.response?.data?.message ||
+          "Login failed. Please check your credentials.";
         setErrorMessage(errorDescription);
+        toast.error(errorDescription);
       });
   };
 

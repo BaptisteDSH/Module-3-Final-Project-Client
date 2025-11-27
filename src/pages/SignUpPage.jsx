@@ -1,8 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { API_URL } from "../config/apiUrl.config";
 
 const SignUpPage = () => {
@@ -139,6 +138,12 @@ const SignUpPage = () => {
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate form before submitting
+    if (!validateForm()) {
+      toast.error(errorMessage);
+      return;
+    }
+
     try {
       //Step 1: upload images to Cloudinary
 
@@ -182,12 +187,19 @@ const SignUpPage = () => {
       // Send POST request to the server
       await axios.post(`${API_URL}/api/user/signup`, requestBody);
 
-      toast.success("Your profile has been created!");
-      navigate("/login");
+      // Show success message
+      toast.success("Account created successfully! Redirecting to login...");
+
+      // Wait for the toast to be visible before navigating
+      setTimeout(() => {
+        navigate("/login");
+      }, 2500);
     } catch (error) {
       // Basic frontend error handling: transform and display server errors
-      const errorDescription = error.response?.data?.message || "Signup failed";
+      const errorDescription =
+        error.response?.data?.message || "Signup failed. Please try again.";
       setErrorMessage(errorDescription);
+      toast.error(errorDescription);
     }
   };
 
@@ -465,7 +477,6 @@ const SignUpPage = () => {
               </Link>
             </div>
             {errorMessage && <p className="error">{errorMessage}</p>}
-            <ToastContainer />
           </div>
         </div>
       </div>
