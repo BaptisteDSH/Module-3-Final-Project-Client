@@ -1615,8 +1615,10 @@ button:hover {
 }
 
 .user-detail-container img {
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  aspect-ratio: 1;
   margin-right: 5%;
   border-radius: 50%;
   object-fit: cover;
@@ -1630,12 +1632,12 @@ button:hover {
 .myprofile-text-infos {
   display: flex;
   align-items: flex-start;
-  margin-left: 30%;
+  margin-left: 10%;
   flex-direction: column;
 }
 
 .myprofile-infos h1 {
-  font-size: 5rem;
+  font-size: clamp(2rem, 5vw, 5rem);
   font-weight: bold;
   margin-bottom: 3%;
 }
@@ -1662,9 +1664,11 @@ button:hover {
 
 .myprofile-buttons-edit-add-container {
   margin: 5%;
-  padding: 80px;
+  padding: 40px 20px;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .myprofile-card-button-container {
@@ -1675,11 +1679,12 @@ button:hover {
 /* Pets, Events, and Adoptions Containers */
 .user-cards-container {
   display: flex;
-  justify-content: space-around;
-  gap: 3%;
+  justify-content: flex-start;
+  gap: 20px;
   padding: 3%;
   margin: 3%;
   flex-wrap: wrap;
+  overflow-x: auto;
 }
 
 .pet-detail-box {
@@ -1689,6 +1694,7 @@ button:hover {
   width: 300px;
   height: 300px;
   max-width: 300px;
+  flex-shrink: 0;
   overflow: hidden;
   border-radius: 3%;
   transition: transform 0.3s ease-in-out;
@@ -2243,28 +2249,80 @@ button:hover {
   /***********************/
 
   /* My Profile Page */
-  .user-cards-container {
-    justify-content: flex-start;
-    gap: 20px;
+  .user-detail-container {
+    flex-direction: column;
+    text-align: center;
+    margin: 5%;
   }
 
   .user-detail-container img {
     width: 150px;
     height: 150px;
-    margin: 5%;
+    margin: 0 auto 20px;
+  }
+
+  .myprofile-infos {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .myprofile-text-infos {
+    margin-left: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .myprofile-infos h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .myprofile-infos h5 {
+    font-size: 0.9rem;
+  }
+
+  .myprofile-infos p {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+
+  .myprofile-h2 {
+    font-size: 1.5rem;
+    padding: 3%;
+  }
+
+  .myprofile-buttons-edit-add-container {
+    flex-direction: column;
+    padding: 20px;
+    margin: 0;
+    gap: 10px;
+  }
+
+  .myprofile-button,
+  .myprofile-button-delete {
+    width: 100%;
+    margin: 5px 0;
+    padding: 12px 20px;
+  }
+
+  .myprofile-card-button-container {
+    flex-direction: column;
+    gap: 10px;
   }
 
   .user-cards-container {
+    justify-content: flex-start;
+    gap: 20px;
     flex-wrap: nowrap;
     overflow-x: auto;
     padding: 10px;
-    gap: 20px;
   }
 
   .pet-detail-box,
   .event-card {
     width: 250px;
     height: 250px;
+    flex-shrink: 0;
   }
 
   /***********************/
@@ -2533,29 +2591,79 @@ button:hover {
   /***********************/
 
   /*My Profile Page*/
-
-  .user-cards-container {
-    justify-content: flex-start;
-    gap: 20px;
-  }
-  .user-detail-container img {
-    width: 200px;
-    height: 200px;
+  .user-detail-container {
+    flex-direction: column;
+    text-align: center;
     margin: 5%;
   }
 
-  /* Cards in row, no wrap and smooth scroll */
+  .user-detail-container img {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+  }
+
+  .myprofile-infos {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .myprofile-text-infos {
+    margin-left: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .myprofile-infos h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+
+  .myprofile-infos h5 {
+    font-size: 1rem;
+  }
+
+  .myprofile-infos p {
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+
+  .myprofile-h2 {
+    font-size: 2rem;
+    padding: 4%;
+  }
+
+  .myprofile-buttons-edit-add-container {
+    flex-direction: row;
+    padding: 40px;
+    margin: 2%;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .myprofile-button,
+  .myprofile-button-delete {
+    margin: 5px;
+    padding: 12px 24px;
+  }
+
+  .myprofile-card-button-container {
+    gap: 10px;
+  }
+
   .user-cards-container {
+    justify-content: flex-start;
+    gap: 30px;
     flex-wrap: nowrap;
     overflow-x: auto;
     padding: 10px;
-    gap: 30px;
   }
 
   .pet-detail-box,
   .event-card {
     width: 300px;
     height: 300px;
+    flex-shrink: 0;
   }
 
   /***********************/
@@ -2602,6 +2710,38 @@ button:hover {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Medium screens (tablets landscape) - 769px to 1024px */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .user-detail-container {
+    margin: 3%;
+  }
+
+  .user-detail-container img {
+    max-width: 300px;
+  }
+
+  .myprofile-text-infos {
+    margin-left: 5%;
+  }
+
+  .myprofile-infos h1 {
+    font-size: 3.5rem;
+  }
+
+  .myprofile-h2 {
+    font-size: 2.5rem;
+    padding: 3%;
+  }
+
+  .myprofile-buttons-edit-add-container {
+    padding: 30px 20px;
+  }
+
+  .user-cards-container {
+    gap: 15px;
   }
 }
 
