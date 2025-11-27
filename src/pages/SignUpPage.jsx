@@ -193,7 +193,7 @@ const SignUpPage = () => {
       // Wait for the toast to be visible before navigating
       setTimeout(() => {
         navigate("/login");
-      }, 2500);
+      }, 1500);
     } catch (error) {
       // Basic frontend error handling: transform and display server errors
       const errorDescription =

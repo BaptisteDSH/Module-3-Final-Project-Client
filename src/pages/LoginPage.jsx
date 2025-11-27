@@ -34,7 +34,7 @@ const LoginPage = () => {
         // Wait for the toast to be visible before navigating
         setTimeout(() => {
           navigate("/");
-        }, 1500);
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
