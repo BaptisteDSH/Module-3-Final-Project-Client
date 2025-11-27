@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Switch from "./Switch";
+import darkLogo from "../assets/darkLogo.png";
 
 const Navbar = () => {
   const { isLoggedIn, logOutUser } = useContext(AuthContext);
@@ -37,7 +38,7 @@ const Navbar = () => {
         }}
       >
         <Link to="/">
-          <img src="src/assets/darkLogo.png" alt="logo" />
+          <img src={darkLogo} alt="logo" />
         </Link>
 
         <button
